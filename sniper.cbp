@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="sniper" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option virtualFolders="ui\;lib\;doc\;include\;" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/sniper" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-std=c++0x" />
+					<Add option="-m64" />
+					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
+					<Add directory="lib" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-m64" />
+					<Add library="libwxmsw31ud_richtext.a" />
+					<Add library="libwxmsw31ud_aui.a" />
+					<Add library="libwxmsw31ud_media.a" />
+					<Add library="libwxbase31ud_net.a" />
+					<Add library="libwxbase31ud_xml.a" />
+					<Add library="libwxmsw31ud_adv.a" />
+					<Add library="libwxmsw31ud_html.a" />
+					<Add library="libwxmsw31ud_core.a" />
+					<Add library="libwxbase31ud.a" />
+					<Add library="libwxpngd.a" />
+					<Add library="libwxjpegd.a" />
+					<Add library="libwxtiffd.a" />
+					<Add library="libwxzlibd.a" />
+					<Add library="libwxregexud.a" />
+					<Add directory="$(#wx)/lib/gcc_dll_debug_x64" />
+					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswud" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/sniper" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
+					<Add directory="lib" />
+					<Add directory="include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="libwxmsw31u_richtext.a" />
+					<Add library="libwxmsw31u_aui.a" />
+					<Add library="libwxmsw31u_media.a" />
+					<Add library="libwxbase31u_net.a" />
+					<Add library="libwxbase31u_xml.a" />
+					<Add library="libwxmsw31u_adv.a" />
+					<Add library="libwxmsw31u_html.a" />
+					<Add library="libwxmsw31u_core.a" />
+					<Add library="libwxbase31u.a" />
+					<Add library="libwxpng.a" />
+					<Add library="libwxjpeg.a" />
+					<Add library="libwxtiff.a" />
+					<Add library="libwxzlib.a" />
+					<Add library="libwxregexu.a" />
+					<Add directory="$(#wx)/lib/gcc_dll_release_x64" />
+					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-std=c++11" />
+			<Add option="-m64" />
+			<Add option="-Og" />
+			<Add option="-g" />
+			<Add option="-pipe" />
+			<Add option="-mthreads" />
+			<Add option="-D__GNUWIN32__" />
+			<Add option="-D__WXMSW__" />
+			<Add option="-DWXUSINGDLL" />
+			<Add option="-DwxUSE_UNICODE" />
+			<Add directory="$(#wx)/include" />
+			<Add directory="../sniper" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="$(#wx)/include" />
+		</ResourceCompiler>
+		<Linker>
+			<Add option="-m64" />
+			<Add option="-mthreads" />
+		</Linker>
+		<Unit filename="include/core/Stock.h" />
+		<Unit filename="include/spider/SinaStockSpider.h" />
+		<Unit filename="include/spider/Spider.h" />
+		<Unit filename="include/spider/StockSpider.h" />
+		<Unit filename="include/util/Helper.h" />
+		<Unit filename="lib/wxJSON/json_defs.h" />
+		<Unit filename="lib/wxJSON/jsonreader.cpp" />
+		<Unit filename="lib/wxJSON/jsonreader.h" />
+		<Unit filename="lib/wxJSON/jsonval.cpp" />
+		<Unit filename="lib/wxJSON/jsonval.h" />
+		<Unit filename="lib/wxJSON/jsonwriter.cpp" />
+		<Unit filename="lib/wxJSON/jsonwriter.h" />
+		<Unit filename="resource.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="sniper.cbp" />
+		<Unit filename="sniper.layout" />
+		<Unit filename="sniperApp.cpp" />
+		<Unit filename="sniperApp.h" />
+		<Unit filename="sniperMain.cpp" />
+		<Unit filename="sniperMain.h" />
+		<Unit filename="src/spider/SinaStockSpider.cpp" />
+		<Unit filename="src/spider/Spider.cpp" />
+		<Unit filename="src/spider/StockSpider.cpp" />
+		<Unit filename="src/util/Helper.cpp" />
+		<Unit filename="wxsmith/sniperframe.wxs" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="0" i18n="1" name="sniperFrame" language="CPP" />
+				</resources>
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

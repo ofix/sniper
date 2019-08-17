@@ -1,0 +1,11 @@
+#ignore build directory
+bin/
+obj/
+
+#ignore compressed packages
+*.gz
+*.zip
+*.iso
+*.jar
+*.rar
+*.tar
