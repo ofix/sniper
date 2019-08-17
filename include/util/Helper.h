@@ -15,6 +15,7 @@ bool saveTo(wxString path, const wxString& text);
 bool http(wxString strUrl,wxString& strResponse);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
 int FixBadJson(wxString& strJson);
+void Console(wxString& strText);
 wxString GetExecDir();
 
 #endif // COMMON_H

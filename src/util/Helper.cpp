@@ -78,3 +78,14 @@ int FixBadJson(wxString& strJson)
         return 0;
     }
 }
+
+//output debug information to console window
+void Console(wxString& strText)
+{
+    static int count = 1;
+    wxString strCount = wxString::Format("%03d",count);
+    std::cout<<std::endl<<_T("*************")+strCount+_T("*************")<<std::endl;
+    std::wcout<<strText<<std::endl;
+    std::cout<<_T("*****************************")<<std::endl<<std::endl;
+    count++;
+}

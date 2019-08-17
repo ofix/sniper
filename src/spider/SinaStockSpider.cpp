@@ -33,16 +33,18 @@ bool SinaStockSpider::Run()
         m_total = wxAtoi(strTotal);
     }
     if(m_total >0){
-        for(int i=0;i<=m_total;i+=m_pageSize){
+        for(int i=0,j=0;i<=m_total;i+=m_pageSize,j++){
             wxString jsonStock;
             wxString urlStock = wxT("http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"\
                                     "Market_Center.getHQNodeData"\
-                                    "?page=")+wxString::Format("%d",i)+wxT("&num=")+wxString::Format("%d",m_pageSize)
+                                    "?page=")+wxString::Format("%d",j)+wxT("&num=")+wxString::Format("%d",m_pageSize)
                                     +wxT("&sort=symbol&asc=1&node=hs_a&symbol=&_s_r_a=auto");
             http(urlStock,jsonStock);
             wxJSONReader reader;
             wxJSONValue  jsonArr;
+            Console(urlStock);
             FixBadJson(jsonStock);
+
             // resStock has already been UNICODE
             int numErrors = 0;
             numErrors = reader.Parse(jsonStock, &jsonArr);

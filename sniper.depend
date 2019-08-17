@@ -2824,7 +2824,7 @@
 1565605107 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
-1565932604 d:\work_c++\sniper\include\util\helper.h
+1566029559 d:\work_c++\sniper\include\util\helper.h
 	<wx/url.h>
 	<wx/sstream.h>
 	<wx/convauto.h>
@@ -2852,7 +2852,7 @@
 1566012105 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
-1566012061 source:d:\work_c++\sniper\src\util\helper.cpp
+1566032792 source:d:\work_c++\sniper\src\util\helper.cpp
 	"util/Helper.h"
 	<exception>
 	<iostream>
