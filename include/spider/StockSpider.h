@@ -3,10 +3,15 @@
 
 #include "Spider.h"
 
+/*******************************************
+ *@class StockSpider
+ *@todo the parent class of all Stock Spider
+ *@author tom song
+ *******************************************/
 class StockSpider : public Spider
 {
     public:
-        StockSpider(wxString urlTarget);
+        StockSpider(wxString strUrl);
         virtual ~StockSpider();
 
     protected:

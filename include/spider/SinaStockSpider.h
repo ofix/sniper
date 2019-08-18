@@ -3,14 +3,17 @@
 
 #include <wx/vector.h>
 #include <wx/regex.h>
-#include <locale.h>
-#include <iostream>
 #include "core/Stock.h"
 #include "util/Helper.h"
 #include "lib/wxJSON/jsonval.h"
 #include "lib/wxJSON/jsonreader.h"
 #include "StockSpider.h"
 
+/************************************************************
+ *@class SinaStockSpider
+ *@todo to crawl all stock newest data from Sina website
+ *@author tom song
+ ************************************************************/
 class SinaStockSpider : public StockSpider
 {
     public:

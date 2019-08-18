@@ -1,6 +1,6 @@
 #include "spider/SinaStockSpider.h"
 
-SinaStockSpider::SinaStockSpider(wxString urlTarget):StockSpider(urlTarget)
+SinaStockSpider::SinaStockSpider(wxString strUrl):StockSpider(strUrl)
 {
     m_pageSize = 40;
     m_urlTotalCount = wxT("http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"\
@@ -36,14 +36,21 @@ bool SinaStockSpider::Run()
         for(int i=0,j=0;i<=m_total;i+=m_pageSize,j++){
             wxString jsonStock;
             wxString urlStock = wxT("http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"\
-                                    "Market_Center.getHQNodeData"\
-                                    "?page=")+wxString::Format("%d",j)+wxT("&num=")+wxString::Format("%d",m_pageSize)
-                                    +wxT("&sort=symbol&asc=1&node=hs_a&symbol=&_s_r_a=auto");
+                                    "Market_Center.getHQNodeData");
+            kvMap parameters;
+            parameters["page"]=wxString::Format("%d",j);
+            parameters["num"]=wxString::Format("%d",m_pageSize);
+            parameters["sort"]="symbol";
+            parameters["asc"]="1";
+            parameters["node"]="hs_a";
+            parameters["symbol"] = "auto";
+            wxString  para = buildUrlPara(parameters);
+            urlStock.Append(para);
             http(urlStock,jsonStock);
             wxJSONReader reader;
             wxJSONValue  jsonArr;
-            Console(urlStock);
-            FixBadJson(jsonStock);
+            console(urlStock);
+            fixBadJson(jsonStock);
 
             // resStock has already been UNICODE
             int numErrors = 0;
@@ -56,6 +63,7 @@ bool SinaStockSpider::Run()
                return false;
             }
             std::wcout<<jsonArr[0]["symbol"].AsString()<<std::endl;
+            break;
         }
     }else{
         std::cout<<"Load Sina Stock Data Error."<<std::endl;

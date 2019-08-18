@@ -19,6 +19,8 @@
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
+					<Add directory="include/spider" />
+					<Add directory="include/core" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
@@ -54,6 +56,8 @@
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
+					<Add directory="include/spider" />
+					<Add directory="include/core" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -101,10 +105,14 @@
 			<Add option="-m64" />
 			<Add option="-mthreads" />
 		</Linker>
+		<Unit filename="include/core/Global.h" />
+		<Unit filename="include/core/Map.h" />
 		<Unit filename="include/core/Stock.h" />
+		<Unit filename="include/spider/EastMoneySpider.h" />
 		<Unit filename="include/spider/SinaStockSpider.h" />
 		<Unit filename="include/spider/Spider.h" />
 		<Unit filename="include/spider/StockSpider.h" />
+		<Unit filename="include/spider/StockStarSpider.h" />
 		<Unit filename="include/util/Helper.h" />
 		<Unit filename="lib/wxJSON/json_defs.h" />
 		<Unit filename="lib/wxJSON/jsonreader.cpp" />
@@ -122,9 +130,11 @@
 		<Unit filename="sniperApp.h" />
 		<Unit filename="sniperMain.cpp" />
 		<Unit filename="sniperMain.h" />
+		<Unit filename="src/spider/EastMoneySpider.cpp" />
 		<Unit filename="src/spider/SinaStockSpider.cpp" />
 		<Unit filename="src/spider/Spider.cpp" />
 		<Unit filename="src/spider/StockSpider.cpp" />
+		<Unit filename="src/spider/StockStarSpider.cpp" />
 		<Unit filename="src/util/Helper.cpp" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>

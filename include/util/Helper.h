@@ -10,12 +10,15 @@
 #include <wx/stdpaths.h>
 #include <wx/string.h>
 #include <wx/regex.h>
+#include "core/Global.h"
+#include "core/Map.h"
 
 bool saveTo(wxString path, const wxString& text);
 bool http(wxString strUrl,wxString& strResponse);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
-int FixBadJson(wxString& strJson);
-void Console(wxString& strText);
+int fixBadJson(wxString& strJson);
+void console(wxString& strText);
 wxString GetExecDir();
+wxString buildUrlPara(kvMap para,bool bComma=true);
 
 #endif // COMMON_H

@@ -1,6 +1,6 @@
 #include "spider/StockSpider.h"
 
-StockSpider::StockSpider(wxString urlTarget):Spider(urlTarget)
+StockSpider::StockSpider(wxString strUrl):Spider(strUrl)
 {
     m_total = 0;
     m_pageSize = 20;

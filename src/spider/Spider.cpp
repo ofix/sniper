@@ -1,8 +1,8 @@
 #include "spider/Spider.h"
 
-Spider::Spider(wxString urlTarget)
+Spider::Spider(wxString strUrl)
 {
-    m_urlTarget= urlTarget;
+    m_url= strUrl;
     m_bRun = false;
     m_timeStart = wxDateTime::Now();
     m_timeEnd = wxDateTime::Now();

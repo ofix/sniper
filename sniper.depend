@@ -8,14 +8,15 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msw\rcdefs.h
 
-1566012102 source:d:\work_c++\sniper\sniperapp.cpp
+1566112323 source:d:\work_c++\sniper\sniperapp.cpp
 	"sniperApp.h"
+	"core/Global.h"
 	"spider/SinaStockSpider.h"
-	<iostream>
+	"spider/StockStarSpider.h"
 	"sniperMain.h"
 	<wx/image.h>
 
-1565603930 d:\work_c++\sniper\sniperapp.h
+1566108689 d:\work_c++\sniper\sniperapp.h
 	<wx/app.h>
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\app.h
@@ -2810,11 +2811,9 @@
 	"json_defs.h"
 	"jsonval.h"
 
-1566011816 d:\work_c++\sniper\include\spider\sinastockspider.h
+1566111610 d:\work_c++\sniper\include\spider\sinastockspider.h
 	<wx/vector.h>
 	<wx/regex.h>
-	<locale.h>
-	<iostream>
 	"core/Stock.h"
 	"util/Helper.h"
 	"lib/wxJSON/jsonval.h"
@@ -2824,7 +2823,7 @@
 1565605107 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
-1566029559 d:\work_c++\sniper\include\util\helper.h
+1566111864 d:\work_c++\sniper\include\util\helper.h
 	<wx/url.h>
 	<wx/sstream.h>
 	<wx/convauto.h>
@@ -2834,26 +2833,51 @@
 	<wx/stdpaths.h>
 	<wx/string.h>
 	<wx/regex.h>
+	"core/Global.h"
+	"core/Map.h"
 
-1566012127 d:\work_c++\sniper\include\spider\stockspider.h
+1566110329 d:\work_c++\sniper\include\spider\stockspider.h
 	"Spider.h"
 
-1565608581 d:\work_c++\sniper\include\spider\spider.h
+1566113393 d:\work_c++\sniper\include\spider\spider.h
 	<wx/string.h>
 	<wx/datetime.h>
 	<wx/longlong.h>
+	"util/Helper.h"
 
-1566012105 source:d:\work_c++\sniper\src\spider\sinastockspider.cpp
+1566111864 source:d:\work_c++\sniper\src\spider\sinastockspider.cpp
 	"spider/SinaStockSpider.h"
 
-1566012105 source:d:\work_c++\sniper\src\spider\spider.cpp
+1566052469 source:d:\work_c++\sniper\src\spider\spider.cpp
 	"spider/Spider.h"
 
-1566012105 source:d:\work_c++\sniper\src\spider\stockspider.cpp
+1566052411 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
-1566032792 source:d:\work_c++\sniper\src\util\helper.cpp
+1566112045 source:d:\work_c++\sniper\src\util\helper.cpp
 	"util/Helper.h"
-	<exception>
+
+1566108925 d:\work_c++\sniper\include\core\hash.h
+	<wx/hashmap.h>
+
+1566110672 d:\work_c++\sniper\include\core\global.h
 	<iostream>
+	<locale.h>
+	<exception>
+
+1566111383 source:d:\work_c++\sniper\src\spider\eastmoneyspider.cpp
+	"spider/EastMoneySpider.h"
+
+1566110414 d:\work_c++\sniper\include\spider\eastmoneyspider.h
+	"StockSpider.h"
+
+1566112675 source:d:\work_c++\sniper\src\spider\stockstarspider.cpp
+	"spider/StockStarSpider.h"
+
+1566113660 d:\work_c++\sniper\include\spider\stockstarspider.h
+	<wx/regex.h>
+	"StockSpider.h"
+
+1566110492 d:\work_c++\sniper\include\core\map.h
+	<wx/hashmap.h>
 

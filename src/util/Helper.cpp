@@ -1,10 +1,6 @@
 #include "util/Helper.h"
 
-#include <exception>
-#include <iostream>
-using std::cout;
-using std::wcout;
-
+// http request
 bool http(wxString strUrl,wxString& strResponse)
 {
     try{
@@ -67,7 +63,7 @@ wxString GetExecDir()
 }
 
 // fix bad json without "" in keys
-int FixBadJson(wxString& strJson)
+int fixBadJson(wxString& strJson)
 {
     try{
      wxRegEx reg(_T("([a-zA-Z]\\w*):"),wxRE_ADVANCED);
@@ -80,7 +76,7 @@ int FixBadJson(wxString& strJson)
 }
 
 //output debug information to console window
-void Console(wxString& strText)
+void console(wxString& strText)
 {
     static int count = 1;
     wxString strCount = wxString::Format("%03d",count);
@@ -88,4 +84,22 @@ void Console(wxString& strText)
     std::wcout<<strText<<std::endl;
     std::cout<<_T("*****************************")<<std::endl<<std::endl;
     count++;
+}
+
+
+//return URL parameter in wxString
+wxString buildUrlPara(kvMap para,bool bComma){
+    wxString s= wxT("");
+    if(bComma){
+        s.Append("?");
+    }
+    kvMap::iterator it;
+    for(it=para.begin();it!=para.end();++it){
+        s.Append(it->first);
+        s.Append("=");
+        s.Append(it->second);
+        s.Append("&");
+    }
+    s.RemoveLast(1);
+    return s;
 }

@@ -8,9 +8,9 @@
  **************************************************************/
 
 #include "sniperApp.h"
+#include "core/Global.h"
 #include "spider/SinaStockSpider.h"
-
-#include <iostream>
+#include "spider/StockStarSpider.h"
 
 //(*AppHeaders
 #include "sniperMain.h"
@@ -31,7 +31,8 @@ bool sniperApp::OnInit()
         SetTopWindow(Frame);
     }
     //*)
-    SinaStockSpider* pSpider = new SinaStockSpider();
+//    SinaStockSpider* pSpider = new SinaStockSpider();
+    StockStarSpider* pSpider = new StockStarSpider();
     pSpider->Run();
     return wxOK;
 
