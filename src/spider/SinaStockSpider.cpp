@@ -9,10 +9,6 @@ SinaStockSpider::SinaStockSpider(wxString strUrl):StockSpider(strUrl)
                         "?page=1&num=");
     m_urlPageData.Append(wxString::Format(_T("%d"),m_pageSize));
     m_urlPageData.Append(wxT("&sort=symbol&asc=1&node=hs_a&symbol=&_s_r_a=auto"));
-
-    std::locale::global(std::locale(""));
-    setlocale(LC_CTYPE, "");    // MinGW gcc.
-    std::wcout.imbue(std::locale(""));
 }
 
 SinaStockSpider::~SinaStockSpider()

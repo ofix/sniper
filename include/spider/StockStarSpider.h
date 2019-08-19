@@ -2,7 +2,9 @@
 #define STOCKSTARSPIDER_H
 
 #include <wx/regex.h>
+#include <wx/vector.h>
 #include "StockSpider.h"
+#include "core/Stock.h"
 
 /**********************************************
  *@class StockStarSpider
@@ -15,8 +17,11 @@ class StockStarSpider : public StockSpider
         StockStarSpider(wxString strUrl=wxT("http://q.ssajax.cn/webhandler/rank.ashx"));
         virtual ~StockStarSpider();
         virtual bool Run();
-        wxString Parse(wxString& response);
+        bool Parse(wxString& response);
+        ShareItem VecToItem(wxVector<wxString> vec);
+        void Dump();
     protected:
+        wxVector<ShareItem> m_rows;
 };
 
 #endif // STOCKSTARSPIDER_H

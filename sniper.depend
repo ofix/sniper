@@ -2820,7 +2820,7 @@
 	"lib/wxJSON/jsonreader.h"
 	"StockSpider.h"
 
-1565605107 d:\work_c++\sniper\include\core\stock.h
+1566234668 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
 1566111864 d:\work_c++\sniper\include\util\helper.h
@@ -2845,13 +2845,13 @@
 	<wx/longlong.h>
 	"util/Helper.h"
 
-1566111864 source:d:\work_c++\sniper\src\spider\sinastockspider.cpp
+1566234599 source:d:\work_c++\sniper\src\spider\sinastockspider.cpp
 	"spider/SinaStockSpider.h"
 
 1566052469 source:d:\work_c++\sniper\src\spider\spider.cpp
 	"spider/Spider.h"
 
-1566052411 source:d:\work_c++\sniper\src\spider\stockspider.cpp
+1566234600 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
 1566112045 source:d:\work_c++\sniper\src\util\helper.cpp
@@ -2871,12 +2871,14 @@
 1566110414 d:\work_c++\sniper\include\spider\eastmoneyspider.h
 	"StockSpider.h"
 
-1566229314 source:d:\work_c++\sniper\src\spider\stockstarspider.cpp
+1566234736 source:d:\work_c++\sniper\src\spider\stockstarspider.cpp
 	"spider/StockStarSpider.h"
 
-1566113660 d:\work_c++\sniper\include\spider\stockstarspider.h
+1566234183 d:\work_c++\sniper\include\spider\stockstarspider.h
 	<wx/regex.h>
+	<wx/vector.h>
 	"StockSpider.h"
+	"core/Stock.h"
 
 1566110492 d:\work_c++\sniper\include\core\map.h
 	<wx/hashmap.h>
