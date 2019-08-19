@@ -46,13 +46,22 @@ wxString StockStarSpider::Parse(wxString& response)
             size_t start, len;
             r_tr.GetMatch(&start, &len, 0);
             wxString tr = r_tr.GetMatch(table,2);
-            std::cout<<"***** tr = "<<tr<<std::endl;
             //Get the content in <td>
             wxRegEx r_td(_T("(<td[^>]*>(.*?)</td>)+?"),wxRE_ADVANCED);
             while(r_td.Matches(tr)){
                 size_t s, e;
                 r_td.GetMatch(&s, &e, 0);
                 wxString td = r_td.GetMatch(tr,2);
+                //filter <a> tag
+                wxRegEx r_a(_T("<a[^>]*>(.*?)</a>"),wxRE_ADVANCED);
+                if(r_a.Matches(td)){
+                    td = r_a.GetMatch(td,1);
+                }
+                //filter <span> tag
+                wxRegEx r_span(_T("<span[^>]*>(.*?)</span>"),wxRE_ADVANCED);
+                if(r_span.Matches(td)){
+                    td = r_span.GetMatch(td,1);
+                }
                 std::cout<<"***** td = "<<td<<std::endl;
                 tr = tr.Mid(s+e);
             }
