@@ -14,7 +14,7 @@
 #include "core/Map.h"
 
 bool saveTo(wxString path, const wxString& text);
-bool http(wxString strUrl,wxString& strResponse);
+bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet=wxFONTENCODING_CP936);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
 int fixBadJson(wxString& strJson);
 void console(wxString& strText);

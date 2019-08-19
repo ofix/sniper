@@ -1,12 +1,12 @@
 #include "util/Helper.h"
 
 // http request
-bool http(wxString strUrl,wxString& strResponse)
+bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet)
 {
     try{
         wxURL _url(strUrl);
-        wxCSConv a(wxFONTENCODING_CP936);
-        wxStringOutputStream out_stream(&strResponse,a);
+        wxCSConv conv(enumCharSet);
+        wxStringOutputStream out_stream(&strResponse,conv);
         _url.GetInputStream()->Read(out_stream);
         return true;
     }catch(...){

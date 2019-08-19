@@ -2,6 +2,17 @@
 #define STOCKITEM_H
 #include <wx/longlong.h>
 
+
+#define MARKET_NAME_ZH(i) ((i==1)?_T("沪市"):((i==2)?_T("深市"):_T("创业板")))
+#define MARKET_NAME_EN(i) ((i==1)?_T("SHANG HAI"):((i==2)?_T("SHEN ZHEN"):_T("CHUAN YE BAN")))
+
+struct ShareBrief
+{
+    wxString code; //stock code
+    wxString name; //stock name
+    short market;  //stock original market, 1 - SHANG HAI,2 -SHEN ZHEN,3 - CHUAN YE BAN
+};
+
 struct StockItem
 {
    wxString code; // stock code

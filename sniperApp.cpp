@@ -11,6 +11,7 @@
 #include "core/Global.h"
 #include "spider/SinaStockSpider.h"
 #include "spider/StockStarSpider.h"
+#include "spider/IfengSpider.h"
 
 //(*AppHeaders
 #include "sniperMain.h"
@@ -32,7 +33,7 @@ bool sniperApp::OnInit()
     }
     //*)
 //    SinaStockSpider* pSpider = new SinaStockSpider();
-    StockStarSpider* pSpider = new StockStarSpider();
+    IfengSpider* pSpider = new IfengSpider();
     pSpider->Run();
     return wxOK;
 

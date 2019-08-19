@@ -8,11 +8,12 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msw\rcdefs.h
 
-1566112323 source:d:\work_c++\sniper\sniperapp.cpp
+1566237918 source:d:\work_c++\sniper\sniperapp.cpp
 	"sniperApp.h"
 	"core/Global.h"
 	"spider/SinaStockSpider.h"
 	"spider/StockStarSpider.h"
+	"spider/IfengSpider.h"
 	"sniperMain.h"
 	<wx/image.h>
 
@@ -2820,10 +2821,10 @@
 	"lib/wxJSON/jsonreader.h"
 	"StockSpider.h"
 
-1566234668 d:\work_c++\sniper\include\core\stock.h
+1566237298 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
-1566111864 d:\work_c++\sniper\include\util\helper.h
+1566238915 d:\work_c++\sniper\include\util\helper.h
 	<wx/url.h>
 	<wx/sstream.h>
 	<wx/convauto.h>
@@ -2851,10 +2852,10 @@
 1566052469 source:d:\work_c++\sniper\src\spider\spider.cpp
 	"spider/Spider.h"
 
-1566234600 source:d:\work_c++\sniper\src\spider\stockspider.cpp
+1566235835 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
-1566112045 source:d:\work_c++\sniper\src\util\helper.cpp
+1566238915 source:d:\work_c++\sniper\src\util\helper.cpp
 	"util/Helper.h"
 
 1566108925 d:\work_c++\sniper\include\core\hash.h
@@ -2882,4 +2883,11 @@
 
 1566110492 d:\work_c++\sniper\include\core\map.h
 	<wx/hashmap.h>
+
+1566243641 source:d:\work_c++\sniper\src\spider\ifengspider.cpp
+	"IfengSpider.h"
+
+1566237403 d:\work_c++\sniper\include\spider\ifengspider.h
+	<StockSpider.h>
+	"core/Stock.h"
 
