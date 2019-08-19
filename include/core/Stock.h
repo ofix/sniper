@@ -14,4 +14,18 @@ struct StockItem
    float price_now;
 };
 
+struct ShareItem
+{
+    wxString code; //代码
+    wxString name; //名称
+    float price; //当前价格
+    float change_percent; //涨跌幅
+    float change; //涨跌额
+    float to; //成交金额 turnover
+    float qr; //量比 quantity relative
+    float pe; //市盈率 price earnings ratio (P/E ratio)
+    float pb; //市净率 price net asset ratio (PBR)
+    float roe; //净资产收益率 return on equity
+};
+
 #endif // STOCKITEM_H
