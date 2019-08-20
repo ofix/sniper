@@ -20,5 +20,6 @@ int fixBadJson(wxString& strJson);
 void console(wxString& strText);
 wxString GetExecDir();
 wxString buildUrlPara(kvMap para,bool bComma=true);
+wxVector<wxString> slice(wxString src,wxString delimiter=_T(","));
 
 #endif // COMMON_H

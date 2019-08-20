@@ -5,7 +5,7 @@
 		<Option title="sniper" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="ui\;lib\;doc\;include\;" />
+		<Option virtualFolders="lib\;doc\;include\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/sniper" prefix_auto="1" extension_auto="1" />
@@ -21,6 +21,7 @@
 					<Add directory="include" />
 					<Add directory="include/spider" />
 					<Add directory="include/core" />
+					<Add directory="include/ui" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
@@ -58,6 +59,7 @@
 					<Add directory="include" />
 					<Add directory="include/spider" />
 					<Add directory="include/core" />
+					<Add directory="include/ui" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -114,6 +116,7 @@
 		<Unit filename="include/spider/Spider.h" />
 		<Unit filename="include/spider/StockSpider.h" />
 		<Unit filename="include/spider/StockStarSpider.h" />
+		<Unit filename="include/ui/KlineCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
 		<Unit filename="lib/wxJSON/json_defs.h" />
 		<Unit filename="lib/wxJSON/jsonreader.cpp" />
@@ -137,6 +140,7 @@
 		<Unit filename="src/spider/Spider.cpp" />
 		<Unit filename="src/spider/StockSpider.cpp" />
 		<Unit filename="src/spider/StockStarSpider.cpp" />
+		<Unit filename="src/ui/KlineCtrl.cpp" />
 		<Unit filename="src/util/Helper.cpp" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>

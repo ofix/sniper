@@ -103,3 +103,21 @@ wxString buildUrlPara(kvMap para,bool bComma){
     s.RemoveLast(1);
     return s;
 }
+
+// slice string in delimiter
+wxVector<wxString> slice(wxString src,wxString delimiter)
+{
+    wxVector<wxString> vec;
+    wxString::const_iterator it;
+    size_t nPos, nPrevPos;
+    nPos = nPrevPos = 0;
+    for(it=src.begin(); it!=src.end(); ++it,nPos++){
+        if((*it) != delimiter){
+           continue;
+        }else{
+            vec.push_back(src.SubString(nPrevPos,nPos));
+            nPrevPos = nPos;
+        }
+    }
+    return vec;
+}

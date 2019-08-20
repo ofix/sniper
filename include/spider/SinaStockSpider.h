@@ -22,7 +22,7 @@ class SinaStockSpider : public StockSpider
         virtual bool Run();
         virtual void* GetResult();
     protected:
-        wxVector<StockItem> m_data;
+        wxVector<KlineItem> m_data;
         wxString m_urlTotalCount; // URL to get stock total count
         wxString m_urlPageData; //URL to get stock page data
 };

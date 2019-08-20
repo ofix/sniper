@@ -5,6 +5,9 @@
 
 #define MARKET_NAME_ZH(i) ((i==1)?_T("沪市"):((i==2)?_T("深市"):_T("创业板")))
 #define MARKET_NAME_EN(i) ((i==1)?_T("SHANG HAI"):((i==2)?_T("SHEN ZHEN"):_T("CHUAN YE BAN")))
+#define MARKET_SHANG_HAI 1
+#define MARKET_SHEN_ZHEN 2
+#define MARKET_CHUAN_YE_BAN 3
 
 struct ShareBrief
 {
@@ -13,16 +16,29 @@ struct ShareBrief
     short market;  //stock original market, 1 - SHANG HAI,2 -SHEN ZHEN,3 - CHUAN YE BAN
 };
 
-struct StockItem
+// for k line drawing
+struct KlineRange{
+    int begin; // beginning position of K lines
+    int end;   // end position of K Lines
+};
+
+struct KlineItem
 {
-   wxString code; // stock code
-   wxString name; // stock name
-   wxLongLong market_value; // stock market value
-   wxInt8 danger; // 0:no danger 1:normal danger 2: damage danger
-   bool watch; // 0:not in watch 1:in watch
-   float price_open;
-   float price_close;
-   float price_now;
+   wxString day; //日期
+   wxString code; // share code
+   wxString name; // share name
+   double market_cap; // share market value
+   double change_rate; //涨跌幅
+   double change_amount; //涨跌额
+   double trade_volume; //成交量
+   double trade_amount; //成交额
+   double price_open; //开盘价
+   double price_close; //收盘价
+   double price_max; //最高价
+   double price_min; //最低价
+   double price_now; //当前实时价
+   wxInt8 danger; // 1:security 2:warning 3: danger 4: damage
+   wxInt8 favorite; // 0:not favorite 1:favorite
 };
 
 struct ShareItem
