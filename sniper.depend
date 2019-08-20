@@ -8,12 +8,10 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msw\rcdefs.h
 
-1566237918 source:d:\work_c++\sniper\sniperapp.cpp
+1566321015 source:d:\work_c++\sniper\sniperapp.cpp
 	"sniperApp.h"
 	"core/Global.h"
-	"spider/SinaStockSpider.h"
-	"spider/StockStarSpider.h"
-	"spider/IfengSpider.h"
+	"core/SpiderManager.h"
 	"sniperMain.h"
 	<wx/image.h>
 
@@ -2812,7 +2810,7 @@
 	"json_defs.h"
 	"jsonval.h"
 
-1566111610 d:\work_c++\sniper\include\spider\sinastockspider.h
+1566293126 d:\work_c++\sniper\include\spider\sinastockspider.h
 	<wx/vector.h>
 	<wx/regex.h>
 	"core/Stock.h"
@@ -2821,10 +2819,10 @@
 	"lib/wxJSON/jsonreader.h"
 	"StockSpider.h"
 
-1566237298 d:\work_c++\sniper\include\core\stock.h
+1566293935 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
-1566238915 d:\work_c++\sniper\include\util\helper.h
+1566297753 d:\work_c++\sniper\include\util\helper.h
 	<wx/url.h>
 	<wx/sstream.h>
 	<wx/convauto.h>
@@ -2855,13 +2853,13 @@
 1566235835 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
-1566238915 source:d:\work_c++\sniper\src\util\helper.cpp
+1566297191 source:d:\work_c++\sniper\src\util\helper.cpp
 	"util/Helper.h"
 
 1566108925 d:\work_c++\sniper\include\core\hash.h
 	<wx/hashmap.h>
 
-1566110672 d:\work_c++\sniper\include\core\global.h
+1566320808 d:\work_c++\sniper\include\core\global.h
 	<iostream>
 	<locale.h>
 	<exception>
@@ -2884,10 +2882,57 @@
 1566110492 d:\work_c++\sniper\include\core\map.h
 	<wx/hashmap.h>
 
-1566243641 source:d:\work_c++\sniper\src\spider\ifengspider.cpp
+1566322766 source:d:\work_c++\sniper\src\spider\ifengspider.cpp
 	"IfengSpider.h"
 
-1566237403 d:\work_c++\sniper\include\spider\ifengspider.h
+1566322746 d:\work_c++\sniper\include\spider\ifengspider.h
 	<StockSpider.h>
 	"core/Stock.h"
+
+1566321262 d:\work_c++\sniper\include\core\spidermanager.h
+	<wx/vector.h>
+	"Stock.h"
+	"spider/IfengSpider.h"
+	"spider/HistoryStockSpider.h"
+	"spider/SinaStockSpider.h"
+
+1566297908 d:\work_c++\sniper\include\spider\historystockspider.h
+	<StockSpider.h>
+	"core/Stock.h"
+	"util/Helper.h"
+
+1566322312 source:d:\work_c++\sniper\src\core\spidermanager.cpp
+	"SpiderManager.h"
+
+1566297936 source:d:\work_c++\sniper\src\spider\historystockspider.cpp
+	"HistoryStockSpider.h"
+
+1566295772 source:d:\work_c++\sniper\src\ui\klinectrl.cpp
+	"KLineCtrl.h"
+
+1566295423 d:\work_c++\sniper\include\ui\klinectrl.h
+	<wx/control.h>
+	<wx/vector.h>
+	<wx/textfile.h>
+	<wx/dcclient.h>
+	<wx/dcbuffer.h>
+	"core/Stock.h"
+	"util/Helper.h"
+
+1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\textfile.h
+	"wx/defs.h"
+	"wx/textbuf.h"
+	"wx/file.h"
+
+1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\textbuf.h
+	"wx/defs.h"
+	"wx/arrstr.h"
+	"wx/convauto.h"
+	"wx/string.h"
+	"wx/dynarray.h"
+
+1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\dcbuffer.h
+	"wx/dcmemory.h"
+	"wx/dcclient.h"
+	"wx/window.h"
 

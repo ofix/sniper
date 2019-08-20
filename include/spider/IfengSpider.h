@@ -10,10 +10,17 @@ class IfengSpider : public StockSpider
         IfengSpider(wxString strUrl = wxT(""));
         virtual ~IfengSpider();
         virtual bool Run();
-        bool Parse(wxString& strResponse,short iTag=1);
+        wxVector<ShareBrief> GetAllShares();
+        size_t GetShareCount() const;
+        size_t GetShanghaiShareCount()const;
+        size_t GetShenzhenShareCount()const;
+        size_t GetChuanyebanShareCount()const;
         void Dump();
+        void DumpShareCount();
     protected:
+        bool Parse(wxString& strResponse,short iTag=1);
         wxVector<ShareBrief> m_shares;
+        wxVector<size_t> m_vecCount; // store three market share count in slot [0,1,2]
 };
 
 #endif // IFENGSPIDER_H

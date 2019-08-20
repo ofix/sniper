@@ -9,9 +9,7 @@
 
 #include "sniperApp.h"
 #include "core/Global.h"
-#include "spider/SinaStockSpider.h"
-#include "spider/StockStarSpider.h"
-#include "spider/IfengSpider.h"
+#include "core/SpiderManager.h"
 
 //(*AppHeaders
 #include "sniperMain.h"
@@ -32,9 +30,8 @@ bool sniperApp::OnInit()
         SetTopWindow(Frame);
     }
     //*)
-//    SinaStockSpider* pSpider = new SinaStockSpider();
-    IfengSpider* pSpider = new IfengSpider();
-    pSpider->Run();
+    SpiderManager* pManager = new SpiderManager();
+    pManager->CrawlAllShares();
     return wxOK;
 
 }
