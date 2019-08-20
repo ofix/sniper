@@ -2882,7 +2882,7 @@
 1566110492 d:\work_c++\sniper\include\core\map.h
 	<wx/hashmap.h>
 
-1566322766 source:d:\work_c++\sniper\src\spider\ifengspider.cpp
+1566324389 source:d:\work_c++\sniper\src\spider\ifengspider.cpp
 	"IfengSpider.h"
 
 1566322746 d:\work_c++\sniper\include\spider\ifengspider.h
@@ -2896,15 +2896,15 @@
 	"spider/HistoryStockSpider.h"
 	"spider/SinaStockSpider.h"
 
-1566297908 d:\work_c++\sniper\include\spider\historystockspider.h
+1566324165 d:\work_c++\sniper\include\spider\historystockspider.h
 	<StockSpider.h>
 	"core/Stock.h"
 	"util/Helper.h"
 
-1566322312 source:d:\work_c++\sniper\src\core\spidermanager.cpp
+1566324122 source:d:\work_c++\sniper\src\core\spidermanager.cpp
 	"SpiderManager.h"
 
-1566297936 source:d:\work_c++\sniper\src\spider\historystockspider.cpp
+1566324285 source:d:\work_c++\sniper\src\spider\historystockspider.cpp
 	"HistoryStockSpider.h"
 
 1566295772 source:d:\work_c++\sniper\src\ui\klinectrl.cpp

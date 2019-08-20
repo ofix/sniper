@@ -14,7 +14,7 @@ class HistoryStockSpider : public StockSpider
 {
     public:
         // please reference http://quotes.money.163.com/trade/lsjysj_002421.html#01b07
-        HistoryStockSpider(wxVector<ShareBrief>& stockList,wxString savePath, wxString strUrl=_T(""));
+        HistoryStockSpider(wxVector<ShareBrief>& stockList,wxString savePath=_T(""), wxString strUrl=_T(""));
         virtual ~HistoryStockSpider();
         virtual bool Run();
 

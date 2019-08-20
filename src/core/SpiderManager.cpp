@@ -12,9 +12,12 @@ SpiderManager::~SpiderManager()
 
 bool SpiderManager::CrawlAllShares()
 {
+    //获取所有股票的代码和简称
     IfengSpider spider;
     spider.Run();
-    spider.DumpShareCount();
-    spider.Dump();
+    //抓取历史数据
+    wxVector<ShareBrief> shares = spider.GetAllShares();
+    HistoryStockSpider hSpider(shares);
+    hSpider.Run();
     return true;
 }

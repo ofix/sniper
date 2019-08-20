@@ -39,8 +39,8 @@ bool IfengSpider::Parse(wxString& strResponse,short iTag)
     while(r.Matches(strResponse)){
         size_t start, len;
         r.GetMatch(&start, &len, 0);
-        wxString code = r.GetMatch(strResponse,1);
-        wxString name= r.GetMatch(strResponse,2);
+        wxString code = r.GetMatch(strResponse,2);
+        wxString name= r.GetMatch(strResponse,1);
         ShareBrief s;
         s.code = code;
         s.name = name;

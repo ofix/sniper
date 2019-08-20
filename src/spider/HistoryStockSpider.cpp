@@ -20,9 +20,9 @@ bool HistoryStockSpider::Run()
     while( it != m_stockList.end()){
         wxString code = (*it).code; //股票代号
         int market = (*it).market; //东方财富股票详情数据
-        wxString prefix = wxT("0"); //深市
+        wxString prefix = wxT("1"); //深市+创业板
         if(market == MARKET_SHANG_HAI){
-            prefix = '1';//沪市
+            prefix = '0';//沪市
         }
         wxString response;
         wxDateTime _now = wxDateTime::Now();
