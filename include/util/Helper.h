@@ -18,7 +18,7 @@ bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet=wxFON
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
 int fixBadJson(wxString& strJson);
 void console(wxString& strText);
-wxString GetExecDir();
+wxString getExecDir();
 wxString buildUrlPara(kvMap para,bool bComma=true);
 wxVector<wxString> slice(wxString src,wxString delimiter=_T(","));
 

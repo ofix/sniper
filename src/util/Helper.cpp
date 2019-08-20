@@ -53,7 +53,7 @@ bool downloadHttpFile(wxString strUrl,wxString& strResponse)
     return false;
 }
 
-wxString GetExecDir()
+wxString getExecDir()
 {
     wxString strExePath ;
     wxStandardPathsBase& stdp = wxStandardPaths::Get();
