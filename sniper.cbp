@@ -22,6 +22,7 @@
 					<Add directory="include/spider" />
 					<Add directory="include/core" />
 					<Add directory="include/ui" />
+					<Add directory="lib/pinyin" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
@@ -60,6 +61,7 @@
 					<Add directory="include/spider" />
 					<Add directory="include/core" />
 					<Add directory="include/ui" />
+					<Add directory="lib/pinyin" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -122,6 +124,8 @@
 		<Unit filename="include/spider/StockStarSpider.h" />
 		<Unit filename="include/ui/KlineCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
+		<Unit filename="lib/pinyin/PinYin.cpp" />
+		<Unit filename="lib/pinyin/PinYin.h" />
 		<Unit filename="lib/wxJSON/json_defs.h" />
 		<Unit filename="lib/wxJSON/jsonreader.cpp" />
 		<Unit filename="lib/wxJSON/jsonreader.h" />
