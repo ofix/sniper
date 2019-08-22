@@ -1,6 +1,6 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(uint16_t size):m_size(size),m_msgLocker(m_msgSection)
+ThreadPool::ThreadPool(uint16_t size):m_size(size),m_msgLocker(m_msgSection),m_bRun(false)
 {
 
 }
@@ -29,6 +29,7 @@ bool ThreadPool::Run()
             JobThread* pThread = new JobThread(this);
             if(pThread->Run() != wxTHREAD_NO_ERROR){
                 Destroy();
+                m_bRun = false;
                 m_errorNo = ERROR_THREAD_POOL_CREATE_FAILURE;
                 m_errorMsg = wxT("线程池创建失败!");
                 return false;
@@ -36,6 +37,7 @@ bool ThreadPool::Run()
                 m_idleThreads.push_back(pThread);
             }
         }
+        m_bRun = true;
         return true;
     }catch(...){
         m_errorNo = ERROR_THREAD_SYSTEM_EXCEPTION;
@@ -43,6 +45,11 @@ bool ThreadPool::Run()
         return false;
     }
     return true;
+}
+
+bool ThreadPool::IsRunning()const
+{
+    return m_bRun;
 }
 
 uint16_t ThreadPool::GetCpuCoreCount() const
@@ -57,7 +64,18 @@ wxString ThreadPool::GetLastError()const
 
 bool ThreadPool::Destroy()
 {
-    return false;
+    try{
+        if(m_idleThreads.size() == 0){
+            return false;
+        }
+        if(m_busyThreads.size() == 0){
+            return false;
+        }
+
+    }catch(...){
+        m_errorNo = ERROR_THREAD_SYSTEM_EXCEPTION;
+        m_errorMsg = wxT("系统异常");
+    }
 }
 
 uint16_t ThreadPool::GetSize() const
@@ -95,9 +113,14 @@ bool ThreadPool::PauseThread()
     return false;
 }
 
-bool ThreadPool::PushMessageToQueue(JobMessage& message)
+bool ThreadPool::PostMessage(JobMessage& message)
 {
-    return false;
+    try{
+
+        return true;
+    }catch(...){
+        return false;
+    }
 }
 
 void ThreadPool::onTaskMsgPost(wxEvent& event)

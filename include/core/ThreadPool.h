@@ -27,12 +27,13 @@ class ThreadPool
         bool Destroy();
         uint16_t GetSize() const;
         bool SetSize(uint16_t size);
+        bool IsRunning()const;
 
         uint16_t GetBusyThreadsCount() const;
         uint16_t GetIdleThreadsCount() const;
 
         bool PauseThread();
-        bool PushMessageToQueue(JobMessage& message);
+        bool PostMessage(JobMessage& message);
         wxString GetLastError()const;
 
         void onTaskMsgPost(wxEvent& event);
@@ -48,6 +49,7 @@ class ThreadPool
         wxMessageQueue<JobMessage> m_msgQueue;
         wxCriticalSectionLocker m_msgLocker;
         wxCriticalSection m_msgSection;
+        bool m_bRun;
         int m_errorNo;
         wxString m_errorMsg;
 
