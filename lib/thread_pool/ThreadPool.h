@@ -6,7 +6,7 @@
 #include <wx/msgqueue.h>
 #include <wx/event.h>
 
-#include "JobMessage.h"
+#include "ThreadTask.h"
 #include "WorkerThread.h"
 #include "BossThread.h"
 
@@ -33,7 +33,7 @@ class ThreadPool
         uint16_t GetIdleThreadsCount() const;
 
         bool PauseThread();
-        bool PostMessage(JobMessage& message);
+        bool PostJob(ThreadTask& message);
         wxString GetLastError()const;
 
         void onTaskMsgPost(wxEvent& event);
@@ -46,7 +46,7 @@ class ThreadPool
         wxVector<WorkerThread*> m_busyThreads;
         wxVector<WorkerThread*> m_idleThreads;
         BossThread m_bossThread;
-        wxMessageQueue<JobMessage> m_msgQueue;
+        wxMessageQueue<ThreadTask> m_msgQueue;
         wxCriticalSectionLocker m_msgLocker;
         wxCriticalSection m_msgSection;
         bool m_bRun;

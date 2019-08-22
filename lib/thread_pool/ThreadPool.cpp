@@ -1,6 +1,8 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(uint16_t size):m_size(size),m_msgLocker(m_msgSection),m_bRun(false)
+ThreadPool::ThreadPool(uint16_t size):m_size(size)
+                            ,m_msgLocker(m_msgSection)
+                            ,m_bRun(false)
 {
 
 }
@@ -113,7 +115,7 @@ bool ThreadPool::PauseThread()
     return false;
 }
 
-bool ThreadPool::PostMessage(JobMessage& message)
+bool ThreadPool::PostTask(ThreadTask& task)
 {
     try{
 

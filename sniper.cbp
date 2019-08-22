@@ -112,7 +112,7 @@
 		<Unit filename="include/core/BossThread.h" />
 		<Unit filename="include/core/FileManager.h" />
 		<Unit filename="include/core/Global.h" />
-		<Unit filename="include/core/JobMessage.h" />
+		<Unit filename="include/core/ThreadTask.h" />
 		<Unit filename="include/core/Map.h" />
 		<Unit filename="include/core/SpiderManager.h" />
 		<Unit filename="include/core/Stock.h" />
@@ -148,7 +148,7 @@
 		<Unit filename="sniperMain.h" />
 		<Unit filename="src/core/BossThread.cpp" />
 		<Unit filename="src/core/FileManager.cpp" />
-		<Unit filename="src/core/JobMessage.cpp" />
+		<Unit filename="src/core/ThreadTask.cpp" />
 		<Unit filename="src/core/SpiderManager.cpp" />
 		<Unit filename="src/core/ThreadPool.cpp" />
 		<Unit filename="src/core/TrieTree.cpp" />
