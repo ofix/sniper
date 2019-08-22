@@ -4,7 +4,11 @@
 #include <wx/vector.h>
 #include <wx/thread.h>
 #include <wx/msgqueue.h>
-#include "TaskMessage.h"
+#include <wx/event.h>
+
+#include "JobMessage.h"
+#include "JobThread.h"
+#include "ManagerThread.h"
 
 /***********************************
  *@class ThreadPool
@@ -12,6 +16,7 @@
  *@author tom song
  ***********************************/
  #define DEFAULT_THREAD_POOL_SIZE 8
+ #define ERROR_THREAD_POOL_CREATE_FAILURE 201
 class ThreadPool
 {
     public:
@@ -26,18 +31,24 @@ class ThreadPool
         uint16_t GetIdleThreadsCount() const;
 
         bool PauseThread();
-        bool PushMessageToQueue(TaskMessage& message);
+        bool PushMessageToQueue(JobMessage& message);
+        wxString GetLastError()const;
 
         void onTaskMsgPost(wxEvent& event);
         void onWorkerThreadPost(wxEvent& event);
     protected:
+        uint16_t GetCpuCoreCount()const;
+    protected:
         uint16_t m_size;
         uint16_t m_taskTodo;
-        wxList<wxThread> m_busyThreads;
-        wxList<wxThread> m_idleThreads;
-        wxThread m_threadManager;
-        wxMessageQueue m_msgQueue;
+        wxVector<JobThread*> m_busyThreads;
+        wxVector<JobThread*> m_idleThreads;
+        ManagerThread m_threadManager;
+        wxMessageQueue<JobMessage> m_msgQueue;
         wxCriticalSectionLocker m_msgLocker;
+        wxCriticalSection m_msgSection;
+        int m_errorNo;
+        wxString m_errorMsg;
 
 };
 

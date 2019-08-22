@@ -111,10 +111,12 @@
 		</Linker>
 		<Unit filename="include/core/FileManager.h" />
 		<Unit filename="include/core/Global.h" />
+		<Unit filename="include/core/JobMessage.h" />
+		<Unit filename="include/core/JobThread.h" />
+		<Unit filename="include/core/ManagerThread.h" />
 		<Unit filename="include/core/Map.h" />
 		<Unit filename="include/core/SpiderManager.h" />
 		<Unit filename="include/core/Stock.h" />
-		<Unit filename="include/core/TaskMessage.h" />
 		<Unit filename="include/core/ThreadPool.h" />
 		<Unit filename="include/core/TrieTree.h" />
 		<Unit filename="include/spider/EastMoneySpider.h" />
@@ -145,8 +147,10 @@
 		<Unit filename="sniperMain.cpp" />
 		<Unit filename="sniperMain.h" />
 		<Unit filename="src/core/FileManager.cpp" />
+		<Unit filename="src/core/JobMessage.cpp" />
+		<Unit filename="src/core/JobThread.cpp" />
+		<Unit filename="src/core/ManagerThread.cpp" />
 		<Unit filename="src/core/SpiderManager.cpp" />
-		<Unit filename="src/core/TaskMessage.cpp" />
 		<Unit filename="src/core/ThreadPool.cpp" />
 		<Unit filename="src/core/TrieTree.cpp" />
 		<Unit filename="src/spider/EastMoneySpider.cpp" />
