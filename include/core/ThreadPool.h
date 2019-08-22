@@ -7,8 +7,8 @@
 #include <wx/event.h>
 
 #include "JobMessage.h"
-#include "JobThread.h"
-#include "ManagerThread.h"
+#include "WorkerThread.h"
+#include "BossThread.h"
 
 /***********************************
  *@class ThreadPool
@@ -43,9 +43,9 @@ class ThreadPool
     protected:
         uint16_t m_size;
         uint16_t m_taskTodo;
-        wxVector<JobThread*> m_busyThreads;
-        wxVector<JobThread*> m_idleThreads;
-        ManagerThread m_threadManager;
+        wxVector<WorkerThread*> m_busyThreads;
+        wxVector<WorkerThread*> m_idleThreads;
+        BossThread m_bossThread;
         wxMessageQueue<JobMessage> m_msgQueue;
         wxCriticalSectionLocker m_msgLocker;
         wxCriticalSection m_msgSection;

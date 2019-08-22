@@ -26,7 +26,7 @@ bool ThreadPool::Run()
             m_size = cpu_cores;
         }
         for(uint16_t i =0; i<m_size; i++){
-            JobThread* pThread = new JobThread(this);
+            WorkerThread* pThread = new WorkerThread(this);
             if(pThread->Run() != wxTHREAD_NO_ERROR){
                 Destroy();
                 m_bRun = false;
@@ -88,7 +88,7 @@ bool ThreadPool::SetSize(uint16_t size)
     if(size > m_size){
         uint16_t count = size - m_size;
         for(uint16_t i=0; i<count; i++){
-            JobThread* pThread = new JobThread(this);
+            WorkerThread* pThread = new WorkerThread(this);
             if(pThread->Run() == wxTHREAD_NO_ERROR){
                 m_idleThreads.push_back(pThread);
             }

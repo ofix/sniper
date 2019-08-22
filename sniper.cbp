@@ -109,16 +109,16 @@
 			<Add option="-m64" />
 			<Add option="-mthreads" />
 		</Linker>
+		<Unit filename="include/core/BossThread.h" />
 		<Unit filename="include/core/FileManager.h" />
 		<Unit filename="include/core/Global.h" />
 		<Unit filename="include/core/JobMessage.h" />
-		<Unit filename="include/core/JobThread.h" />
-		<Unit filename="include/core/ManagerThread.h" />
 		<Unit filename="include/core/Map.h" />
 		<Unit filename="include/core/SpiderManager.h" />
 		<Unit filename="include/core/Stock.h" />
 		<Unit filename="include/core/ThreadPool.h" />
 		<Unit filename="include/core/TrieTree.h" />
+		<Unit filename="include/core/WorkerThread.h" />
 		<Unit filename="include/spider/EastMoneySpider.h" />
 		<Unit filename="include/spider/HistoryStockSpider.h" />
 		<Unit filename="include/spider/IfengSpider.h" />
@@ -146,13 +146,13 @@
 		<Unit filename="sniperApp.h" />
 		<Unit filename="sniperMain.cpp" />
 		<Unit filename="sniperMain.h" />
+		<Unit filename="src/core/BossThread.cpp" />
 		<Unit filename="src/core/FileManager.cpp" />
 		<Unit filename="src/core/JobMessage.cpp" />
-		<Unit filename="src/core/JobThread.cpp" />
-		<Unit filename="src/core/ManagerThread.cpp" />
 		<Unit filename="src/core/SpiderManager.cpp" />
 		<Unit filename="src/core/ThreadPool.cpp" />
 		<Unit filename="src/core/TrieTree.cpp" />
+		<Unit filename="src/core/WorkerThread.cpp" />
 		<Unit filename="src/spider/EastMoneySpider.cpp" />
 		<Unit filename="src/spider/HistoryStockSpider.cpp" />
 		<Unit filename="src/spider/IfengSpider.cpp" />
