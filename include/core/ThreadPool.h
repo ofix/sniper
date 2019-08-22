@@ -17,6 +17,7 @@
  ***********************************/
  #define DEFAULT_THREAD_POOL_SIZE 8
  #define ERROR_THREAD_POOL_CREATE_FAILURE 201
+ #define ERROR_THREAD_SYSTEM_EXCEPTION 202
 class ThreadPool
 {
     public:

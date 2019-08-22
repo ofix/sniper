@@ -16,24 +16,31 @@ ThreadPool::~ThreadPool()
  ******************************************/
 bool ThreadPool::Run()
 {
-
-    if(m_size<=0){
-        m_size = DEFAULT_THREAD_POOL_SIZE;
-    }
-    uint16_t cpu_cores = GetCpuCoreCount();
-    if(cpu_cores >= m_size)
-    {
-        m_size = cpu_cores;
-    }
-    for(uint16_t i =0; i<m_size; i++){
-        JobThread* pThread = new JobThread(this);
-        if(!pThread->Run() != wxTHREAD_NO_ERROR){
-            m_idleThreads.push_back(pThread);
-        }else{
-            m_errorNo = ERROR_THREAD_POOL_CREATE_FAILURE;
-            m_errorMsg = wxT("线程池创建失败!");
-            return false;
+    try{
+        if(m_size<=0){
+            m_size = DEFAULT_THREAD_POOL_SIZE;
         }
+        uint16_t cpu_cores = GetCpuCoreCount();
+        if(cpu_cores >= m_size)
+        {
+            m_size = cpu_cores;
+        }
+        for(uint16_t i =0; i<m_size; i++){
+            JobThread* pThread = new JobThread(this);
+            if(pThread->Run() != wxTHREAD_NO_ERROR){
+                Destroy();
+                m_errorNo = ERROR_THREAD_POOL_CREATE_FAILURE;
+                m_errorMsg = wxT("线程池创建失败!");
+                return false;
+            }else{
+                m_idleThreads.push_back(pThread);
+            }
+        }
+        return true;
+    }catch(...){
+        m_errorNo = ERROR_THREAD_SYSTEM_EXCEPTION;
+        m_errorMsg = wxT("系统异常");
+        return false;
     }
     return true;
 }
