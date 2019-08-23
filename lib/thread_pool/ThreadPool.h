@@ -25,34 +25,31 @@ class ThreadPool
         virtual ~ThreadPool();
         bool Run();
         bool Destroy();
-        uint16_t GetSize() const;
+        uint16_t GetSize();
         bool SetSize(uint16_t size);
-        bool IsRunning()const;
+        bool IsRunning();
 
-        uint16_t GetBusyThreadsCount() const;
-        uint16_t GetIdleThreadsCount() const;
+        uint16_t GetBusyThreadsCount();
+        uint16_t GetIdleThreadsCount();
 
         bool PauseThread();
-        bool PostJob(ThreadTask& message);
-        wxString GetLastError()const;
+        bool PostTask(ThreadTask& message);
+        wxString GetLastError();
 
         void onTaskMsgPost(wxEvent& event);
         void onWorkerThreadPost(wxEvent& event);
-    protected:
-        uint16_t GetCpuCoreCount()const;
-    protected:
+    private:
+        bool m_bRun;
         uint16_t m_size;
         uint16_t m_taskTodo;
+        int m_errorNo;
+        wxString m_errorMsg;
         wxVector<WorkerThread*> m_busyThreads;
         wxVector<WorkerThread*> m_idleThreads;
         BossThread m_bossThread;
         wxMessageQueue<ThreadTask> m_msgQueue;
-        wxCriticalSectionLocker m_msgLocker;
-        wxCriticalSection m_msgSection;
-        bool m_bRun;
-        int m_errorNo;
-        wxString m_errorMsg;
-
+        wxCriticalSection m_section;
+        wxMutex m_mutex;
 };
 
 #endif // THREADPOOL_H

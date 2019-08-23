@@ -14,8 +14,8 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-std=c++0x" />
 					<Add option="-m64" />
+					<Add option="-g" />
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
@@ -109,16 +109,12 @@
 			<Add option="-m64" />
 			<Add option="-mthreads" />
 		</Linker>
-		<Unit filename="include/core/BossThread.h" />
 		<Unit filename="include/core/FileManager.h" />
 		<Unit filename="include/core/Global.h" />
-		<Unit filename="include/core/ThreadTask.h" />
 		<Unit filename="include/core/Map.h" />
 		<Unit filename="include/core/SpiderManager.h" />
 		<Unit filename="include/core/Stock.h" />
-		<Unit filename="include/core/ThreadPool.h" />
 		<Unit filename="include/core/TrieTree.h" />
-		<Unit filename="include/core/WorkerThread.h" />
 		<Unit filename="include/spider/EastMoneySpider.h" />
 		<Unit filename="include/spider/HistoryStockSpider.h" />
 		<Unit filename="include/spider/IfengSpider.h" />
@@ -130,6 +126,15 @@
 		<Unit filename="include/util/Helper.h" />
 		<Unit filename="lib/pinyin/PinYin.cpp" />
 		<Unit filename="lib/pinyin/PinYin.h" />
+		<Unit filename="lib/thread_pool/BossThread.cpp" />
+		<Unit filename="lib/thread_pool/BossThread.h" />
+		<Unit filename="lib/thread_pool/ThreadEvent.h" />
+		<Unit filename="lib/thread_pool/ThreadPool.cpp" />
+		<Unit filename="lib/thread_pool/ThreadPool.h" />
+		<Unit filename="lib/thread_pool/ThreadTask.cpp" />
+		<Unit filename="lib/thread_pool/ThreadTask.h" />
+		<Unit filename="lib/thread_pool/WorkerThread.cpp" />
+		<Unit filename="lib/thread_pool/WorkerThread.h" />
 		<Unit filename="lib/wxJSON/json_defs.h" />
 		<Unit filename="lib/wxJSON/jsonreader.cpp" />
 		<Unit filename="lib/wxJSON/jsonreader.h" />
@@ -146,13 +151,9 @@
 		<Unit filename="sniperApp.h" />
 		<Unit filename="sniperMain.cpp" />
 		<Unit filename="sniperMain.h" />
-		<Unit filename="src/core/BossThread.cpp" />
 		<Unit filename="src/core/FileManager.cpp" />
-		<Unit filename="src/core/ThreadTask.cpp" />
 		<Unit filename="src/core/SpiderManager.cpp" />
-		<Unit filename="src/core/ThreadPool.cpp" />
 		<Unit filename="src/core/TrieTree.cpp" />
-		<Unit filename="src/core/WorkerThread.cpp" />
 		<Unit filename="src/spider/EastMoneySpider.cpp" />
 		<Unit filename="src/spider/HistoryStockSpider.cpp" />
 		<Unit filename="src/spider/IfengSpider.cpp" />

@@ -1,7 +1,9 @@
 #include "WorkerThread.h"
 #include "ThreadPool.h"
 
-WorkerThread::WorkerThread(ThreadPool* pThreadPool,wxThreadKind kind):m_pThreadPool(pThreadPool),wxThread(kind)
+WorkerThread::WorkerThread(ThreadPool* pThreadPool,wxThreadKind kind)
+                    :wxThread(kind)
+                    ,m_pThreadPool(pThreadPool)
 {
     //ctor
 }
