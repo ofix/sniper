@@ -11,6 +11,8 @@
 #include "core/Global.h"
 #include "core/SpiderManager.h"
 
+#include "lib/thread_pool/ThreadPool.h"
+
 //(*AppHeaders
 #include "sniperMain.h"
 #include <wx/image.h>
@@ -30,8 +32,8 @@ bool sniperApp::OnInit()
         SetTopWindow(Frame);
     }
     //*)
-    SpiderManager* pManager = new SpiderManager();
-    pManager->CrawlAllShares();
+    ThreadPool* pThreadPool = new ThreadPool();
+    pThreadPool->Run();
     return wxOK;
 
 }

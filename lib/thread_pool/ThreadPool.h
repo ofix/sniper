@@ -26,14 +26,14 @@ class ThreadPool
         bool Run();
         bool Destroy();
         uint16_t GetSize();
-        bool SetSize(uint16_t size);
+        bool ReSize(uint16_t size);
         bool IsRunning();
 
         uint16_t GetBusyThreadsCount();
         uint16_t GetIdleThreadsCount();
 
         bool PauseThread();
-        bool PostTask(ThreadTask& message);
+        bool PostTask(ThreadTask& task);
         wxString GetLastError();
 
         void onTaskMsgPost(wxEvent& event);
@@ -47,7 +47,7 @@ class ThreadPool
         wxVector<WorkerThread*> m_busyThreads;
         wxVector<WorkerThread*> m_idleThreads;
         BossThread m_bossThread;
-        wxMessageQueue<ThreadTask> m_msgQueue;
+        wxMessageQueue<ThreadTask> m_taskQueue;
         wxCriticalSection m_section;
         wxMutex m_mutex;
 };

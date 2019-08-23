@@ -9,3 +9,8 @@ ThreadTask::~ThreadTask()
 {
     //dtor
 }
+
+void ThreadTask::Execute()
+{
+
+}

@@ -92,7 +92,7 @@ uint16_t ThreadPool::GetSize()
     return m_size;
 }
 
-bool ThreadPool::SetSize(uint16_t size)
+bool ThreadPool::ReSize(uint16_t size)
 {
     if(size > m_size){
         uint16_t count = size - m_size;
@@ -127,6 +127,8 @@ bool ThreadPool::PauseThread()
 bool ThreadPool::PostTask(ThreadTask& task)
 {
     try{
+        wxCriticalSectionLocker enter(m_section);
+        m_taskQueue.Post(task);
         return true;
     }catch(...){
         return false;

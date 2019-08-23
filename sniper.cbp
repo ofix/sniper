@@ -133,6 +133,8 @@
 		<Unit filename="lib/thread_pool/ThreadPool.h" />
 		<Unit filename="lib/thread_pool/ThreadTask.cpp" />
 		<Unit filename="lib/thread_pool/ThreadTask.h" />
+		<Unit filename="lib/thread_pool/TimerThreadTask.cpp" />
+		<Unit filename="lib/thread_pool/TimerThreadTask.h" />
 		<Unit filename="lib/thread_pool/WorkerThread.cpp" />
 		<Unit filename="lib/thread_pool/WorkerThread.h" />
 		<Unit filename="lib/wxJSON/json_defs.h" />
