@@ -7,17 +7,18 @@
 #define TASK_PRIORITY_HIGH 2
 #define TASK_PRIORITY_NORMAL 1
 #define TASK_PRIORITY_LOW 0
+
 class ThreadTask
 {
     public:
         ThreadTask();
         virtual ~ThreadTask();
         virtual void Execute();
-    protected:
-        int m_type; // task type
-        int m_bSuspend; // can be suspend or not
-        int m_priority; // task priority
-        wxMemoryBuffer m_data;
+    public:
+        int priority; // task priority
+        int type; // task type
+        int bInterrupt; // can be suspend or not
+        wxMemoryBuffer data;
 };
 
 #endif // ThreadTask_H
