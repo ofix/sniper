@@ -5,7 +5,7 @@
 #include <wx/vector.h>
 
 /*****************************************************
- * following are some beneficial think-about for thread-polling
+ * Following are some beneficial think-about for thread-polling
  * If a task need keep running all the way for a fixed time span
  * ,these are many discrete, and the task is I/O bound.for such
  * program,keep the task running in UI main thread is not a good
@@ -26,6 +26,24 @@
  * Besides, we should be very careful the task priority.we should avoid a nested periodically task exist.
  * just for MySQL doesn't support nested transaction, otherwise it would make the answer complexed
  * at present.
+ * some thinking-about task priority.
+ * a higher priority task has the right to occupy other lower priority running worker thread's execution time.
+ * if above suppose is enough, we may encounter another hazard situation: the higher priority task has not ended yet,but the lower priority thread
+ * in the timer queue has timed-out,need run immediately!!! if we repeat above steps, all the worker threads would be
+ * occupy by the priority execute task, and the higher priority compute bound task would be abandoned in the task queue
+ * all the time.
+ * If we want all the tasks has the opportunity to run,we has a opt, cut down every task execution time,just like the
+ * operating system do.
+ * to solve this zigzag puzzle, every task could be
+   *****
+  [timer1]
+  [timer2]
+  [timer3]
+  [timer4]
+  [timer5]
+   *****
+ *
+ *
  *
  *****************************************************/
 class ThreadPool;
