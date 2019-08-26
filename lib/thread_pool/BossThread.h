@@ -56,15 +56,16 @@ class BossThread:public wxThread
         BossThread(ThreadPool* pThreadPool,wxThreadKind kind=wxTHREAD_DETACHED);
         virtual ~BossThread();
         virtual void* Entry();
-        void NewTaskNotify();
-        void ThreadIdleNotify(int threadId); // must lock and sync
+        bool NotifyNewTask();
+        bool NotifyWorkerIdle(int threadId); // must lock and sync
 
     protected:
-        void AssignTask(ThreadTask* task); // must lock and sync
+        void DispatchTask(ThreadTask* task); // must lock and sync
 
         ThreadPool* m_pThreadPool;
         int m_awake; // UI main thread or worker thread would modify this variable
-        wxVector<int> m_threadsState; // worker thread state; worker threads would modify it
+        wxVector<int> m_threadsBitMap; // worker thread state; worker threads would modify it
+        std::queue<threadTimer> m_timerQueue;
         wxCriticalSection m_criticalSection;
 };
 
