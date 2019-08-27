@@ -268,6 +268,17 @@ double KlineCtrl::GetMaxVolume()
     return max;
 }
 
+/**********************************
+ *@para member KlineItem 数据成员  1:trade_volume,2:trade_amount
+ *@para KlineType 1:day,2:week,3:month
+ **********************************/
+double KlineCtrl::GetMaxValue(int member, int klineType)
+{
+    return 0;
+}
+
+
+
 /**
  * @func 绘制十字线
  * @param wxDC* pDC 设备绘制上下文
