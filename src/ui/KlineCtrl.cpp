@@ -242,6 +242,32 @@ void KlineCtrl::DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
     //考虑涨停
 }
 
+void KlineCtrl::DrawAnalysisBar(wxDC* pDC)
+{
+    switch(m_analysisType){
+    case 1: // Draw volume Bar
+        {
+            int maxVolume = GetMaxVolume();
+        },
+    default:
+        break;
+    }
+}
+
+double KlineCtrl::GetMaxVolume()
+{
+    double max = 0;
+    wxVector<KlineItem>::const_iterator it;
+    for(it = m_klines.begin(); it != m_klines.end(); ++it)
+    {
+        if(it->trade_volume > max)
+        {
+            max = it->trade_volume;
+        }
+    }
+    return max;
+}
+
 /**
  * @func 绘制十字线
  * @param wxDC* pDC 设备绘制上下文

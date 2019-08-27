@@ -63,6 +63,8 @@ class KlineCtrl:public wxControl
                       float rect_price_high,float rect_price_low,
                       int minX,int minY,int maxX,int maxY,int lineWidth,int lineSpan);
         void DrawCrossLine(wxDC* pDC,int centerX,int centerY,int w,int h);//光标十字线
+        void DrawAnalysisBar(wxDC* pDC);
+        double GetMaxVolume();
         float GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end);
         float GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end);
         KlineRange  GetKlineRangeZoomIn(long totalKLines, long widthContainer,
@@ -86,6 +88,8 @@ class KlineCtrl:public wxControl
         wxString m_csvPath; // csv file path of day k line history data
         wxVector<KlineItem> m_klines; // the k line data
         KlineRange m_klineRng;
+        bool m_showAnalysisBar; // if true, draw volume,MCDA,KDJ index
+        int m_analysisType;
 };
 
 #endif // KLINECTRL_H

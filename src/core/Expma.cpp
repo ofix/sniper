@@ -18,7 +18,7 @@ static wxVector<double> Expma::Calc()
     for(it = m_data.begin(); it != m_data.end(); ++it)
     {
         double Y2 = 2*(*it)+(N-1)*Y)/(N+1);
-        expma.push(Y2);
+        expma.push_back(Y2);
         Y = Y2;
     }
     return expma;
