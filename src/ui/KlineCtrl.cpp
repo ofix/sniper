@@ -278,6 +278,23 @@ double KlineCtrl::GetMaxValue(int member, int klineType)
 }
 
 
+wxVector<KlineItem> KlineCtrl::GetWeekKlines()
+{
+    if(m_weekKlines.empty()){
+        // calc week klines;
+    }
+    return m_weekKlines;
+}
+
+wxVector<KlineItem> KlineCtrl::GetMonthKlines()
+{
+    if(m_monthKlines.empty()){
+        // calc month klines;
+    }
+    return m_monthKlines;
+}
+
+
 
 /**
  * @func 绘制十字线
