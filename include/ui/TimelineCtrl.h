@@ -3,10 +3,15 @@
 #include <wx/vector.h>
 #include <core/Stock.h>
 #include <wx/dc.h>
+#include <wx/control.h>
 
-class TimelineCtrl
+class TimelineCtrl:public wxControl
 {
     public:
+        wxDECLARE_DYNAMIC_CLASS(TimelineCtrl);
+        wxDECLARE_EVENT_TABLE();
+        wxDECLARE_NO_COPY_CLASS(TimelineCtrl);
+
         TimelineCtrl(wxVector& timeline,wxString code);
 
         virtual ~TimelineCtrl();
@@ -21,7 +26,8 @@ class TimelineCtrl
         int m_offset; // helper for average price calculation
         int m_lastAverage;
         wxString m_shareCode;
-
+        // event table declaration
+        wxDECLARE_EVENT_TABLE();
 };
 
 #endif // TIMELINECTRL_H
