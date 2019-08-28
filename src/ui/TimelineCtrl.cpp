@@ -31,4 +31,14 @@ void TimelineCtrl::AddNewData(wxVector& timeline)
     }
 }
 
+void TimelineCtrl::DrawTimeline(wxDC* pDC)
+{
+
+}
+
+void TimelineCtrl::DrawAveragePriceLine(wxDC* pDC)
+{
+
+}
+
 
