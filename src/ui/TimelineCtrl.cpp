@@ -25,7 +25,10 @@ void TimelineCtrl::UpdateAveragePrice()
 
 void TimelineCtrl::AddNewData(wxVector& timeline)
 {
-
+    wxVector<TimelineItem>::const_iterator it;
+    for(it = timeline.begin(); it != timeline.end(); ++it){
+        m_timeline.push_back(*it);
+    }
 }
 
 
