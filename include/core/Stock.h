@@ -41,6 +41,14 @@ struct KlineItem
    wxInt8 favorite; // 0:not favorite 1:favorite
 };
 
+struct TimelineItem
+{
+    wxString code; // share code
+    wxString time; //
+    double price; // transaction price
+    int hand; // how much hand has commit
+};
+
 struct ShareItem
 {
     wxString code; //代码
