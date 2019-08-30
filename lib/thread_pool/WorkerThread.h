@@ -11,6 +11,7 @@
 #define WORKER_THREAD_SLEEP 2
 #define WORKER_THREAD_RUNNING 1
 #define WORKER_THREAD_IDLE 0
+#define WORKER_THREAD_DESTROY -1
 
 class BossThread;
 class WorkerThread:public wxThread

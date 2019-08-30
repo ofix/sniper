@@ -44,7 +44,6 @@ void*  WorkerThread::Entry()
                 // need Sleep, ask for boss Thread wake up me iRet seconds
                 wxMutexLocker locker(m_mutex);
                 m_status = WORKER_THREAD_SLEEP;
-                wxThread::Sleep(iSeconds);
             }
 
             //check for higher priority thread exist
@@ -54,37 +53,33 @@ void*  WorkerThread::Entry()
             }
             if(CHECK_FOR(SIGNAL_DESTROY))
             {
-
+                wxMutexLocker locker(m_mutex);
+                m_status = WORKER_THREAD_DESTROY;
+                break;
             }
-            if(CHECK_FOR(SIGNAL_DISCARD_TASK))
+            if(CHECK_FOR(SIGNAL_DISCARD_TASK)) // check for task can be discard
             {
-
+                wxMutexLocker locker(m_mutex);
+                m_status = WORKER_THREAD_IDLE;
+                break;
             }
-            if(CHECK_FOR(SIGNAL_BACKUP_TASK))
-            {
-
-            }
-            wxThread::Sleep(m_pTask->timer)
+            wxThread::Sleep(iSeconds);
         }else{
-            //check for higher priority thread exist
-            if(CHECK_FOR(SIGNAL_TASK_URGENT))
-            {
-
-            }
+            m_pTask->Execute();
+            wxMutexLocker locker(m_mutex);
             if(CHECK_FOR(SIGNAL_DESTROY))
             {
-
+                m_status = WORKER_THREAD_DESTROY;
+                break;
             }
             if(CHECK_FOR(SIGNAL_DISCARD_TASK))
             {
-
+                m_status = WORKER_THREAD_DESTROY;
+                break;
             }
-            if(CHECK_FOR(SIGNAL_BACKUP_TASK))
-            {
-
-            }
+            m_status = WORKER_THREAD_IDLE;
+            break;
         }
-        break;
     }
 }
 
