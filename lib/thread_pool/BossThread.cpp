@@ -1,25 +1,22 @@
 #include "BossThread.h"
 #include "ThreadPool.h"
-BossThread::BossThread(ThreadPool* pThreadPool,wxThreadKind kind):wxThread(kind)
+BossThread::BossThread(ThreadPool* pThreadPool,wxCondition* pQueueCondition,wxThreadKind kind):wxThread(kind)
                         ,m_pThreadPool(pThreadPool)
+                        ,m_pQueueCondition(pQueueCondition)
 {
     //ctor
 }
 
 BossThread::~BossThread()
 {
-    //dtor
-    //
-    while(1){
-        // 等待awake 醒来
-
-    }
 }
 
 void* BossThread::Entry()
 {
-    while(1)
+    while()
     {
+        // 在thread pool 上等待
+        m_pQueueCondition.Wait();
         //检查空闲线程
         m_threadsState::const_iterator it;
         for(it = m_threadsState.begin(); it != m_threadsState.end(); ++it)
@@ -48,12 +45,6 @@ void* BossThread::Entry()
             }
         }
     }
-}
-
-void BossThread::NewTaskNotify()
-{
-   wxCriticalSectionLocker enter(m_criticalSection);
-   m_awake |= 8;
 }
 
 void BossThread::ThreadIdleNotify()

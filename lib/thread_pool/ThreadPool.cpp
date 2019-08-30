@@ -34,7 +34,7 @@ bool ThreadPool::Run()
             m_size = cpu_cores*2;
         }
         // create boss thread
-        BossThread* m_pBossThread = new BossThread(this);
+        BossThread* m_pBossThread = new BossThread(this,m_queueCondition);
         if(m_pBossThread->Run() != wxTHREAD_NO_ERROR){
             Destroy();
             m_bRun = false;
@@ -42,6 +42,7 @@ bool ThreadPool::Run()
             m_errorMsg = wxT("BossThread创建失败!");
             return false;
         }
+        // create worker threads
         for(uint16_t i =0; i<m_size; i++){
             WorkerThread* pThread = new WorkerThread(this);
             if(pThread->Run() != wxTHREAD_NO_ERROR){
@@ -58,7 +59,7 @@ bool ThreadPool::Run()
         return m_bRun;
     }catch(...){
         m_errorNo = ERROR_THREAD_SYSTEM_EXCEPTION;
-        m_errorMsg = wxT("系统异常");
+        m_errorMsg = wxT("线程池创建异常");
         return false;
     }
 }
@@ -128,28 +129,14 @@ uint16_t ThreadPool::GetIdleThreadsCount()
     return m_idleThreads.size();
 }
 
-bool ThreadPool::PauseThread()
-{
-    return false;
-}
-
-bool ThreadPool::PostTask(ThreadTask& task)
+bool ThreadPool::QueueTask(ThreadTask& task)
 {
     try{
         wxCriticalSectionLocker enter(m_section);
         m_taskQueue.Post(task);
+        m_condition.Broadcast();
         return true;
     }catch(...){
         return false;
     }
-}
-
-void ThreadPool::onTaskMsgPost(wxEvent& event)
-{
-
-}
-
-void ThreadPool::onWorkerThreadPost(wxEvent& event)
-{
-
 }

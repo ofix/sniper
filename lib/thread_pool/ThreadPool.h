@@ -36,7 +36,6 @@ class ThreadPool
 
         bool PauseTask(int task_no); // pause task execution
         bool QueueTask(ThreadTask& task); // add task to the priority queue
-        bool PauseThread();
 
     private:
         bool m_bRun;
@@ -51,6 +50,7 @@ class ThreadPool
         wxMessageQueue<ThreadTask> m_taskQueue;
         wxCriticalSection m_section;
         wxMutex m_mutex;
+        wxCondition m_queueCondition;
 };
 
 #endif // THREADPOOL_H

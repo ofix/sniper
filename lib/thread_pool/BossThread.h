@@ -1,7 +1,6 @@
 #ifndef BossThread_H
 #define BossThread_H
 #include <wx/thread.h>
-#include <wx/thread.h>
 #include <wx/vector.h>
 
 /*************************************************************************************************************
@@ -53,14 +52,14 @@ class ThreadPool;
 class BossThread:public wxThread
 {
     public:
-        BossThread(ThreadPool* pThreadPool,wxThreadKind kind=wxTHREAD_DETACHED);
+        BossThread(ThreadPool* pThreadPool,wxCondition* pQueueCondition,wxThreadKind kind=wxTHREAD_DETACHED);
         virtual ~BossThread();
         virtual void* Entry();
-        bool NotifyNewTask();
         bool NotifyWorkerIdle(int threadId); // must lock and sync
 
     protected:
         void DispatchTask(ThreadTask* task); // must lock and sync
+        wxCondition& m_pQueueCondition;
 
         ThreadPool* m_pThreadPool;
         int m_awake; // UI main thread or worker thread would modify this variable
