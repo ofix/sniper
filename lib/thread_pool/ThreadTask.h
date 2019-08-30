@@ -17,8 +17,15 @@ class ThreadTask
     public:
         int priority; // task priority
         int type; // task type
+        int id; // task id
         int bInterrupt; // can be suspend or not
         wxMemoryBuffer data;
+};
+
+class TaskStatus
+{
+    int task_id;
+    int status; // wait,running,finished not in consideration
 };
 
 #endif // ThreadTask_H

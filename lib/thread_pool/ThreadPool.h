@@ -18,6 +18,7 @@
  #define DEFAULT_THREAD_POOL_SIZE 8
  #define ERROR_THREAD_POOL_CREATE_FAILURE 201
  #define ERROR_THREAD_SYSTEM_EXCEPTION 202
+class BossThread;
 class ThreadPool
 {
     public:
@@ -33,9 +34,9 @@ class ThreadPool
         uint16_t GetBusyThreadsCount();
         uint16_t GetIdleThreadsCount();
 
-        bool PauseThread();
         bool PauseTask(int task_no); // pause task execution
         bool QueueTask(ThreadTask& task); // add task to the priority queue
+        bool PauseThread();
 
     private:
         bool m_bRun;
@@ -43,9 +44,10 @@ class ThreadPool
         uint16_t m_taskTodo;
         int m_errorNo;
         wxString m_errorMsg;
+        BossThread* m_pBossThread; // DETACHED thread must in running or this pointer is unsafe.
         wxVector<WorkerThread*> m_busyThreads; // all threads should keep running
         wxVector<WorkerThread*> m_idleThreads;
-        wxVector<ThreadTask*> task_status;
+        wxVector<TaskStatus> running_task_status; //running task status;
         wxMessageQueue<ThreadTask> m_taskQueue;
         wxCriticalSection m_section;
         wxMutex m_mutex;
