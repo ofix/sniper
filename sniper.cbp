@@ -124,6 +124,7 @@
 		<Unit filename="include/spider/StockSpider.h" />
 		<Unit filename="include/spider/StockStarSpider.h" />
 		<Unit filename="include/ui/KlineCtrl.h" />
+		<Unit filename="include/ui/TimelineCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
 		<Unit filename="lib/pinyin/PinYin.cpp" />
 		<Unit filename="lib/pinyin/PinYin.h" />
@@ -166,6 +167,7 @@
 		<Unit filename="src/spider/StockSpider.cpp" />
 		<Unit filename="src/spider/StockStarSpider.cpp" />
 		<Unit filename="src/ui/KlineCtrl.cpp" />
+		<Unit filename="src/ui/TimelineCtrl.cpp" />
 		<Unit filename="src/util/Helper.cpp" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>

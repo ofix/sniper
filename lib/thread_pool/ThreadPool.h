@@ -28,25 +28,24 @@ class ThreadPool
         uint16_t GetSize();
         bool ReSize(uint16_t size);
         bool IsRunning();
+        wxString GetLastError();
 
         uint16_t GetBusyThreadsCount();
         uint16_t GetIdleThreadsCount();
 
         bool PauseThread();
-        bool PostTask(ThreadTask& task);
-        wxString GetLastError();
+        bool PauseTask(int task_no); // pause task execution
+        bool QueueTask(ThreadTask& task); // add task to the priority queue
 
-        void onTaskMsgPost(wxEvent& event);
-        void onWorkerThreadPost(wxEvent& event);
     private:
         bool m_bRun;
         uint16_t m_size;
         uint16_t m_taskTodo;
         int m_errorNo;
         wxString m_errorMsg;
-        wxVector<WorkerThread*> m_busyThreads;
+        wxVector<WorkerThread*> m_busyThreads; // all threads should keep running
         wxVector<WorkerThread*> m_idleThreads;
-        BossThread m_bossThread;
+        wxVector<ThreadTask*> task_status;
         wxMessageQueue<ThreadTask> m_taskQueue;
         wxCriticalSection m_section;
         wxMutex m_mutex;

@@ -19,7 +19,8 @@ class TimelineCtrl:public wxControl
         void AddNewData(wxVector& timeline);
         void DrawTimeline(wxDC* pDC);
         void DrawAveragePriceLine(wxDC* pDC);
-
+        //event callback functions
+        void OnPaint(wxPaintEvent& event);
     protected:
         wxVector<TimelineItem> m_timeline;
         wxVector<double> m_average

@@ -33,13 +33,22 @@ bool ThreadPool::Run()
         {
             m_size = cpu_cores*2;
         }
+        // create boss thread
+        BossThread* m_pBossThread = new BossThread(this);
+        if(m_pBossThread->Run() != wxTHREAD_NO_ERROR){
+            Destroy();
+            m_bRun = false;
+            m_errorNo = ERROR_THREAD_POOL_CREATE_FAILURE;
+            m_errorMsg = wxT("BossThread创建失败!");
+            return false;
+        }
         for(uint16_t i =0; i<m_size; i++){
             WorkerThread* pThread = new WorkerThread(this);
             if(pThread->Run() != wxTHREAD_NO_ERROR){
                 Destroy();
                 m_bRun = false;
                 m_errorNo = ERROR_THREAD_POOL_CREATE_FAILURE;
-                m_errorMsg = wxT("线程池创建失败!");
+                m_errorMsg = wxT("WorkerThread创建失败!");
                 return false;
             }else{
                 m_idleThreads.push_back(pThread);
