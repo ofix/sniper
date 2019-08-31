@@ -40,7 +40,8 @@ bool sniperApp::OnInit()
     //   use a detached thread from thread pool to download from Ifeng Website.
     // 5.map stock brief data to a trie tree for search
     // 6.check out if all shares day K line data has download? if not download from finance.163.com
-    //
+    // 7.checkout the daytime,if it's week day, start start threads to monitor share real-time price from website
+    // 8.create app data.
     wxOpen("config.ini",)
 
     ThreadPool* pThreadPool = new ThreadPool();
