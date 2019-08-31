@@ -32,6 +32,15 @@ bool sniperApp::OnInit()
         SetTopWindow(Frame);
     }
     //*)
+
+    // 1.define config default values in .exe
+    // 2.create thread pool
+    // 3.read config file, If not exist,create one
+    // 4.get all stock brief information from stock.data.ini, if not exists,
+    //   use a detached thread from thread pool to download from Ifeng Website.
+    //
+    wxOpen("config.ini",)
+
     ThreadPool* pThreadPool = new ThreadPool();
     pThreadPool->Run();
     return wxOK;
