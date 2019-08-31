@@ -38,6 +38,8 @@ bool sniperApp::OnInit()
     // 3.read config file, If not exist,create one
     // 4.get all stock brief information from stock.data.ini, if not exists,
     //   use a detached thread from thread pool to download from Ifeng Website.
+    // 5.map stock brief data to a trie tree for search
+    // 6.check out if all shares day K line data has download? if not download from finance.163.com
     //
     wxOpen("config.ini",)
 
