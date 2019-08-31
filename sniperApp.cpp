@@ -42,6 +42,8 @@ bool sniperApp::OnInit()
     // 6.check out if all shares day K line data has download? if not download from finance.163.com
     // 7.checkout the daytime,if it's week day, start start threads to monitor share real-time price from website
     // 8.create app data.
+    // 9.listen and wait user's input, if double click,read day kline data from csv file and display it.
+    // 10.
     wxOpen("config.ini",)
 
     ThreadPool* pThreadPool = new ThreadPool();
