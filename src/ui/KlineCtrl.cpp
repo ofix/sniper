@@ -5,6 +5,13 @@ KlineCtrl::KlineCtrl()
     Init();
 }
 
+KlineCtrl::KlineCtrl(wxString strShareCode)
+{
+    Init();
+    SetCsvPath(getExecDir()+strShareCode+_T(".csv"));
+    ReadCsv();
+}
+
 KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,
                    const wxPoint& pos,
                    const wxSize& size,

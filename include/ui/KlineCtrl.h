@@ -28,6 +28,7 @@ class KlineCtrl:public wxControl
     wxDECLARE_NO_COPY_CLASS(KlineCtrl);
     public:
         KlineCtrl();
+        KlineCtrl(wxString strShareCode);
         KlineCtrl(wxWindow* parent,wxWindowID id,
                  const wxPoint& pos = wxDefaultPosition,
                  const wxSize& size = wxDefaultSize,
