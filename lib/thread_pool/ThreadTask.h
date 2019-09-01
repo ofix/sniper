@@ -13,7 +13,7 @@ class ThreadTask
     public:
         ThreadTask();
         virtual ~ThreadTask();
-        virtual void Execute();
+        virtual int Execute();
     public:
         int priority; // task priority
         int type; // task type
@@ -26,6 +26,11 @@ class TaskStatus
 {
     int task_id;
     int status; // wait,running,finished not in consideration
+};
+
+enum eTask
+{
+    TIMER,
 };
 
 #endif // ThreadTask_H

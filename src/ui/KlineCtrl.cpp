@@ -248,7 +248,7 @@ void KlineCtrl::DrawAnalysisBar(wxDC* pDC)
     case 1: // Draw volume Bar
         {
             int maxVolume = GetMaxVolume();
-        },
+        }
     default:
         break;
     }

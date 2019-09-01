@@ -1,7 +1,16 @@
 #include "TimelineCtrl.h"
+#include <wx/dc.h>
+#include <wx/dcbuffer.h>
 
-TimelineCtrl::TimelineCtrl(wxVector& timeline,wxString code),
-                    m_timeline(timeline),m_shareCode(code),m_offset(0)
+TimelineCtrl::TimelineCtrl()
+{
+
+}
+
+TimelineCtrl::TimelineCtrl(wxVector<TimelineItem>& timeline,wxString code)
+                    :m_timeline(timeline)
+                    ,m_shareCode(code)
+                    ,m_offset(0)
                     ,m_lastAverage(0)
 {
     //ctor
@@ -22,14 +31,14 @@ void TimelineCtrl::UpdateAveragePrice()
 {
     wxVector<TimelineItem>::const_iterator it;
     double total = 0;
-    for(it = m_timeline.begin()+m_offset,it != m_timeline.end(); it++)
+    for(it = m_timeline.begin()+m_offset;it != m_timeline.end(); it++)
     {
         total+=it->price;
     }
     m_average = (m_lastAverage*m_offset+total)/m_timeline.size();
 }
 
-void TimelineCtrl::AddNewData(wxVector& timeline)
+void TimelineCtrl::AddNewData(wxVector<TimelineItem>& timeline)
 {
     wxVector<TimelineItem>::const_iterator it;
     for(it = timeline.begin(); it != timeline.end(); ++it){

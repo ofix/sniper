@@ -2,6 +2,7 @@
 
 ThreadPool::ThreadPool(uint16_t size):m_bRun(false),
                             m_size(size),
+                            m_queueCondition(m_mutex),
                             m_taskTodo(0)
 {
     if(m_size <=0){
@@ -34,7 +35,7 @@ bool ThreadPool::Run()
             m_size = cpu_cores*2;
         }
         // create boss thread
-        BossThread* m_pBossThread = new BossThread(this,m_queueCondition);
+       m_pBossThread = new BossThread(this,&m_queueCondition);
         if(m_pBossThread->Run() != wxTHREAD_NO_ERROR){
             Destroy();
             m_bRun = false;
@@ -44,7 +45,7 @@ bool ThreadPool::Run()
         }
         // create worker threads
         for(uint16_t i =0; i<m_size; i++){
-            WorkerThread* pThread = new WorkerThread(this);
+            WorkerThread* pThread = new WorkerThread(m_pBossThread);
             if(pThread->Run() != wxTHREAD_NO_ERROR){
                 Destroy();
                 m_bRun = false;
@@ -107,7 +108,7 @@ bool ThreadPool::ReSize(uint16_t size)
     if(size > m_size){
         uint16_t count = size - m_size;
         for(uint16_t i=0; i<count; i++){
-            WorkerThread* pThread = new WorkerThread(this);
+            WorkerThread* pThread = new WorkerThread(m_pBossThread);
             if(pThread->Run() == wxTHREAD_NO_ERROR){
                 m_idleThreads.push_back(pThread);
             }
@@ -134,9 +135,19 @@ bool ThreadPool::QueueTask(ThreadTask& task)
     try{
         wxCriticalSectionLocker enter(m_section);
         m_taskQueue.Post(task);
-        m_condition.Broadcast();
+        //m_condition.Broadcast();
         return true;
     }catch(...){
         return false;
     }
+}
+
+wxVector<WorkerThread*> ThreadPool::GetBusyThreads()
+{
+    return m_busyThreads;
+}
+
+wxVector<WorkerThread*> ThreadPool::GetIdleThreads()
+{
+    return m_idleThreads;
 }

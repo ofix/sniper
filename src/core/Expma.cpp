@@ -1,6 +1,6 @@
 #include "Expma.h"
 
-Expma::Expma(wxVector<double> data,int N):m_data(data),m_n(N)
+Expma::Expma()
 {
     //ctor
 }
@@ -10,14 +10,14 @@ Expma::~Expma()
     //dtor
 }
 
-static wxVector<double> Expma::Calc()
+wxVector<double> Expma::Calc(wxVector<double> data,int N)
 {
-    double Y = m_data[0];
+    double Y = data[0];
     wxVector<double> expma;
     wxVector<double>::const_iterator it;
-    for(it = m_data.begin(); it != m_data.end(); ++it)
+    for(it = data.begin(); it != data.end(); ++it)
     {
-        double Y2 = 2*(*it)+(N-1)*Y)/(N+1);
+        double Y2 = (2*(*it)+(N-1)*Y)/(N+1);
         expma.push_back(Y2);
         Y = Y2;
     }

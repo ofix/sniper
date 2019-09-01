@@ -34,6 +34,9 @@ class ThreadPool
         uint16_t GetBusyThreadsCount();
         uint16_t GetIdleThreadsCount();
 
+        wxVector<WorkerThread*> GetBusyThreads();
+        wxVector<WorkerThread*> GetIdleThreads();
+
         bool PauseTask(int task_no); // pause task execution
         bool QueueTask(ThreadTask& task); // add task to the priority queue
 

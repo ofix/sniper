@@ -2,6 +2,7 @@
 #define BossThread_H
 #include <wx/thread.h>
 #include <wx/vector.h>
+#include "ThreadTask.h"
 
 /*************************************************************************************************************
  * Following are some beneficial think-about for thread pool's implementation.
@@ -59,12 +60,11 @@ class BossThread:public wxThread
 
     protected:
         void DispatchTask(ThreadTask* task); // must lock and sync
-        wxCondition& m_pQueueCondition;
-
+        wxCondition* m_pQueueCondition;
+        wxVector<int> m_threadsState;
         ThreadPool* m_pThreadPool;
         int m_awake; // UI main thread or worker thread would modify this variable
         wxVector<int> m_threadsBitMap; // worker thread state; worker threads would modify it
-        std::queue<threadTimer> m_timerQueue;
         wxCriticalSection m_criticalSection;
 };
 

@@ -1,12 +1,17 @@
 #ifndef WorkerThread_H
 #define WorkerThread_H
 #include <wx/thread.h>
+#include "ThreadTask.h"
 
-#define CHECK_FOR(SIGNAL) ((~SIGNALS) & SIGNAL)
 #define SIGNAL_DESTROY 0x00000001
 #define SIGNAL_DISCARD_TASK 0x00000010
 #define SIGNAL_SWAP_TASK 0x00001000
 #define SIGNAL_BACKUP_TASK 0x00010000
+#define SIGNAL_TASK_URGENT 0x00100000
+
+#define SIGNALS (SIGNAL_DESTROY|SIGNAL_DISCARD_TASK \
+                    |SIGNAL_SWAP_TASK|SIGNAL_BACKUP_TASK|SIGNAL_TASK_URGENT)
+#define CHECK_FOR(SIGNAL) ((~SIGNALS) & SIGNAL)
 
 #define WORKER_THREAD_SLEEP 2
 #define WORKER_THREAD_RUNNING 1
@@ -21,6 +26,7 @@ class WorkerThread:public wxThread
         virtual ~WorkerThread();
         virtual void* Entry();
         int GetStatus();
+        void SetTask(ThreadTask* pTask);
 
     protected:
         BossThread* m_pBossThread;

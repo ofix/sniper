@@ -12,23 +12,22 @@ class TimelineCtrl:public wxControl
         wxDECLARE_EVENT_TABLE();
         wxDECLARE_NO_COPY_CLASS(TimelineCtrl);
 
-        TimelineCtrl(wxVector& timeline,wxString code);
+        TimelineCtrl();
+        TimelineCtrl(wxVector<TimelineItem>& timeline,wxString code);
 
         virtual ~TimelineCtrl();
         void UpdateAveragePrice();
-        void AddNewData(wxVector& timeline);
+        void AddNewData(wxVector<TimelineItem>& timeline);
         void DrawTimeline(wxDC* pDC);
         void DrawAveragePriceLine(wxDC* pDC);
         //event callback functions
         void OnPaint(wxPaintEvent& event);
     protected:
         wxVector<TimelineItem> m_timeline;
-        wxVector<double> m_average
+        wxVector<double> m_average;
         int m_offset; // helper for average price calculation
         int m_lastAverage;
         wxString m_shareCode;
-        // event table declaration
-        wxDECLARE_EVENT_TABLE();
 };
 
 #endif // TIMELINECTRL_H

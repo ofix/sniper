@@ -10,7 +10,7 @@ ThreadTask::~ThreadTask()
     //dtor
 }
 
-void ThreadTask::Execute()
+int ThreadTask::Execute()
 {
-
+    return 0;
 }

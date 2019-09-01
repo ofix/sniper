@@ -10,10 +10,10 @@ TimerThreadTask::~TimerThreadTask()
     //dtor
 }
 
-void TimerThreadTask::Execute()
+int TimerThreadTask::Execute()
 {
     for(int i=0; i<100; i++){
         std::cout<<"thread_id: "<<wxThread::GetCurrentId()<<" output: "<<i<<std::endl;
-        wxThread::Sleep(300);
+        return 300; // task schedule.
     }
 }

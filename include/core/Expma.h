@@ -5,12 +5,9 @@
 class Expma
 {
     public:
-        Expma(wxVector<double> data,int N);
+        Expma();
         virtual ~Expma();
-        static wxVector<double> Calc();
-    protected:
-        static wxVector<double> m_data;
-        int m_n;
+        static wxVector<double> Calc(wxVector<double> data,int N);
 };
 
 #endif // EXPMA_H

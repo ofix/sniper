@@ -7,7 +7,7 @@ class TimerThreadTask:public ThreadTask
     public:
         TimerThreadTask();
         virtual ~TimerThreadTask();
-        virtual void Execute();
+        virtual int Execute();
 };
 
 #endif // TIMERTHREADTASK_H
