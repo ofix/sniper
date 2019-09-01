@@ -5,9 +5,10 @@ KlineCtrl::KlineCtrl()
     Init();
 }
 
-KlineCtrl::KlineCtrl(wxString strShareCode)
+KlineCtrl::KlineCtrl(wxString strShareCode,wxWindow* parent,wxWindowID id)
 {
     Init();
+    Create(parent,id);
     SetCsvPath(getExecDir()+strShareCode+_T(".csv"));
     ReadCsv();
 }
@@ -254,7 +255,7 @@ void KlineCtrl::DrawAnalysisBar(wxDC* pDC)
     switch(m_analysisType){
     case 1: // Draw volume Bar
         {
-            int maxVolume = GetMaxVolume();
+            //int maxVolume = GetMaxVolume();
         }
     default:
         break;

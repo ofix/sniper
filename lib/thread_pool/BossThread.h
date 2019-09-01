@@ -60,9 +60,10 @@ class BossThread:public wxThread
 
     protected:
         void DispatchTask(ThreadTask* task); // must lock and sync
+
+        ThreadPool* m_pThreadPool;
         wxCondition* m_pQueueCondition;
         wxVector<int> m_threadsState;
-        ThreadPool* m_pThreadPool;
         int m_awake; // UI main thread or worker thread would modify this variable
         wxVector<int> m_threadsBitMap; // worker thread state; worker threads would modify it
         wxCriticalSection m_criticalSection;

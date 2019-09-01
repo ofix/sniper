@@ -9,9 +9,9 @@ TimelineCtrl::TimelineCtrl()
 
 TimelineCtrl::TimelineCtrl(wxVector<TimelineItem>& timeline,wxString code)
                     :m_timeline(timeline)
-                    ,m_shareCode(code)
                     ,m_offset(0)
                     ,m_lastAverage(0)
+                    ,m_shareCode(code)
 {
     //ctor
 }

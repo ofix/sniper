@@ -16,4 +16,5 @@ int TimerThreadTask::Execute()
         std::cout<<"thread_id: "<<wxThread::GetCurrentId()<<" output: "<<i<<std::endl;
         return 300; // task schedule.
     }
+    return 0;
 }

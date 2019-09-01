@@ -8,10 +8,11 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msw\rcdefs.h
 
-1566321015 source:d:\work_c++\sniper\sniperapp.cpp
+1567347264 source:d:\work_c++\sniper\sniperapp.cpp
 	"sniperApp.h"
 	"core/Global.h"
 	"core/SpiderManager.h"
+	"lib/thread_pool/ThreadPool.h"
 	"sniperMain.h"
 	<wx/image.h>
 
@@ -2819,7 +2820,7 @@
 	"lib/wxJSON/jsonreader.h"
 	"StockSpider.h"
 
-1566293935 d:\work_c++\sniper\include\core\stock.h
+1567006438 d:\work_c++\sniper\include\core\stock.h
 	<wx/longlong.h>
 
 1566297753 d:\work_c++\sniper\include\util\helper.h
@@ -2935,4 +2936,91 @@
 	"wx/dcmemory.h"
 	"wx/dcclient.h"
 	"wx/window.h"
+
+1566719130 source:d:\work_c++\sniper\lib\pinyin\pinyin.cpp
+	"PinYin.h"
+
+1566402383 d:\work_c++\sniper\lib\pinyin\pinyin.h
+	<wx/string.h>
+	<wx/except.h>
+
+1567349478 source:d:\work_c++\sniper\lib\thread_pool\bossthread.cpp
+	"BossThread.h"
+	"ThreadPool.h"
+
+1567348435 d:\work_c++\sniper\lib\thread_pool\bossthread.h
+	<wx/thread.h>
+	<wx/vector.h>
+	"ThreadTask.h"
+
+1567348126 d:\work_c++\sniper\lib\thread_pool\threadtask.h
+	<wx/buffer.h>
+	"core/Global.h"
+	<wx/thread.h>
+
+1567348586 d:\work_c++\sniper\lib\thread_pool\threadpool.h
+	<wx/vector.h>
+	<wx/thread.h>
+	<wx/msgqueue.h>
+	<wx/event.h>
+	"ThreadTask.h"
+	"WorkerThread.h"
+	"BossThread.h"
+
+1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msgqueue.h
+	"wx/thread.h"
+	"wx/stopwatch.h"
+	"wx/beforestd.h"
+	<queue>
+	"wx/afterstd.h"
+
+1567348088 d:\work_c++\sniper\lib\thread_pool\workerthread.h
+	<wx/thread.h>
+	"ThreadTask.h"
+
+1567349150 source:d:\work_c++\sniper\lib\thread_pool\threadpool.cpp
+	"ThreadPool.h"
+
+1567348136 source:d:\work_c++\sniper\lib\thread_pool\threadtask.cpp
+	"ThreadTask.h"
+
+1567348300 source:d:\work_c++\sniper\lib\thread_pool\timerthreadtask.cpp
+	"TimerThreadTask.h"
+
+1567348247 d:\work_c++\sniper\lib\thread_pool\timerthreadtask.h
+	"ThreadTask.h"
+
+1567348883 source:d:\work_c++\sniper\lib\thread_pool\workerthread.cpp
+	"WorkerThread.h"
+	"BossThread.h"
+
+1567349893 source:d:\work_c++\sniper\src\core\expma.cpp
+	"Expma.h"
+
+1567349780 d:\work_c++\sniper\include\core\expma.h
+	<wx/vector.h>
+
+1566400946 source:d:\work_c++\sniper\src\core\filemanager.cpp
+	"FileManager.h"
+
+1566400902 d:\work_c++\sniper\include\core\filemanager.h
+	<wx/vector.h>
+	"core/Stock.h"
+
+1566401217 source:d:\work_c++\sniper\src\core\trietree.cpp
+	"TrieTree.h"
+
+1566401075 d:\work_c++\sniper\include\core\trietree.h
+	<wx/vector.h>
+
+1567350403 source:d:\work_c++\sniper\src\ui\timelinectrl.cpp
+	"TimelineCtrl.h"
+	<wx/dc.h>
+	<wx/dcbuffer.h>
+
+1567350390 d:\work_c++\sniper\include\ui\timelinectrl.h
+	<wx/vector.h>
+	<core/Stock.h>
+	<wx/dc.h>
+	<wx/control.h>
 

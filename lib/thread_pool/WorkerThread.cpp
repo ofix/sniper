@@ -33,7 +33,7 @@ void*  WorkerThread::Entry()
         m_status = WORKER_THREAD_RUNNING;
         // wait on m_pBossThread.m_threadsState
         if(m_pTask->type == eTask::TIMER){
-            int mSpan = 10; //m_pTask->timer;
+            //int mSpan = 10; //m_pTask->timer;
             int iSeconds = m_pTask->Execute(); // Execute Task
             // normal is 1,exception is 0 ,>1 need sleep
             if(iSeconds == 0) // The thread should Sleep iRet seconds; task has finished

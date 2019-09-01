@@ -1,9 +1,10 @@
 #include "ThreadPool.h"
 
-ThreadPool::ThreadPool(uint16_t size):m_bRun(false),
-                            m_size(size),
-                            m_queueCondition(m_mutex),
-                            m_taskTodo(0)
+ThreadPool::ThreadPool(uint16_t size):m_bRun(false)
+                            ,m_size(size)
+                            ,m_taskTodo(0)
+                            ,m_queueCondition(m_mutex)
+
 {
     if(m_size <=0){
         m_size = wxThread::GetCPUCount();
