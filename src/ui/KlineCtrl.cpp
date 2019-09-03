@@ -10,8 +10,10 @@ KlineCtrl::KlineCtrl(wxString strShareCode,wxWindow* parent,wxWindowID id)
     Init();
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Create(parent,id);
+    GetClientSize(&m_width,&m_height);
     SetCsvPath(getExecDir()+strShareCode+_T(".csv"));
     ReadCsv();
+    m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
 }
 
 KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,
@@ -137,7 +139,6 @@ bool KlineCtrl::ReadCsv()
         item.danger = 0 ;
         item.price_now = item.price_close;
         m_klines.push_back(item);
-        break;
     }
     return true;
 }
@@ -495,9 +496,9 @@ void KlineCtrl::OnBackground(wxEraseEvent& event)
 
 void KlineCtrl::OnSize(wxSizeEvent& event)
 {
-    wxSize sizeClient= this->GetParent()->GetClientSize();
-    this->SetClientSize(sizeClient);
-    this->Refresh(false);//刷新窗口
+    GetClientSize(&m_width,&m_height);
+    m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
+    Refresh();//刷新窗口
 }
 
 void KlineCtrl::OnKeyDown(wxKeyEvent& event)
