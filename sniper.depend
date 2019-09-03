@@ -8,11 +8,11 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\msw\rcdefs.h
 
-1567347264 source:d:\work_c++\sniper\sniperapp.cpp
+1567352771 source:d:\work_c++\sniper\sniperapp.cpp
 	"sniperApp.h"
 	"core/Global.h"
 	"core/SpiderManager.h"
-	"lib/thread_pool/ThreadPool.h"
+	"ui/KlineCtrl.h"
 	"sniperMain.h"
 	<wx/image.h>
 
@@ -1507,7 +1507,7 @@
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\univ\theme.h
 	"wx/string.h"
 
-1565951932 d:\work_c++\sniper\snipermain.h
+1567353784 d:\work_c++\sniper\snipermain.h
 	<wx/frame.h>
 	<wx/menu.h>
 	<wx/statusbr.h>
@@ -1590,9 +1590,10 @@
 
 1544370008 d:\work_c++\wxwidgets-3.1.2\include\wx\qt\menu.h
 
-1565951932 source:d:\work_c++\sniper\snipermain.cpp
+1567519492 source:d:\work_c++\sniper\snipermain.cpp
 	"sniperMain.h"
 	<wx/msgdlg.h>
+	"KlineCtrl.h"
 	<wx/intl.h>
 	<wx/string.h>
 
@@ -2908,10 +2909,10 @@
 1566324285 source:d:\work_c++\sniper\src\spider\historystockspider.cpp
 	"HistoryStockSpider.h"
 
-1566295772 source:d:\work_c++\sniper\src\ui\klinectrl.cpp
+1567352147 source:d:\work_c++\sniper\src\ui\klinectrl.cpp
 	"KLineCtrl.h"
 
-1566295423 d:\work_c++\sniper\include\ui\klinectrl.h
+1567352057 d:\work_c++\sniper\include\ui\klinectrl.h
 	<wx/control.h>
 	<wx/vector.h>
 	<wx/textfile.h>
@@ -2948,7 +2949,7 @@
 	"BossThread.h"
 	"ThreadPool.h"
 
-1567348435 d:\work_c++\sniper\lib\thread_pool\bossthread.h
+1567352167 d:\work_c++\sniper\lib\thread_pool\bossthread.h
 	<wx/thread.h>
 	<wx/vector.h>
 	"ThreadTask.h"
@@ -2978,19 +2979,19 @@
 	<wx/thread.h>
 	"ThreadTask.h"
 
-1567349150 source:d:\work_c++\sniper\lib\thread_pool\threadpool.cpp
+1567352240 source:d:\work_c++\sniper\lib\thread_pool\threadpool.cpp
 	"ThreadPool.h"
 
 1567348136 source:d:\work_c++\sniper\lib\thread_pool\threadtask.cpp
 	"ThreadTask.h"
 
-1567348300 source:d:\work_c++\sniper\lib\thread_pool\timerthreadtask.cpp
+1567352269 source:d:\work_c++\sniper\lib\thread_pool\timerthreadtask.cpp
 	"TimerThreadTask.h"
 
 1567348247 d:\work_c++\sniper\lib\thread_pool\timerthreadtask.h
 	"ThreadTask.h"
 
-1567348883 source:d:\work_c++\sniper\lib\thread_pool\workerthread.cpp
+1567352295 source:d:\work_c++\sniper\lib\thread_pool\workerthread.cpp
 	"WorkerThread.h"
 	"BossThread.h"
 
@@ -3013,7 +3014,7 @@
 1566401075 d:\work_c++\sniper\include\core\trietree.h
 	<wx/vector.h>
 
-1567350403 source:d:\work_c++\sniper\src\ui\timelinectrl.cpp
+1567352120 source:d:\work_c++\sniper\src\ui\timelinectrl.cpp
 	"TimelineCtrl.h"
 	<wx/dc.h>
 	<wx/dcbuffer.h>

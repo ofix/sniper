@@ -11,7 +11,8 @@
 #include "core/Global.h"
 #include "core/SpiderManager.h"
 
-#include "lib/thread_pool/ThreadPool.h"
+//#include "lib/thread_pool/ThreadPool.h"
+#include "ui/KlineCtrl.h"
 
 //(*AppHeaders
 #include "sniperMain.h"
@@ -48,6 +49,7 @@ bool sniperApp::OnInit()
 
 //    ThreadPool* pThreadPool = new ThreadPool();
 //    pThreadPool->Run();
+
     return wxOK;
 
 }

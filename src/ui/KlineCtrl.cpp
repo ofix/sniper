@@ -8,6 +8,7 @@ KlineCtrl::KlineCtrl()
 KlineCtrl::KlineCtrl(wxString strShareCode,wxWindow* parent,wxWindowID id)
 {
     Init();
+    SetBackgroundStyle(wxBG_STYLE_PAINT);
     Create(parent,id);
     SetCsvPath(getExecDir()+strShareCode+_T(".csv"));
     ReadCsv();
