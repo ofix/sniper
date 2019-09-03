@@ -115,8 +115,8 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
         if((*it) != delimiter){
            continue;
         }else{
-            vec.push_back(src.SubString(nPrevPos,nPos));
-            nPrevPos = nPos;
+            vec.push_back(src.SubString(nPrevPos,nPos-1));
+            nPrevPos = nPos+1;
         }
     }
     return vec;
