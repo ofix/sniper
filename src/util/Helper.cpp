@@ -119,5 +119,6 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
             nPrevPos = nPos+1;
         }
     }
+    vec.push_back(src.SubString(nPrevPos,nPos-1));
     return vec;
 }

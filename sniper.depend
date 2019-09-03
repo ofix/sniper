@@ -2855,7 +2855,7 @@
 1566235835 source:d:\work_c++\sniper\src\spider\stockspider.cpp
 	"spider/StockSpider.h"
 
-1567521765 source:d:\work_c++\sniper\src\util\helper.cpp
+1567523398 source:d:\work_c++\sniper\src\util\helper.cpp
 	"util/Helper.h"
 
 1566108925 d:\work_c++\sniper\include\core\hash.h
@@ -2909,7 +2909,7 @@
 1566324285 source:d:\work_c++\sniper\src\spider\historystockspider.cpp
 	"HistoryStockSpider.h"
 
-1567520903 source:d:\work_c++\sniper\src\ui\klinectrl.cpp
+1567524656 source:d:\work_c++\sniper\src\ui\klinectrl.cpp
 	"KLineCtrl.h"
 
 1567352057 d:\work_c++\sniper\include\ui\klinectrl.h

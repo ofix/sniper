@@ -137,6 +137,7 @@ bool KlineCtrl::ReadCsv()
         item.danger = 0 ;
         item.price_now = item.price_close;
         m_klines.push_back(item);
+        break;
     }
     return true;
 }
