@@ -17,6 +17,7 @@
  * 3 将1.2中得到的UTF-8转为执行字符集(Execution Character Set)：
  * 对于宽字符串（即C/C++中以L标记的串，如L"abc", L'中'），执行字符集为UTF-16编码。
  * 对于窄字符串（和宽字符串对应，即不以L标记的串），执行字符集为系统当前的代码页。
+ *\link (https://www.cnblogs.com/KevinYang/archive/2010/06/18/1760597.html)
  */
 
 
