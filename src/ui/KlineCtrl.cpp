@@ -573,7 +573,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
             }
         }
-        std::cout<<"++++++++ crossLine "<<m_crossLine << " ++++++++++"<<std::endl;
+        //std::cout<<"++++++++ crossLine "<<m_crossLine << " ++++++++++"<<std::endl;
     }else if(event.GetKeyCode() == KEY_DOWN){ //缩小K线图
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
@@ -623,7 +623,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                  m_crossLinePt = GetCrossLinePt(m_crossLine);//修正十字线的位置
             }
         }
-        std::cout<<"--------- crossLine "<<m_crossLine << " ----------"<<std::endl;
+        //std::cout<<"--------- crossLine "<<m_crossLine << " ----------"<<std::endl;
     }
     this->Refresh(false);
 }
@@ -642,7 +642,7 @@ void KlineCtrl::OnLeftMouseDown(wxMouseEvent& event)
             m_crossLine = m_klineRng.begin-k;
             m_crossLinePt = GetCrossLinePt(m_crossLine);
         }
-        std::wcout<<"鼠标左键被按下....."<<std::endl;
+        //std::wcout<<"鼠标左键被按下....."<<std::endl;
         this->Refresh(false);
     }
 }
