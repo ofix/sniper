@@ -20,7 +20,7 @@
  *\link (https://www.cnblogs.com/KevinYang/archive/2010/06/18/1760597.html)
  */
 
-
+// 汉字转拼音要考虑字符的编码是GB2312,GBK,还是utf8,
 
 class PinYin
 {
