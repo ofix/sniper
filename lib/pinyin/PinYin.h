@@ -21,6 +21,13 @@
  */
 
 // 汉字转拼音要考虑字符的编码是GB2312,GBK,还是utf8,
+// utf-8编码和字符集字符序号的对应关系
+/***********************************
+ * 0x0000 - 0x007F       0xxxxxxx
+ * 0x0080 - 0x07FF       110yyyxx 10xxxxxx
+ * 0x0800 - 0xFFFF       1110yyyy 10yyyyxx 10xxxxxx
+ * 0x100000 - 0x10FFFF   11110zzz 10zzyyyy 10yyyyxx 10xxxxxx
+ ***********************************/
 
 class PinYin
 {
