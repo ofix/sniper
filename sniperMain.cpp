@@ -96,13 +96,15 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
 
     // wxString 测试
     wxCSConv gbkConv(wxFONTENCODING_CP936);
-    wxString test = wxT("你");
-    std::string str1(gbkConv.cWX2MB(test.c_str()));
+    std::string str1(gbkConv.cWX2MB(_T("你"))); //gbk格式
+    std::string str2("你"); // utf8格式
 
 
 
     std::cout<<"str1 = "<<str1<<std::endl;
     std::cout<<"str1 size = "<<str1.length()<<std::endl;
+    std::cout<<"str1 HEX = "<<strToHex(str1)<<std::endl;
+    std::cout<<"str2 HEX = "<<strToHex(str2)<<std::endl;
 }
 
 sniperFrame::~sniperFrame()
