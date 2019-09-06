@@ -11,6 +11,10 @@
 #include <wx/msgdlg.h>
 #include "KlineCtrl.h"
 
+#include <iostream>
+#include <string>
+#include <wx/strconv.h>
+
 //(*InternalHeaders(sniperFrame)
 #include <wx/intl.h>
 #include <wx/string.h>
@@ -87,8 +91,18 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     //*)
 
     // create day k line control
-    KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
-    pKlineCtrl->Show();
+    // KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
+    // pKlineCtrl->Show();
+
+    // wxString 测试
+    wxCSConv gbkConv(wxFONTENCODING_CP936);
+    wxString test = wxT("你");
+    std::string str1(gbkConv.cWX2MB(test.c_str()));
+
+
+
+    std::cout<<"str1 = "<<str1<<std::endl;
+    std::cout<<"str1 size = "<<str1.length()<<std::endl;
 }
 
 sniperFrame::~sniperFrame()

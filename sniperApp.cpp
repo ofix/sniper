@@ -12,7 +12,6 @@
 #include "core/SpiderManager.h"
 
 //#include "lib/thread_pool/ThreadPool.h"
-#include "ui/KlineCtrl.h"
 
 //(*AppHeaders
 #include "sniperMain.h"
@@ -23,6 +22,7 @@ IMPLEMENT_APP(sniperApp);
 
 bool sniperApp::OnInit()
 {
+
     //(*AppInitialize
     bool wxsOK = true;
     wxInitAllImageHandlers();
