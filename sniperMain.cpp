@@ -14,6 +14,7 @@
 #include <iostream>
 #include <string>
 #include <wx/strconv.h>
+#include <wx/textfile.h>
 
 //(*InternalHeaders(sniperFrame)
 #include <wx/intl.h>
@@ -112,16 +113,22 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
 //    std::cout<<"[str_utf8 HEX    ] = "<<stringToHex(str_utf8)<<std::endl;
 //    std::wcout<<"[str_unicode HEX ] = "<<wstringToHex(str_unicode)<<std::endl;
     // generate gb2312 map
-    int count = 0;
-    for(uint16_t i=0xB0A0; i<=0xF7F0; i++){
-        std::cout<<uint16ToHex(i)<<std::endl;
-        count ++;
-        if(count >10)
-        {
-         break;
+    wxTextFile mapFile;
+    wxString fileName = getExecDir()+"gb2312.dat";
+    if(!mapFile.Open(fileName)){
+        mapFile.Create(fileName);
+    }
+    mapFile.Clear();
+    wxString sline = uint16ToHex(0xB0A0)+",";
+    for(uint16_t i=0xB0A1; i<=0xF7FF; i++){
+        sline += uint16ToHex(i)+",";
+        if(i%16 == 15){
+            mapFile.AddLine(sline.Left(sline.length()-1));
+            sline = "";
         }
     }
-
+    mapFile.Write();
+    mapFile.Close();
 }
 
 sniperFrame::~sniperFrame()
