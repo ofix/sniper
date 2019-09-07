@@ -126,19 +126,43 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
 
 
 /**
- * #purpose	: 字符串转十六进制字符串
- * #note	: 可用于汉字字符串
- * #param str		: 要转换成十六进制的字符串
- * #param separator	: 十六进制字符串间的分隔符
- * #return	: 接收转换后的字符串
+ * @target : 多字节字符串转十六进制，支持中英文混合
+ * @param str : 要转换成十六进制的字符串
+ * @param separator : 十六进制字符串间的分隔符
+ * @return : 16进制字符串
  */
-std::string strToHex(std::string str, std::string separator)
+std::string stringToHex(std::string str, std::string separator)
 {
 	const std::string hex = "0123456789ABCDEF";
 	std::stringstream ss;
-
-	for (std::string::size_type i = 0; i < str.size(); ++i)
-		ss << hex[(unsigned char)str[i] >> 4] << hex[(unsigned char)str[i] & 0xf] << separator;
-
+	for (std::string::size_type i = 0; i<str.size(); ++i)
+	{
+		ss << hex[(unsigned char)str[i] >> 4]
+		   << hex[(unsigned char)str[i] & 0x0f]
+		   << separator;
+	}
 	return ss.str();
 }
+
+/**
+ * @target : Unicode宽字符串转十六进制,支持中英文混合
+ * @param str: 要转换成十六进制的Unicode字符串
+ * @param separator: 十六进制字符串间的分隔符
+ * @return : 16进制字符串
+ */
+std::string wstringToHex(std::wstring str, std::string separator)
+{
+	const std::string hex = "0123456789ABCDEF";
+	std::stringstream ss;
+	for (std::wstring::size_type i = 0; i < str.size(); ++i)
+	{
+        ss << hex[(uint16_t)str[i] >> 12 & 0x0f]
+           << hex[(uint16_t)str[i] >> 8 & 0x0f]
+           << separator
+		   << hex[(uint16_t)str[i] >> 4 & 0x0f]
+	       << hex[(uint16_t)str[i] & 0x0f]
+	       << separator;
+	}
+	return ss.str();
+}
+

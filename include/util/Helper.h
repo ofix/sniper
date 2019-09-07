@@ -21,6 +21,7 @@ void console(wxString& strText);
 wxString getExecDir();
 wxString buildUrlPara(kvMap para,bool bComma=true);
 wxVector<wxString> slice(wxString src,wxString delimiter=_T(","));
-std::string strToHex(std::string str, std::string separator = "");
+std::string stringToHex(std::string str, std::string separator = " ");
+std::string wstringToHex(std::wstring str,std::string separator = " ");
 
 #endif // COMMON_H
