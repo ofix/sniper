@@ -3,6 +3,9 @@
 
 #include <wx/string.h>
 #include <wx/except.h>
+#include <string>
+#include <map>
+#include <vector>
 /**
  *\brief 编译器对代码文件中的字符如何进行处理
  * please visit link (https://www.cnblogs.com/jiangxueqiao/archive/2017/09/01/7464408.html)
@@ -34,6 +37,10 @@ class PinYin
 public:
     PinYin();
     ~PinYin();
+    void Init();
+private:
+    std::map<uint16_t,unsigned char> m_gb2312;
+    std::vector<std::string> m_pinyin;
     static bool Convert(wxString& strChinese,wxString& strPinYin);
 };
 

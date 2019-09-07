@@ -23,5 +23,6 @@ wxString buildUrlPara(kvMap para,bool bComma=true);
 wxVector<wxString> slice(wxString src,wxString delimiter=_T(","));
 std::string stringToHex(std::string str, std::string separator = " ");
 std::string wstringToHex(std::wstring str,std::string separator = " ");
+std::string uint16ToHex(uint16_t num,bool bPrefix=true);
 
 #endif // COMMON_H

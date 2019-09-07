@@ -166,3 +166,18 @@ std::string wstringToHex(std::wstring str, std::string separator)
 	return ss.str();
 }
 
+//十六进制
+std::string uint16ToHex(uint16_t num,bool bPrefix)
+{
+    const std::string hex="0123456789ABCDEF";
+    std::string s = "";
+    s += hex[num>>16&0x0f];
+    s += hex[num>>8&0x0f];
+    s += hex[num>>4&0x0f];
+    s += hex[num&0x0f];
+    if(bPrefix){
+        s = "0x" +s;
+    }
+    return s;
+}
+

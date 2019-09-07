@@ -95,22 +95,33 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     // pKlineCtrl->Show();
 
     // wxString 测试
-    wxCSConv gbkConv(wxFONTENCODING_CP936);
-    std::string str_gbk(gbkConv.cWX2MB(_T("z国"))); //gbk格式
-    std::string str_utf8("z国"); // utf8格式
-    std::wstring str_unicode(gbkConv.cWX2WC(_T("z国")));// unicode格式
+//    wxCSConv gbkConv(wxFONTENCODING_CP936);
+//    std::string str_gbk(gbkConv.cWX2MB(_T("z国"))); //gbk格式
+//    std::string str_utf8("z国"); // utf8格式
+//    std::wstring str_unicode(gbkConv.cWX2WC(_T("z国")));// unicode格式
+//
+//
+//
+//    std::cout<<"[str_gbk         ] = "<<str_gbk<<std::endl;
+//    //std::cout<<"[str_utf8        ] = "<<str_utf8<<std::endl;
+//    std::cout<<"[str_unicode     ] = "<<str_unicode<<std::endl;
+//    std::cout<<"[str_gbk size    ] = "<<str_gbk.size()<<" byte"<<std::endl;
+//    std::cout<<"[str_utf8 size   ] = "<<str_utf8.size()<<" byte"<<std::endl;
+//    std::cout<<"[str_unicode size] = "<<str_unicode.size()*2<<" byte"<<std::endl;
+//    std::cout<<"[str_gbk HEX     ] = "<<stringToHex(str_gbk)<<std::endl;
+//    std::cout<<"[str_utf8 HEX    ] = "<<stringToHex(str_utf8)<<std::endl;
+//    std::wcout<<"[str_unicode HEX ] = "<<wstringToHex(str_unicode)<<std::endl;
+    // generate gb2312 map
+    int count = 0;
+    for(uint16_t i=0xB0A0; i<=0xF7F0; i++){
+        std::cout<<uint16ToHex(i)<<std::endl;
+        count ++;
+        if(count >10)
+        {
+         break;
+        }
+    }
 
-
-
-    std::cout<<"[str_gbk         ] = "<<str_gbk<<std::endl;
-    //std::cout<<"[str_utf8        ] = "<<str_utf8<<std::endl;
-    std::cout<<"[str_unicode     ] = "<<str_unicode<<std::endl;
-    std::cout<<"[str_gbk size    ] = "<<str_gbk.size()<<" byte"<<std::endl;
-    std::cout<<"[str_utf8 size   ] = "<<str_utf8.size()<<" byte"<<std::endl;
-    std::cout<<"[str_unicode size] = "<<str_unicode.size()*2<<" byte"<<std::endl;
-    std::cout<<"[str_gbk HEX     ] = "<<stringToHex(str_gbk)<<std::endl;
-    std::cout<<"[str_utf8 HEX    ] = "<<stringToHex(str_utf8)<<std::endl;
-    std::wcout<<"[str_unicode HEX ] = "<<wstringToHex(str_unicode)<<std::endl;
 }
 
 sniperFrame::~sniperFrame()
