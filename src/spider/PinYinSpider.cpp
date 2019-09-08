@@ -38,18 +38,57 @@ bool PinYinSpider::Run()
         }
     }
 
-    wxTextFile gbkFileSimple;
-    wxString path = getExecDir()+wxT("gbk.txt");
-    if(!gbkFileSimple.Open(path)){
-        gbkFileSimple.Create(path);
+    // generate map file
+//    wxTextFile gbkFileSimple;
+//    wxString path = getExecDir()+wxT("gbk.txt");
+//    if(!gbkFileSimple.Open(path)){
+//        gbkFileSimple.Create(path);
+//    }
+//    gbkFileSimple.Clear();
+//    std::vector<gbkRawPacket>::const_iterator it;
+//    for(it=m_pinyin.begin();it!=m_pinyin.end();++it){
+////        wxCSConv gbkConv(wxFONTENCODING_CP936);
+////        std::string str_gbk(gbkConv.cWX2MB(wxString(it->zh_char))); //gbk格式
+////        std::cout<<str_gbk<<std::endl;
+//        wxString strLine = it->zh_char+",";
+//        if(it->pinyin_1!=""){
+//            strLine += it->pinyin_1+"|";
+//        }
+//        if(it->pinyin_2!=""){
+//            strLine += it->pinyin_2+"|";
+//        }
+//        if(it->pinyin_3!=""){
+//            strLine += it->pinyin_3+"|";
+//        }
+//        if(it->pinyin_4!=""){
+//            strLine += it->pinyin_4+"|";
+//        }
+//        if(it->pinyin_5!=""){
+//            strLine += it->pinyin_5+"|";
+//        }
+//        if(it->pinyin_6!=""){
+//            strLine += it->pinyin_6+"|";
+//        }
+//        strLine = strLine.Left(strLine.length()-1);
+//        gbkFileSimple.AddLine(strLine);
+//    }
+//    gbkFileSimple.Write();
+//    gbkFileSimple.Close();
+
+    wxTextFile gbkMapFile;
+    wxString path = getExecDir()+wxT("gbk_utf8_map.cpp");
+    if(!gbkMapFile.Open(path)){
+        gbkMapFile.Create(path);
     }
-    gbkFileSimple.Clear();
+    gbkMapFile.Clear();
+    wxString strHead = "std::map<std::string,std::string> PinYin::m_pinyin_utf8_map = { ";
+    gbkMapFile.AddLine(strHead);
     std::vector<gbkRawPacket>::const_iterator it;
     for(it=m_pinyin.begin();it!=m_pinyin.end();++it){
 //        wxCSConv gbkConv(wxFONTENCODING_CP936);
 //        std::string str_gbk(gbkConv.cWX2MB(wxString(it->zh_char))); //gbk格式
 //        std::cout<<str_gbk<<std::endl;
-        wxString strLine = it->zh_char+",";
+        wxString strLine = "{\"" +it->zh_char+"\",\"";
         if(it->pinyin_1!=""){
             strLine += it->pinyin_1+"|";
         }
@@ -69,10 +108,17 @@ bool PinYinSpider::Run()
             strLine += it->pinyin_6+"|";
         }
         strLine = strLine.Left(strLine.length()-1);
-        gbkFileSimple.AddLine(strLine);
+        strLine += "\"";
+        if(it != m_pinyin.end()-1){
+            strLine += "},";
+        }else{
+            strLine += "} ";
+        }
+        gbkMapFile.AddLine(strLine);
     }
-    gbkFileSimple.Write();
-    gbkFileSimple.Close();
+    gbkMapFile.AddLine("};");
+    gbkMapFile.Write();
+    gbkMapFile.Close();
 
 
     return true;
