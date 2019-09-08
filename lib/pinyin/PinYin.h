@@ -37,13 +37,26 @@ struct gbkCompare {
  * 0x100000 - 0x10FFFF   11110zzz 10zzyyyy 10yyyyxx 10xxxxxx
  ***********************************/
 
+ /************************************************
+  *@class PinYin
+  *@note
+  * usage 1:
+  * ```cpp
+  * PinYin py;
+  * std::string pinying = py.Full(wxString(wxT("*ST雏鹰")));
+  * std::string pinying = py.Full(std::string("*ST雏鹰"));
+  ************************************************/
 class PinYin
 {
 public:
     PinYin();
     ~PinYin();
-    std::string To(std::string strChinese);// utf8 format
-    std::string To(wxString strChinese);// utf8 format
+    std::string Full(std::string strChinese);// utf8 format
+    std::string Full(wxString strChinese);// utf8 format
+    std::string FirstLetter(std::string strChinese); // utf8 format
+    std::string FirstLetter(wxString strChinese); // utf8 format
+protected:
+    std::string Convert(wxString strChinese,bool bFirstLetter=false);
     bool GenerateMapFile(wxString strFileName = getExecDir()+wxT("GBK汉字拼音对照表.csv"));
     bool GenerateMapFileEx(wxString strFileName = getExecDir()+wxT("GBK汉字拼音对照表.csv"));
 private:

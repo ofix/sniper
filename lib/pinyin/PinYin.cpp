@@ -12,13 +12,27 @@ PinYin::~PinYin()
     //dtor
 }
 
-std::string PinYin::To(std::string strChinese)
+std::string PinYin::FirstLetter(std::string strChinese)
 {
-
-    return To(wxString(strChinese.c_str(),wxConvAuto(wxFONTENCODING_UTF8))); //源代码是utf8格式的
+    return FirstLetter(wxString(strChinese.c_str(),wxConvAuto(wxFONTENCODING_UTF8)));
 }
 
-std::string PinYin::To(wxString strChinese){
+std::string PinYin::FirstLetter(wxString strChinese)
+{
+    return Convert(strChinese,true);
+}
+
+std::string PinYin::Full(std::string strChinese)
+{
+    return Full(wxString(strChinese.c_str(),wxConvAuto(wxFONTENCODING_UTF8))); //源代码是utf8格式
+}
+
+std::string PinYin::Full(wxString strChinese){
+    return Convert(strChinese);
+}
+
+std::string PinYin::Convert(wxString strChinese,bool bFirstLetter)
+{
     std::string py="";
     //utf8格式转换成Unicode格式
     std::wstring unicode(strChinese.ToStdWstring());
@@ -31,14 +45,21 @@ std::string PinYin::To(wxString strChinese){
         wxCSConv gbkConv(wxFONTENCODING_CP936);
         std::string gbk(gbkConv.cWC2MB(word)); //gbk value
         uint16_t i_gbk = StringToGbk(gbk);
-        if(i_gbk>=0x8140 && i_gbk<= 0xFEFE){
+        if(i_gbk>=0x8140 && i_gbk<= 0xFEFE){ // gbk chinese code point range
             wxCSConv utf8Conv(wxFONTENCODING_UTF8);
             std::string utf8(utf8Conv.cWC2MB(word)); //gbk value
             std::string value = m_pinyin.find(utf8)->second;
-            py += value;
-        }else{
+            if(bFirstLetter){
+                py += value.substr(0,1);
+            }else{
+                py += value;
+            }
+        }else{ //非汉字不转换
             py += word.ToStdString();
         }
+    }
+    if(bFirstLetter){
+        transform(py.begin(), py.end(), py.begin(), ::toupper);
     }
     return py;
 }

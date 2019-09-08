@@ -131,8 +131,11 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
 //    mapFile.Write();
 //    mapFile.Close();
     //加载网络GB2312对照表
+
+    //查询所有股票代码
+    //获取股票代码的拼音首字母
     PinYin py;
-    std::string pinying = py.To(std::string("*ST雏鹰"));
+    std::string pinying = py.FirstLetter(std::string("*ST雏鹰"));
     std::cout<<"result = "<<pinying<<std::endl;
 }
 
