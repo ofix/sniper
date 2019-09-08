@@ -112,12 +112,18 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
     wxString::const_iterator it;
     size_t nPos, nPrevPos;
     nPos = nPrevPos = 0;
-    for(it=src.begin(); it!=src.end(); ++it,nPos++){
-        if((*it) != delimiter){
-           continue;
-        }else{
-            vec.push_back(src.SubString(nPrevPos,nPos-1));
-            nPrevPos = nPos+1;
+    bool quotation = 0;
+    for(it=src.begin(); it!=src.end(); ++it,nPos++){ //引号内的字符串不分割
+        if(*it == '"'){
+            quotation = !quotation;
+        }
+        if(quotation==0){
+            if(*it != delimiter){
+               continue;
+            }else{
+                vec.push_back(src.SubString(nPrevPos,nPos-1));
+                nPrevPos = nPos+1;
+            }
         }
     }
     vec.push_back(src.SubString(nPrevPos,nPos-1));
