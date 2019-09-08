@@ -15,7 +15,7 @@
 #include <string>
 #include <wx/strconv.h>
 #include <wx/textfile.h>
-#include <spider/PinYinSpider.h>
+#include <lib/pinyin/PinYin.h>
 
 //(*InternalHeaders(sniperFrame)
 #include <wx/intl.h>
@@ -131,9 +131,9 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
 //    mapFile.Write();
 //    mapFile.Close();
     //加载网络GB2312对照表
-    PinYinSpider* pSpider = new PinYinSpider();
-    pSpider->Run();
-
+    PinYin py;
+    std::string pinying = py.To(std::string("*ST雏鹰"));
+    std::cout<<"result = "<<pinying<<std::endl;
 }
 
 sniperFrame::~sniperFrame()

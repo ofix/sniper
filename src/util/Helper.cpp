@@ -187,3 +187,8 @@ std::string uint16ToHex(uint16_t num,bool bPrefix)
     return s;
 }
 
+uint16_t StringToGbk(std::string str){
+    uint16_t i= (str[0]<<8&0xFF00)|(str[1]&0x00FF);
+    return i;
+}
+
