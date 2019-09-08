@@ -16,6 +16,7 @@
 #include <wx/strconv.h>
 #include <wx/textfile.h>
 #include <lib/pinyin/PinYin.h>
+#include <spider/IfengSpider.h>
 
 //(*InternalHeaders(sniperFrame)
 #include <wx/intl.h>
@@ -133,10 +134,30 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     //加载网络GB2312对照表
 
     //查询所有股票代码
-    //获取股票代码的拼音首字母
+    //获取股票代码的拼音首字母，并写入文件
+    // 格式: 股票代号 股票名称 股票简写
+    IfengSpider spider;
+    spider.Run();
+    wxVector<ShareBrief> data = spider.GetAllShares();
+    //输出到文件
+    wxString path = getExecDir()+wxT("shares.csv");
+    wxTextFile shareFile(path);
+    if(!shareFile.Exists()){
+        shareFile.Create();
+    }
+    shareFile.Open();
+    wxVector<ShareBrief>::const_iterator it;
+    wxString line = wxT("");
     PinYin py;
-    std::string pinying = py.FirstLetter(std::string("*ST雏鹰"));
-    std::cout<<"result = "<<pinying<<std::endl;
+    for(it = data.begin(); it!=data.end(); ++it){
+        line = it->code+wxT(",");
+        line += it->name+wxT(",");
+        line += py.FirstLetter(it->name);
+        shareFile.AddLine(line);
+        line = wxT("");
+    }
+    shareFile.Write();
+    shareFile.Close();
 }
 
 sniperFrame::~sniperFrame()
