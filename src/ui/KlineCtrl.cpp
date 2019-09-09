@@ -25,7 +25,7 @@ KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Create(parent,id,pos,size,style,validator);
     m_width = size.GetWidth();
-    m_height = size.GetHeight();
+    m_height = size.GetHeight()*0.7;
 }
 
 //以下函数实现必须写，否则会爆错误 undefined reference to 'vtable for KlineCtrl'
@@ -255,22 +255,14 @@ void KlineCtrl::DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
 
 void KlineCtrl::DrawAnalysisBar(wxDC* pDC)
 {
-    switch(m_analysisType){
-    case 1: // Draw volume Bar
-        {
-            //int maxVolume = GetMaxVolume();
-        }
-    default:
-        break;
-    }
+    int maxVolume = GetMaxVolumeInRange();
 }
 
-double KlineCtrl::GetMaxVolume()
+double KlineCtrl::GetMaxVolumeInRange()
 {
     double max = 0;
     wxVector<KlineItem>::const_iterator it;
-    for(it = m_klines.begin(); it != m_klines.end(); ++it)
-    {
+    for(it = m_klines.begin()+m_klineRng.begin; it != m_klines.begin()+m_klineRng.end; ++it){
         if(it->trade_volume > max)
         {
             max = it->trade_volume;
@@ -496,7 +488,9 @@ void KlineCtrl::OnBackground(wxEraseEvent& event)
 
 void KlineCtrl::OnSize(wxSizeEvent& event)
 {
-    GetClientSize(&m_width,&m_height);
+    int height;
+    GetClientSize(&m_width,&height);
+    m_height = height*0.7;
     m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
     Refresh();//刷新窗口
 }

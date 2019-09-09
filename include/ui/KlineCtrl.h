@@ -65,10 +65,11 @@ class KlineCtrl:public wxControl
                       int minX,int minY,int maxX,int maxY,int lineWidth,int lineSpan);
         void DrawCrossLine(wxDC* pDC,int centerX,int centerY,int w,int h);//光标十字线
         void DrawAnalysisBar(wxDC* pDC);
-        double GetMaxVolume();
-        double GetMaxValue(int member, int klineType);
         wxVector<KlineItem> GetWeekKlines();
         wxVector<KlineItem> GetMonthKlines();
+        // analysis bar | volume bar
+        double GetMaxVolumeInRange();
+        double GetMaxValue(int member, int klineType);
         float GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end);
         float GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end);
         KlineRange  GetKlineRangeZoomIn(long totalKLines, long widthContainer,
