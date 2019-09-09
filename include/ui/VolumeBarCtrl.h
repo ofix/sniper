@@ -17,8 +17,10 @@ class VolumeBarCtrl : public AnalysisCtrl
         void SetSpan(int span);
         void OnDraw(wxDC* pDC);
     protected:
+        double GetMaxVolumeInRange();
+    protected:
         wxVector<KlineItem>* m_pKlines; // the k line data, day | week | month
-        KlineRange* m_pRng;
+        KlineRange* m_pKlineRng;
         int m_span; // volume bar span
 };
 

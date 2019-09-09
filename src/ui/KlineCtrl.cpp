@@ -256,23 +256,6 @@ void KlineCtrl::DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
     //考虑涨停
 }
 
-void KlineCtrl::DrawAnalysisBar(wxDC* pDC)
-{
-    int maxVolume = GetMaxVolumeInRange();
-}
-
-double KlineCtrl::GetMaxVolumeInRange()
-{
-    double max = 0;
-    wxVector<KlineItem>::const_iterator it;
-    for(it = m_klines.begin()+m_klineRng.begin; it != m_klines.begin()+m_klineRng.end; ++it){
-        if(it->trade_volume > max)
-        {
-            max = it->trade_volume;
-        }
-    }
-    return max;
-}
 
 /**********************************
  *@para member KlineItem 数据成员  1:trade_volume,2:trade_amount

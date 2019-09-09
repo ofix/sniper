@@ -68,8 +68,6 @@ class KlineCtrl:public wxControl
         void DrawAnalysisBar(wxDC* pDC);
         wxVector<KlineItem> GetWeekKlines();
         wxVector<KlineItem> GetMonthKlines();
-        // analysis bar | volume bar
-        double GetMaxVolumeInRange();
         double GetMaxValue(int member, int klineType);
         float GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end);
         float GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end);
