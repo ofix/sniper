@@ -7,7 +7,6 @@
 #include <wx/dcbuffer.h>
 #include "core/Stock.h"
 #include "util/Helper.h"
-#include "VolumeBarCtrl.h"
 
 #define KEY_LEFT 314
 #define KEY_RIGHT 316
@@ -21,7 +20,7 @@
 #define KLINE_MODES (KLINE_MODE_DAY|KLINE_MODE_WEEK|KLINE_MODE_MONTH|KLINE_MODE_YEAR)
 #define NO_CROSS_LINE 0
 
-
+class VolumeBarCtrl;
 class KlineCtrl:public wxControl
 {
     wxDECLARE_DYNAMIC_CLASS(KlineCtrl);
@@ -68,6 +67,8 @@ class KlineCtrl:public wxControl
         void DrawAnalysisBar(wxDC* pDC);
         wxVector<KlineItem> GetWeekKlines();
         wxVector<KlineItem> GetMonthKlines();
+        // volume bar event
+        void NotifyVolumeBarSizeChange();
         double GetMaxValue(int member, int klineType);
         float GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end);
         float GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end);
@@ -95,9 +96,10 @@ class KlineCtrl:public wxControl
         wxVector<KlineItem> m_monthKlines; //month k line data;
         KlineRange m_klineRng;
         // volume bar ctrl
-        VolumeBarCtrl m_volumeBarCtrl;
+        VolumeBarCtrl* m_pVolumeBar;
         bool m_showAnalysisBar; // if true, draw volume,MCDA,KDJ index
         int m_analysisType;
+        friend class VolumeBarCtrl;
 };
 
 #endif // KLINECTRL_H
