@@ -9,3 +9,13 @@ VolumeBarCtrl::~VolumeBarCtrl()
 {
     //dtor
 }
+
+void VolumeBarCtrl::SetKlines(wxVector<KlineItem>* pKlines)
+{
+    m_pKlines = pKlines;
+}
+
+void VolumeBarCtrl::SetKlineRng(KlineRange* pRng)
+{
+    m_pRng = pRng;
+}
