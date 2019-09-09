@@ -1,4 +1,4 @@
-#include "KLineCtrl.h"
+#include "KlineCtrl.h"
 
 KlineCtrl::KlineCtrl()
 {
@@ -14,6 +14,9 @@ KlineCtrl::KlineCtrl(wxString strShareCode,wxWindow* parent,wxWindowID id)
     SetCsvPath(getExecDir()+strShareCode+_T(".csv"));
     ReadCsv();
     m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
+    m_volumeBarCtrl.SetSpan(3);
+    m_volumeBarCtrl.SetKlines(&m_klines);
+    m_volumeBarCtrl.SetKlineRng(&m_klineRng);
 }
 
 KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,
@@ -468,6 +471,8 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
                          m_height-20,m_klineWidth,m_klineSpan);
             nDay++;
         }
+        // draw volume bar
+        m_volumeBarCtrl.OnDraw(&dc);
         DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height-20);
     }
 }

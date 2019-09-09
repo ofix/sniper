@@ -4,6 +4,7 @@
 #include <AnalysisCtrl.h>
 #include <wx/vector.h>
 #include <core/Stock.h>
+#include <wx/dcclient.h>
 
 
 class VolumeBarCtrl : public AnalysisCtrl
@@ -13,9 +14,12 @@ class VolumeBarCtrl : public AnalysisCtrl
         virtual ~VolumeBarCtrl();
         void SetKlines(wxVector<KlineItem>* pKlines);
         void SetKlineRng(KlineRange* pRange);
+        void SetSpan(int span);
+        void OnDraw(wxDC* pDC);
     protected:
         wxVector<KlineItem>* m_pKlines; // the k line data, day | week | month
         KlineRange* m_pRng;
+        int m_span; // volume bar span
 };
 
 #endif // VOLUMEBARCTRL_H

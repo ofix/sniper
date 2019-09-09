@@ -7,6 +7,7 @@
 #include <wx/dcbuffer.h>
 #include "core/Stock.h"
 #include "util/Helper.h"
+#include "VolumeBarCtrl.h"
 
 #define KEY_LEFT 314
 #define KEY_RIGHT 316
@@ -95,6 +96,8 @@ class KlineCtrl:public wxControl
         wxVector<KlineItem> m_weekKlines; //week k line data;
         wxVector<KlineItem> m_monthKlines; //month k line data;
         KlineRange m_klineRng;
+        // volume bar ctrl
+        VolumeBarCtrl m_volumeBarCtrl;
         bool m_showAnalysisBar; // if true, draw volume,MCDA,KDJ index
         int m_analysisType;
 };
