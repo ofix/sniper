@@ -8,11 +8,6 @@
 #include "core/Stock.h"
 #include "util/Helper.h"
 
-#define KEY_LEFT 314
-#define KEY_RIGHT 316
-#define KEY_UP 315
-#define KEY_DOWN 317
-
 #define KLINE_MODE_DAY 1
 #define KLINE_MODE_WEEK 2
 #define KLINE_MODE_MONTH 4

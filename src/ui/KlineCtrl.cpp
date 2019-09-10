@@ -375,6 +375,7 @@ KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKlines, long rect,
     }else{
         rng.begin = totalKlines-1 - count;
         rng.end = totalKlines-1;
+        std::cout<<"xxxxxxxxxxxxx"<<std::endl;
     }
 
     return rng;
@@ -393,8 +394,8 @@ KlineRange  KlineCtrl::GetKlineRangeZoomOut(long totalKLines,long crossLine)
         rng.begin = m_klineRng.begin - 360 * left/(left+right);
         rng.end = m_klineRng.end + 360 * right/(left+right);
     }else{
-        rng.begin = m_klineRng.begin;
-        rng.end = m_klineRng.end+360;
+        rng.begin = m_klineRng.begin-360;
+        rng.end = m_klineRng.end;
     }
     if(rng.begin <=0){
         rng.begin = 0;
@@ -455,7 +456,7 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
         }
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
-        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7-20);
+        //DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7-20);
     }
 }
 
@@ -555,7 +556,6 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
             }
         }
-        //std::cout<<"++++++++ crossLine "<<m_crossLine << " ++++++++++"<<std::endl;
     }else if(event.GetKeyCode() == WXK_DOWN){ // scale down klines
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
@@ -587,6 +587,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                 }
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
             }
+            std::cout<<"rng = ( "<<m_klineRng.begin<<" , "<<m_klineRng.end<<" )"<<std::endl;
         }
     }
     if(m_klineRng.begin <= 0){
