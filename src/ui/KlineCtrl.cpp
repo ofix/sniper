@@ -123,7 +123,7 @@ bool KlineCtrl::ReadCsv()
         return false;
     }
     // neglect first line
-    for(size_t i=1; i<file.GetLineCount(); i++)
+    for(size_t i=file.GetLineCount(); i>=1;i--)
     {
         wxString line = file[i];
         wxVector<wxString> fields = slice(line);
@@ -140,7 +140,7 @@ bool KlineCtrl::ReadCsv()
         item.favorite = 0;
         item.danger = 0 ;
         item.price_now = item.price_close;
-        m_klines.push_back(item);
+        m_klines.insert(item);
     }
     return true;
 }
@@ -310,7 +310,7 @@ void KlineCtrl::DrawCrossLine(wxDC* pDC,int centerX,int centerY,int w,int h)//�
 float KlineCtrl::GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end)
 {
     float min = 100000000;
-    for(int i=begin; i>end; i--)
+    for(int i=begin; i<=end; i++)
     {
         if(data.at(i).price_min < min)
         {
@@ -331,7 +331,7 @@ float KlineCtrl::GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end)
 float KlineCtrl::GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end)
 {
     float max = -100000000;
-    for(int i=begin; i>end; i--)
+    for(int i=begin; i<=end; i++)
     {
         if(data.at(i).price_max > max)
         {
@@ -354,7 +354,7 @@ float KlineCtrl::GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end)
  */
 KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKLines, long rect,
                           int16_t klineWidth,int16_t klineSpan,
-                          long crossLine)//放大K线图
+                          long crossLine)
 {
     KlineRange rng;
     long count = rect/(klineWidth+klineSpan);
@@ -362,19 +362,19 @@ KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKLines, long rect,
         count = totalKLines;
     }
     if(crossLine != NO_CROSS_LINE){
-        long left = m_klineRng.begin - crossLine;
-        long right = crossLine - m_klineRng.end;
+        long left = crossLine - m_klineRng.begin;
+        long right = m_klineRng.end - crossLine;
         long removed = abs(left+right - count);
-        if(count > left+right){ //K线变多了
-            rng.begin = m_klineRng.begin + removed*left/(left+right);
-            rng.end = m_klineRng.end - removed*right/(left+right);
-        }else{ //K线变少了
+        if(count > left+right){ // more klines to be shown
             rng.begin = m_klineRng.begin - removed*left/(left+right);
             rng.end = m_klineRng.end + removed*right/(left+right);
+        }else{ // less klines to be shown
+            rng.begin = m_klineRng.begin + removed*left/(left+right);
+            rng.end = m_klineRng.end - removed*right/(left+right);
         }
     }else{
-        rng.begin = count;
-        rng.end = 0;
+        rng.begin = totalKLines - count;
+        rng.end = totalKLines;
     }
 
     return rng;
@@ -388,19 +388,19 @@ KlineRange  KlineCtrl::GetKlineRangeZoomOut(long totalKLines,long crossLine)
 {
     KlineRange rng;
     if(crossLine != NO_CROSS_LINE){
-        long left = m_klineRng.begin - crossLine;
-        long right = crossLine - m_klineRng.end;
-        rng.begin = m_klineRng.begin + 360 * left/(left+right);
-        rng.end = m_klineRng.end - 360 * right/(left+right);
+        long left = crossLine - m_klineRng.begin;
+        long right = m_klineRng.end - crossLine;
+        rng.begin = m_klineRng.begin - 360 * left/(left+right);
+        rng.end = m_klineRng.end + 360 * right/(left+right);
     }else{
-        rng.begin = m_klineRng.begin+360;
-        rng.end = m_klineRng.end;
+        rng.begin = m_klineRng.begin;
+        rng.end = m_klineRng.end+360;
     }
-    if(rng.begin >= totalKLines){
-        rng.begin = totalKLines-1;
+    if(rng.begin <=0){
+        rng.begin = 0;
     }
-    if(rng.end <=0){
-        rng.end = 0;
+    if(rng.end >= totalKLines-1){
+        rng.end = totalKLines-1;
     }
     return rng;
 }
@@ -415,14 +415,14 @@ KlineRange  KlineCtrl::GetKlineRangeZoomOut(long totalKLines,long crossLine)
 wxPoint KlineCtrl::GetCrossLinePt(long n)
 {
     long x,y;
-    long total = m_klineRng.begin - m_klineRng.end;
+    long total = m_klineRng.end - m_klineRng.begin;
     KlineItem item = m_klines.at(n);
     float hPrice = m_rectPriceMax - m_rectPriceMin;
     y = (int)((m_rectPriceMax - item.price_close)/hPrice*(m_height-20)+ 10);
     if(total > m_width){//一屏幕已经显示不下了
-        x = (m_klineRng.begin-n)/total*m_width;
+        x = (m_klineRng.end-n)/total*m_width;
     }else{
-        x = (m_klineWidth+m_klineSpan)*(m_klineRng.begin - n)+m_klineWidth/2;
+        x = (m_klineWidth+m_klineSpan)*(m_klineRng.end - n)+m_klineWidth/2;
     }
     return wxPoint(x,y);
 }
@@ -438,13 +438,13 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
     dc.Clear();
     float rect_price_max = GetRectMaxPrice(m_klines,m_klineRng.begin,m_klineRng.end);
     float rect_price_min = GetRectMinPrice(m_klines,m_klineRng.begin,m_klineRng.end);
-    int visible_klines = m_klineRng.begin - m_klineRng.end +1;
+    int visible_klines = m_klineRng.end - m_klineRng.begin +1;
     int nDay=0;
 
     KlineItem day;
-    if(m_klines.size()>(size_t)m_klineRng.begin)
+    if(m_klines.size()>(size_t)m_klineRng.end)
     {
-        for(int i=m_klineRng.begin; i>=m_klineRng.end; i--)
+        for(int i=m_klineRng.begin; i<=m_klineRng.end; i++)
         {
             day = m_klines.at(i);
             DrawKline(&dc,nDay,visible_klines,day.price_open,day.price_close,
@@ -486,38 +486,41 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
 {
     int max = m_klines.size();
     int key = event.GetKeyCode();
-    if(key == KEY_LEFT){//左移查看
-        if(m_klineRng.begin == max-1){
+    if(key == WXK_LEFT){ // look left
+        if(m_klineRng.begin == 0){// no more klines in the left
             return;
         }
         if(m_crossLine == m_klineRng.begin){
-            m_klineRng.begin+=1;
-            m_klineRng.end+=1;
-        }else if(m_crossLine >= m_klineRng.end && m_crossLine <= m_klineRng.begin){//重新计算十字线
+            m_klineRng.begin-=1;
+            m_klineRng.end-=1;
+        }else if(m_crossLine >= m_klineRng.begin && m_crossLine <= m_klineRng.end){
             if(m_crossLine != max-1){
-                m_crossLine += 1;
+                m_crossLine -= 1;
                 m_crossLinePt = GetCrossLinePt(m_crossLine);
             }
         }
-    }else if(key == KEY_RIGHT){//向右查看
-        if(m_crossLine == m_klineRng.end && m_klineRng.end !=0){//如果右侧还有K线才向右执行
-            m_klineRng.begin-=1;
-            m_klineRng.end-=1;
+    }else if(key == WXK_RIGHT){// look right
+        if(m_klineRng.end == max-1){// no more klines in the left
+            return;
+        }
+        if(m_crossLine == m_klineRng.end && m_klineRng.end != max){
+            m_klineRng.begin+=1;
+            m_klineRng.end+=1;
         }else if(m_crossLine >= m_klineRng.end && m_crossLine <= m_klineRng.begin){
             if(m_crossLine !=0){
                 m_crossLine -= 1;
                 m_crossLinePt = GetCrossLinePt(m_crossLine);
             }
         }
-    }else if(key == KEY_UP){ //放大K线图
+    }else if(key == WXK_UP){ //scale up klines
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
            m_crossLine >= m_klineRng.end){ //以十字线为中心放大
-            long left = m_klineRng.begin - m_crossLine;
-            long right = m_crossLine - m_klineRng.end;
+            long left = m_crossLine - m_klineRng.begin;
+            long right = m_klineRng.end - m_crossLine;
             long old_begin = m_klineRng.begin;
             long old_end = m_klineRng.end;
-            int count = m_klineRng.begin - m_klineRng.end+1;
+            int count = m_klineRng.end - m_klineRng.begin+1;
             if((count-360)>m_width){
                 m_klineRng.begin -= 360*left/(left+right);
                 m_klineRng.end += 360*right/(left+right);
@@ -529,7 +532,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                     m_klineSpan -=1;
                 }
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
-                long removed = left + right - (m_klineRng.begin - m_klineRng.end);
+                long removed = left + right - (m_klineRng.end - m_klineRng.begin);
                 m_klineRng.begin = old_begin - removed*left/(left+right);
                 m_klineRng.end = old_end + removed*right/(left+right);
             }
@@ -541,9 +544,9 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
             }
 
         }else{
-            int count = m_klineRng.begin - m_klineRng.end+1;
+            int count = m_klineRng.end - m_klineRng.begin+1;
             if((count-360)>m_width){
-                m_klineRng.begin -= 360;
+                m_klineRng.end -= 360;
             }else{
                 m_klineWidth+=2;
                 m_klineSpan+=1;
@@ -555,7 +558,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
             }
         }
         //std::cout<<"++++++++ crossLine "<<m_crossLine << " ++++++++++"<<std::endl;
-    }else if(event.GetKeyCode() == KEY_DOWN){ //缩小K线图
+    }else if(event.GetKeyCode() == WXK_DOWN){ // scale down klines
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
            m_crossLine >= m_klineRng.end){ //以十字线为中心缩小
@@ -571,12 +574,6 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                     m_klineSpan = 0;
                 }
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan,m_crossLine);
-                if(m_klineRng.begin>max){
-                    m_klineRng.begin = max;
-                }
-                if(m_klineRng.end<=0){
-                    m_klineRng.end = 0;
-                }
             }
         }else{
             if(m_klineWidth == 1 && m_klineSpan == 0){
@@ -591,20 +588,19 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                     m_klineSpan = 0;
                 }
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
-                if(m_klineRng.begin>max){
-                    m_klineRng.begin = max;
-                }
-                if(m_klineRng.end<=0){
-                    m_klineRng.end = 0;
-                }
             }
         }
-        if(m_crossLine != NO_CROSS_LINE){
-            if(m_crossLine <= m_klineRng.begin && m_crossLine >= m_klineRng.end){
-                 m_crossLinePt = GetCrossLinePt(m_crossLine);//修正十字线的位置
-            }
+    }
+    if(m_klineRng.begin <= 0){
+        m_klineRng.begin = 0;
+    }
+    if(m_klineRng.end >= max-1){
+        m_klineRng.end = max-1;
+    }
+    if(m_crossLine != NO_CROSS_LINE){
+        if(m_crossLine >= m_klineRng.begin && m_crossLine <= m_klineRng.end){
+             m_crossLinePt = GetCrossLinePt(m_crossLine);//修正十字线的位置
         }
-        //std::cout<<"--------- crossLine "<<m_crossLine << " ----------"<<std::endl;
     }
     this->Refresh(false);
 }
@@ -617,13 +613,12 @@ void KlineCtrl::OnLeftMouseDown(wxMouseEvent& event)
         if(this->m_klineWidth == 1){
             m_crossLinePt.x = x;
             m_crossLinePt.y = y;
-            m_crossLine = m_klineRng.begin - x*(m_klineRng.begin - m_klineRng.end)/m_width;
+            m_crossLine = m_klineRng.end - x*(m_klineRng.end - m_klineRng.begin)/m_width;
         }else{ //获取最靠近的K线
             int k = x/(m_klineWidth+m_klineSpan);
-            m_crossLine = m_klineRng.begin-k;
+            m_crossLine = m_klineRng.end-k;
             m_crossLinePt = GetCrossLinePt(m_crossLine);
         }
-        //std::wcout<<"鼠标左键被按下....."<<std::endl;
         this->Refresh(false);
     }
 }

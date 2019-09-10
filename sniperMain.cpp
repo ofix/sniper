@@ -94,8 +94,8 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     //*)
 
     // create day k line control
-    // KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
-    // pKlineCtrl->Show();
+     KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
+     pKlineCtrl->Show();
 
     // wxString 测试
 //    wxCSConv gbkConv(wxFONTENCODING_CP936);

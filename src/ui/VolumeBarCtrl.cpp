@@ -14,8 +14,8 @@ VolumeBarCtrl::~VolumeBarCtrl()
 
 void VolumeBarCtrl::OnDraw(wxDC* pDC)
 {
-    wxVector<KlineItem> klines = m_pKlineCtrl->m_klines;
-    KlineRange klineRng = m_pKlineCtrl->m_klineRng;
+    wxVector<KlineItem>& klines = m_pKlineCtrl->m_klines;
+    KlineRange& klineRng = m_pKlineCtrl->m_klineRng;
     int span = m_pKlineCtrl->m_klineSpan;
     // get canvas height
     double max_volume = GetMaxVolumeInRange();
@@ -40,8 +40,9 @@ double VolumeBarCtrl::GetMaxVolumeInRange()
 {
     double max = 0;
     wxVector<KlineItem>::const_iterator it;
-    wxVector<KlineItem> klines = m_pKlineCtrl->m_klines;
-    KlineRange klineRng = m_pKlineCtrl->m_klineRng;
+    wxVector<KlineItem>& klines = m_pKlineCtrl->m_klines;
+    KlineRange& klineRng = m_pKlineCtrl->m_klineRng;
+    wxASSERT(klineRng.begin < klineRng.end);
     for(it = klines.begin()+ klineRng.begin; it != klines.begin()+klineRng.end; ++it){
         if(it->trade_volume > max)
         {
