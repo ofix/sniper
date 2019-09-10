@@ -22,8 +22,12 @@ void VolumeBarCtrl::OnDraw(wxDC* pDC)
     wxVector<KlineItem>::const_iterator it;
     // calc single volume bar width
     long w = (long)(m_pKlineCtrl->m_width/(klineRng.end - klineRng.begin) - span);
+    w = GUARD(w,1);
     long hVolumeBar = m_pKlineCtrl->m_height*0.3;
     long yVolumeBar = m_pKlineCtrl->m_height*0.7;
+    #ifdef DEBUG
+        std::cout<<"volume bar w,h,y = ["<<w<<","<<hVolumeBar<<","<<yVolumeBar<<"]"<<std::endl;
+    #endif // _DEBUG_
     int i=0;
     for(it = klines.begin()+klineRng.begin; it != klines.begin()+klineRng.end; ++it,++i){
         long x = i*(w+span);

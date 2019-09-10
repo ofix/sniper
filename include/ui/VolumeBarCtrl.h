@@ -10,6 +10,7 @@ class KlineCtrl;
 class VolumeBarCtrl : public AnalysisCtrl
 {
     public:
+        #define GUARD(x,y) ((x)<(y)?(y):(x))
         VolumeBarCtrl(KlineCtrl* pKlineCtrl, long x=0,long y=0,long w=0,long h=0);
         virtual ~VolumeBarCtrl();
         void OnDraw(wxDC* pDC);

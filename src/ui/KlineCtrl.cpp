@@ -456,7 +456,7 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
         }
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
-        //DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7-20);
+        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
     }
 }
 
