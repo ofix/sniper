@@ -27,7 +27,7 @@ KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Create(parent,id,pos,size,style,validator);
     m_width = size.GetWidth();
-    m_height = size.GetHeight()*0.7;
+    m_height = size.GetHeight();
 }
 
 //以下函数实现必须写，否则会爆错误 undefined reference to 'vtable for KlineCtrl'
@@ -123,7 +123,7 @@ bool KlineCtrl::ReadCsv()
         return false;
     }
     // neglect first line
-    for(size_t i=file.GetLineCount(); i>=1;i--)
+    for(size_t i=file.GetLineCount()-1; i>=1;i--)
     {
         wxString line = file[i];
         wxVector<wxString> fields = slice(line);
@@ -140,7 +140,7 @@ bool KlineCtrl::ReadCsv()
         item.favorite = 0;
         item.danger = 0 ;
         item.price_now = item.price_close;
-        m_klines.insert(item);
+        m_klines.push_back(item);
     }
     return true;
 }
@@ -352,14 +352,14 @@ float KlineCtrl::GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end)
  *@return KlineRange
  *@author code lighter
  */
-KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKLines, long rect,
+KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKlines, long rect,
                           int16_t klineWidth,int16_t klineSpan,
                           long crossLine)
 {
     KlineRange rng;
     long count = rect/(klineWidth+klineSpan);
-    if(count>totalKLines){
-        count = totalKLines;
+    if(count>totalKlines){
+        count = totalKlines;
     }
     if(crossLine != NO_CROSS_LINE){
         long left = crossLine - m_klineRng.begin;
@@ -373,8 +373,8 @@ KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKLines, long rect,
             rng.end = m_klineRng.end - removed*right/(left+right);
         }
     }else{
-        rng.begin = totalKLines - count;
-        rng.end = totalKLines;
+        rng.begin = totalKlines-1 - count;
+        rng.end = totalKlines-1;
     }
 
     return rng;
@@ -450,12 +450,12 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
             DrawKline(&dc,nDay,visible_klines,day.price_open,day.price_close,
                          day.price_max,day.price_min,
                          rect_price_max,rect_price_min,0,10,m_width,
-                         m_height-20,m_klineWidth,m_klineSpan);
+                         m_height*0.7-20,m_klineWidth,m_klineSpan);
             nDay++;
         }
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
-        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height-20);
+        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7-20);
     }
 }
 
@@ -475,9 +475,7 @@ void KlineCtrl::OnBackground(wxEraseEvent& event)
 
 void KlineCtrl::OnSize(wxSizeEvent& event)
 {
-    int height;
-    GetClientSize(&m_width,&height);
-    m_height = height*0.7;
+    GetClientSize(&m_width,&m_height);
     m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
     Refresh();//刷新窗口
 }

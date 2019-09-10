@@ -21,14 +21,17 @@ void VolumeBarCtrl::OnDraw(wxDC* pDC)
     double max_volume = GetMaxVolumeInRange();
     wxVector<KlineItem>::const_iterator it;
     // calc single volume bar width
-    long w = (long)(m_w/(klineRng.end - klineRng.begin) - span);
+    long w = (long)(m_pKlineCtrl->m_width/(klineRng.end - klineRng.begin) - span);
+    long hVolumeBar = m_pKlineCtrl->m_height*0.3;
+    long yVolumeBar = m_pKlineCtrl->m_height*0.7;
     int i=0;
     for(it = klines.begin()+klineRng.begin; it != klines.begin()+klineRng.end; ++it,++i){
         long x = i*(w+span);
-        long y = m_y + static_cast<long>((1-it->trade_volume/max_volume)*m_h);
-        long h = it->trade_volume/max_volume*m_h;
+        long y = yVolumeBar + static_cast<long>((1-it->trade_volume/max_volume)*hVolumeBar);
+        long h = it->trade_volume/max_volume*hVolumeBar;
+        pDC->SetPen(*wxTRANSPARENT_PEN);
         if(it->price_close >= it->price_open){ // red bar
-            pDC->SetBrush(wxBrush(wxColor(84,255,255)));
+            pDC->SetBrush(wxBrush(wxColor(255,0,0)));
         }else{ // green bar
             pDC->SetBrush(wxBrush(wxColor(84,255,255)));
         }
@@ -42,7 +45,6 @@ double VolumeBarCtrl::GetMaxVolumeInRange()
     wxVector<KlineItem>::const_iterator it;
     wxVector<KlineItem>& klines = m_pKlineCtrl->m_klines;
     KlineRange& klineRng = m_pKlineCtrl->m_klineRng;
-    wxASSERT(klineRng.begin < klineRng.end);
     for(it = klines.begin()+ klineRng.begin; it != klines.begin()+klineRng.end; ++it){
         if(it->trade_volume > max)
         {
