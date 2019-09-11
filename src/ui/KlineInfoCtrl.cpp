@@ -114,6 +114,7 @@ wxString KlineInfoCtrl::CalcWeek(int year,int month, int day){
         case 5: return wxT("星期六");
         case 6: return wxT("星期日");
     }
+    return wxT("");
 }
 
 KlineItem KlineInfoCtrl::GetCurrentKlineInfo()
@@ -124,7 +125,6 @@ KlineItem KlineInfoCtrl::GetCurrentKlineInfo()
     }else{
         n = m_pKlineCtrl->m_crossLine;
     }
-    std::cout<<"n = "<<n<<std::endl;
     return m_pKlineCtrl->m_klines.at(n);
 }
 

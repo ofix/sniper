@@ -498,25 +498,21 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
             m_klineRng.begin-=1;
             m_klineRng.end-=1;
         }else if(m_crossLine >= m_klineRng.begin && m_crossLine <= m_klineRng.end){
-            if(m_crossLine != max-1){
+            if(m_crossLine != 0){
                 m_crossLine -= 1;
                 m_crossLinePt = GetCrossLinePt(m_crossLine);
             }
         }
     }else if(key == WXK_RIGHT){// look right
-        if(m_klineRng.end == max-1){// no more klines in the left
-            return;
-        }
         if(m_crossLine == m_klineRng.end && m_klineRng.end != max){
             m_klineRng.begin+=1;
             m_klineRng.end+=1;
-        }else if(m_crossLine >= m_klineRng.end && m_crossLine <= m_klineRng.begin){
-            if(m_crossLine !=0){
-                m_crossLine -= 1;
+        }else if(m_crossLine >= m_klineRng.begin && m_crossLine <= m_klineRng.end){
+            if(m_crossLine != max-1){
+                m_crossLine += 1;
                 m_crossLinePt = GetCrossLinePt(m_crossLine);
             }
         }
-        std::cout<<"RIGHT KEY PRESS DOWN"<<std::endl;
     }else if(key == WXK_UP){ //scale up klines
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
