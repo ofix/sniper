@@ -1,7 +1,7 @@
 #ifndef VOLUMEBARCTRL_H
 #define VOLUMEBARCTRL_H
 
-#include <AnalysisCtrl.h>
+#include <ui/AnalysisCtrl.h>
 #include <wx/vector.h>
 #include <core/Stock.h>
 #include <wx/dcclient.h>

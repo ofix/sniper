@@ -1,4 +1,4 @@
-#include "TrieTree.h"
+#include "core/TrieTree.h"
 
 template <class T>
 TrieTree<T>::TrieTree():m_nNodes(0),m_pRoot(nullptr)

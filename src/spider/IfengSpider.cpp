@@ -1,4 +1,4 @@
-#include "IfengSpider.h"
+#include "spider/IfengSpider.h"
 
 IfengSpider::IfengSpider(wxString strUrl):StockSpider(strUrl)
 {

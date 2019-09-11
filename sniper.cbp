@@ -16,6 +16,7 @@
 				<Compiler>
 					<Add option="-m64" />
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
@@ -58,10 +59,6 @@
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
-					<Add directory="include/spider" />
-					<Add directory="include/core" />
-					<Add directory="include/ui" />
-					<Add directory="lib/pinyin" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />

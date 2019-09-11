@@ -1,4 +1,4 @@
-#include "HistoryStockSpider.h"
+#include "spider/HistoryStockSpider.h"
 
 HistoryStockSpider::HistoryStockSpider(wxVector<ShareBrief>& stockList,wxString saveRootPath,wxString strUrl)
                         :StockSpider(strUrl)

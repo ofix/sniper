@@ -1,7 +1,7 @@
 #ifndef IFENGSPIDER_H
 #define IFENGSPIDER_H
 
-#include <StockSpider.h>
+#include "StockSpider.h"
 #include "core/Stock.h"
 
 class IfengSpider : public StockSpider

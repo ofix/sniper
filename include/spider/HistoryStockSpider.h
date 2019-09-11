@@ -1,7 +1,7 @@
 #ifndef HISTORYSTOCKSPIDER_H
 #define HISTORYSTOCKSPIDER_H
 
-#include <StockSpider.h>
+#include "StockSpider.h"
 #include "core/Stock.h"
 #include "util/Helper.h"
 

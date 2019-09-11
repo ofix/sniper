@@ -1,5 +1,5 @@
-#include "KlineCtrl.h"
-#include "VolumeBarCtrl.h"
+#include "ui/KlineCtrl.h"
+#include "ui/VolumeBarCtrl.h"
 
 KlineCtrl::KlineCtrl()
 {
@@ -133,10 +133,10 @@ bool KlineCtrl::ReadCsv()
         fields[3].ToDouble(&item.price_close);
         fields[4].ToDouble(&item.price_max);
         fields[5].ToDouble(&item.price_min);
-        fields[9].ToDouble(&item.change_rate);//涨跌额
-        fields[8].ToDouble(&item.change_amount);//涨跌幅
-        fields[11].ToDouble(&item.trade_amount);//成交额
-        fields[10].ToDouble(&item.trade_volume);//成交量
+        fields[8].ToDouble(&item.change_amount);//涨跌额
+        fields[9].ToDouble(&item.change_rate);//涨跌幅
+        fields[11].ToDouble(&item.trade_volume);//成交量
+        fields[12].ToDouble(&item.trade_amount);//成交额
         item.favorite = 0;
         item.danger = 0 ;
         item.price_now = item.price_close;
@@ -171,86 +171,89 @@ void KlineCtrl::DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
               float rect_price_max,float rect_price_min,
               int minX,int minY,int maxX,int maxY,int klineWidth,int klineSpan)
 {
-    float hPrice = rect_price_max - rect_price_min;
+    double hPrice = rect_price_max - rect_price_min;
     int hRect = maxY - minY;
     int wRect = maxX - minX;
-    int x1,y1,x2,y2;
-    int xShadow,yShadowUp,yShadowDown;//上影线,下影线(如果有的话)
+    double x1,y1,x2,y2;
+    double xShadow,yShadowUp,yShadowDown;//上影线,下影线(如果有的话)
     if(visibleKLineCount > wRect){
         if(price_open < price_close) //红盘
         {
             //绘制K线实体
             x1 = nKLine*wRect/visibleKLineCount; // nKLine/visibleKLineCount = x1/wRect;
-            y1 = (int)((rect_price_max - price_close)/hPrice*hRect + minY);
+            y1 = (rect_price_max - price_close)/hPrice*hRect + minY;
             x2 = x1;
-            y2 = (int)((rect_price_max - price_open)/hPrice*hRect + minY);
+            y2 = (rect_price_max - price_open)/hPrice*hRect + minY;
             pDC->SetPen(*wxRED_PEN);
             pDC->SetBrush(*wxBLACK_BRUSH);
             pDC->DrawLine(x1,y1,x2,y2);
             //绘制上影线
             xShadow = x1;
-            yShadowUp = static_cast<int>((rect_price_max - price_max)/hPrice*hRect + minY);
+            yShadowUp = (rect_price_max - price_max)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowUp,xShadow,y1);
             //绘制下影线
-            yShadowDown = static_cast<int>((rect_price_max - price_min)/hPrice*hRect + minY);
+            yShadowDown = (rect_price_max - price_min)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowDown,xShadow,y2-1);
         }
         else if(price_open >price_close)  //绿盘
         {
             x1 = nKLine*wRect/visibleKLineCount; // nKLine/visibleKLineCount = x1/wRect;
-            y1 = (int)((rect_price_max - price_open)/hPrice*hRect+minY);
+            y1 = (rect_price_max - price_open)/hPrice*hRect+minY;
             x2 = x1;
-            y2 = (int)((rect_price_max - price_close)/hPrice*hRect+minY);
+            y2 = (rect_price_max - price_close)/hPrice*hRect+minY;
             pDC->SetPen(wxPen(wxColor(84,255,255)));
             pDC->SetBrush(wxBrush(wxColor(84,255,255)));
             pDC->DrawLine(x1,y1,x2,y2);
             //绘制上影线
             xShadow = x1;
-            yShadowUp = static_cast<int>((rect_price_max - price_max)/hPrice*hRect + minY);
+            yShadowUp = (rect_price_max - price_max)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowUp,xShadow,y1);
             //绘制下影线
-            yShadowDown = static_cast<int>((rect_price_max - price_min)/hPrice*hRect + minY);
+            yShadowDown = (rect_price_max - price_min)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowDown,xShadow,y2-1);
         }
     }else{
         if(price_open < price_close) //红盘
         {
             //绘制K线实体
-            x1 = (int)(nKLine*(klineWidth+klineSpan));
-            y1 = (int)((rect_price_max - price_close)/hPrice*hRect + minY);
-            x2 = (int)(x1+klineWidth);
-            y2 = (int)((rect_price_max - price_open)/hPrice*hRect + minY);
+            x1 = nKLine*(klineWidth+klineSpan);
+            y1 = (rect_price_max - price_close)/hPrice*hRect + minY;
+            x2 = x1+klineWidth;
+            y2 = (rect_price_max - price_open)/hPrice*hRect + minY;
             pDC->SetPen(*wxRED_PEN);
             pDC->SetBrush(*wxBLACK_BRUSH);
             pDC->DrawRectangle(x1,y1,x2-x1,y2-y1);
             //绘制上影线
-            xShadow = static_cast<int>((x1+x2)/2);
-            yShadowUp = static_cast<int>((rect_price_max - price_max)/hPrice*hRect + minY);
+            xShadow = (x1+x2)/2;
+            yShadowUp = (rect_price_max - price_max)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowUp,xShadow,y1);
             //绘制下影线
-            yShadowDown = static_cast<int>((rect_price_max - price_min)/hPrice*hRect + minY);
+            yShadowDown = (rect_price_max - price_min)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowDown,xShadow,y2-1);
     //        cout<<"x1,y1,w1,h1  "<<x1<<","<<y1<<","<<x2-x1<<","<<y2-y1<<endl;
         }
         else if(price_open >price_close)  //绿盘
         {
-            x1 = (int)(nKLine*(klineWidth+klineSpan));
-            y1 = (int)((rect_price_max - price_open)/hPrice*hRect+minY);
-            x2 = (int)(x1+klineWidth);
-            y2 = (int)((rect_price_max - price_close)/hPrice*hRect+minY);
+            x1 = nKLine*(klineWidth+klineSpan);
+            y1 = (rect_price_max - price_open)/hPrice*hRect+minY;
+            x2 = x1+klineWidth;
+            y2 = (rect_price_max - price_close)/hPrice*hRect+minY;
             pDC->SetPen(wxPen(wxColor(84,255,255)));
             pDC->SetBrush(wxBrush(wxColor(84,255,255)));
             pDC->DrawRectangle(x1,y1,x2-x1,y2-y1);
             //绘制上影线
-            xShadow = static_cast<int>((x1+x2)/2);
-            yShadowUp = static_cast<int>((rect_price_max - price_max)/hPrice*hRect + minY);
+            xShadow = (x1+x2)/2;
+            yShadowUp = (rect_price_max - price_max)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowUp,xShadow,y1);
             //绘制下影线
-            yShadowDown = static_cast<int>((rect_price_max - price_min)/hPrice*hRect + minY);
+            yShadowDown = (rect_price_max - price_min)/hPrice*hRect + minY;
             pDC->DrawLine(xShadow,yShadowDown,xShadow,y2-1);
     //        cout<<"x2,y2,w2,h2  "<<x1<<","<<y1<<","<<x2-x1<<","<<y2-y1<<endl;
         }
     }
+    //绘制分割线
+    pDC->SetPen(*wxWHITE_PEN);
+    pDC->DrawLine(0,hRect,wRect,hRect);
     //考虑跌停
     //考虑涨停
 }
@@ -359,7 +362,7 @@ KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKlines, long rect,
     KlineRange rng;
     long count = rect/(klineWidth+klineSpan);
     if(count>totalKlines){
-        count = totalKlines;
+        count = totalKlines-1;
     }
     if(crossLine != NO_CROSS_LINE){
         long left = crossLine - m_klineRng.begin;
@@ -456,7 +459,7 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
         }
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
-        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
+       // DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
     }
 }
 

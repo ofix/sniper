@@ -1,4 +1,4 @@
-#include "AnalysisCtrl.h"
+#include "ui/AnalysisCtrl.h"
 
 AnalysisCtrl::AnalysisCtrl(long x,long y,long width,long height):\
             m_x(x),m_y(y),m_w(width),m_h(height)

@@ -9,7 +9,7 @@
 
 #include "sniperMain.h"
 #include <wx/msgdlg.h>
-#include "KlineCtrl.h"
+#include "ui/KlineCtrl.h"
 
 #include <iostream>
 #include <string>
