@@ -1,5 +1,6 @@
 #include "ui/KlineCtrl.h"
 #include "ui/VolumeBarCtrl.h"
+#include "ui/KlineInfoCtrl.h"
 
 KlineCtrl::KlineCtrl()
 {
@@ -16,6 +17,7 @@ KlineCtrl::KlineCtrl(wxString strShareCode,wxWindow* parent,wxWindowID id)
     ReadCsv();
     m_klineRng = GetKlineRangeZoomIn(m_klines.size(),m_width,m_klineWidth,m_klineSpan);
     m_pVolumeBar = new VolumeBarCtrl(this);
+    m_pInfoToolbar = new KlineInfoCtrl(this);
 }
 
 KlineCtrl::KlineCtrl(wxWindow* parent,wxWindowID id,

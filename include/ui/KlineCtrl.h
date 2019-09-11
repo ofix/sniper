@@ -16,6 +16,7 @@
 #define NO_CROSS_LINE 0
 
 class VolumeBarCtrl;
+class KlineInfoCtrl;
 class KlineCtrl:public wxControl
 {
     wxDECLARE_DYNAMIC_CLASS(KlineCtrl);
@@ -93,9 +94,11 @@ class KlineCtrl:public wxControl
         int m_paddingRight; // padding right for klines control
         // volume bar ctrl
         VolumeBarCtrl* m_pVolumeBar;
+        KlineInfoCtrl* m_pInfoToolbar;
         bool m_showAnalysisBar; // if true, draw volume,MCDA,KDJ index
         int m_analysisType;
         friend class VolumeBarCtrl;
+        friend class KlineInfoCtrl;
 };
 
 #endif // KLINECTRL_H

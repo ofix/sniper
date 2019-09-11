@@ -59,6 +59,7 @@
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
 					<Add directory="lib" />
 					<Add directory="include" />
+					<Add directory="include/ui" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -122,6 +123,7 @@
 		<Unit filename="include/spider/StockStarSpider.h" />
 		<Unit filename="include/ui/AnalysisCtrl.h" />
 		<Unit filename="include/ui/KlineCtrl.h" />
+		<Unit filename="include/ui/KlineInfoCtrl.h" />
 		<Unit filename="include/ui/TimelineCtrl.h" />
 		<Unit filename="include/ui/VolumeBarCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
@@ -167,6 +169,7 @@
 		<Unit filename="src/spider/StockStarSpider.cpp" />
 		<Unit filename="src/ui/AnalysisCtrl.cpp" />
 		<Unit filename="src/ui/KlineCtrl.cpp" />
+		<Unit filename="src/ui/KlineInfoCtrl.cpp" />
 		<Unit filename="src/ui/TimelineCtrl.cpp" />
 		<Unit filename="src/ui/VolumeBarCtrl.cpp" />
 		<Unit filename="src/util/Helper.cpp" />
