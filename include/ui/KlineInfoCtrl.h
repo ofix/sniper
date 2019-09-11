@@ -15,6 +15,7 @@ class KlineInfoCtrl:public AnalysisCtrl
         KlineItem GetPrevKlineInfo();
         wxString FormatDay(wxString);
         wxString GetWeek(wxString day);
+        wxString CalcWeek(int year,int month, int day);
     protected:
         KlineCtrl* m_pKlineCtrl;
 };

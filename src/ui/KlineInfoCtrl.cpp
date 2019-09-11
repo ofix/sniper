@@ -25,13 +25,11 @@ void KlineInfoCtrl::OnDraw(wxDC* pDC)
     int hFont = 21;
     wxString day = FormatDay(cur.day);
     wxString week = GetWeek(cur.day);
-    #if DEBUG
-        std::cout<<"day,week "<<day<<" , "<<week<<std::endl;
-    #endif // DEBUG
     // day
     pDC->SetTextForeground(wxColor(210,210,210));
     pDC->DrawText(wxT("时间"),x+4,y+4);
-    pDC->DrawText(cur.day,x+4,y+hFont);
+    pDC->DrawText(day,x+4,y+hFont);
+    pDC->DrawText(week,x+4,y+hFont*2);
     pDC->DrawText(wxT("开盘价"),x+4,y+hFont*3);
     pDC->DrawText(wxT("最高价"),x+4,y+hFont*5);
     pDC->DrawText(wxT("最低价"),x+4,y+hFont*7);
@@ -81,23 +79,41 @@ void KlineInfoCtrl::OnDraw(wxDC* pDC)
 wxString KlineInfoCtrl::FormatDay(wxString date)
 {
     wxString year = date.Left(4);
-    wxString month = date.Mid(4,2);
-    wxString day = date.Mid(6,2);
+    wxString month = date.Mid(5,2);
+    wxString day = date.Mid(8,2);
     return year +wxT("\r\n")+month+day;
 }
 
 wxString KlineInfoCtrl::GetWeek(wxString date)
 {
     wxString strYear = date.Left(4);
-    wxString strMonth = date.Mid(4,2);
-    wxString strDay = date.Mid(6,2);
+    wxString strMonth = date.Mid(5,2);
+    wxString strDay = date.Mid(8,2);
     long year,month,day;
     strYear.ToLong(&year);
     strMonth.ToLong(&month);
     strDay.ToLong(&day);
-    wxDateTime dt;
-    dt.Set(day,month,year);
-    return dt.GetWeekDay();
+    return CalcWeek(year,month,day);
+}
+
+//通过日期判断是星期几可以通过基姆拉尔森计算公式算出
+wxString KlineInfoCtrl::CalcWeek(int year,int month, int day){
+    if(month==1||month==2) //把一月和二月换算成上一年的十三月和是四月
+    {
+        month+=12;
+        year--;
+    }
+    int week=(day+2*month+3*(month+1)/5+year+year/4-year/100+year/400)%7;
+    switch(week)
+    {
+        case 0: return wxT("星期一");
+        case 1: return wxT("星期二");
+        case 2: return wxT("星期三");
+        case 3: return wxT("星期四");
+        case 4: return wxT("星期五");
+        case 5: return wxT("星期六");
+        case 6: return wxT("星期日");
+    }
 }
 
 KlineItem KlineInfoCtrl::GetCurrentKlineInfo()
