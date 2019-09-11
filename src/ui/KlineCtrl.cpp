@@ -55,6 +55,9 @@ void KlineCtrl::Init()
     m_curKline = -1;
     m_rectPriceMax = 0;
     m_rectPriceMin = 0;
+    m_paddingTop = 10;
+    m_paddingBottom = 10;
+    m_paddingRight =10;
 }
 
 bool KlineCtrl::Create(wxWindow* parent,
@@ -113,6 +116,16 @@ void KlineCtrl::SetCsvPath(wxString strPath)
 wxString KlineCtrl::GetCsvPath() const
 {
     return m_csvPath;
+}
+
+int KlineCtrl::GetInnerWidth()
+{
+    return m_width - m_paddingRight;
+}
+
+int KlineCtrl::GetInnerHeight()
+{
+    return m_height*0.7 - m_paddingTop - m_paddingBottom;
 }
 
 bool KlineCtrl::ReadCsv()
@@ -251,23 +264,9 @@ void KlineCtrl::DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
     //        cout<<"x2,y2,w2,h2  "<<x1<<","<<y1<<","<<x2-x1<<","<<y2-y1<<endl;
         }
     }
-    //绘制分割线
-    pDC->SetPen(*wxWHITE_PEN);
-    pDC->DrawLine(0,hRect,wRect,hRect);
     //考虑跌停
     //考虑涨停
 }
-
-
-/**********************************
- *@para member KlineItem 数据成员  1:trade_volume,2:trade_amount
- *@para KlineType 1:day,2:week,3:month
- **********************************/
-double KlineCtrl::GetMaxValue(int member, int klineType)
-{
-    return 0;
-}
-
 
 wxVector<KlineItem> KlineCtrl::GetWeekKlines()
 {
@@ -378,7 +377,6 @@ KlineRange  KlineCtrl::GetKlineRangeZoomIn(long totalKlines, long rect,
     }else{
         rng.begin = totalKlines-1 - count;
         rng.end = totalKlines-1;
-        std::cout<<"xxxxxxxxxxxxx"<<std::endl;
     }
 
     return rng;
@@ -418,15 +416,15 @@ KlineRange  KlineCtrl::GetKlineRangeZoomOut(long totalKLines,long crossLine)
  */
 wxPoint KlineCtrl::GetCrossLinePt(long n)
 {
-    long x,y;
+    double x,y;
     long total = m_klineRng.end - m_klineRng.begin;
     KlineItem item = m_klines.at(n);
-    float hPrice = m_rectPriceMax - m_rectPriceMin;
-    y = (int)((m_rectPriceMax - item.price_close)/hPrice*(m_height-20)+ 10);
+    double hPrice = m_rectPriceMax - m_rectPriceMin;
+    y = m_paddingTop+(1-(item.price_close-m_rectPriceMin)/hPrice)*GetInnerHeight();
     if(total > m_width){//一屏幕已经显示不下了
-        x = (m_klineRng.end-n)/total*m_width;
+        x = (n-m_klineRng.begin)/total*m_width;
     }else{
-        x = (m_klineWidth+m_klineSpan)*(m_klineRng.end - n)+m_klineWidth/2;
+        x = (m_klineWidth+m_klineSpan)*(n - m_klineRng.begin)+m_klineWidth/2;
     }
     return wxPoint(x,y);
 }
@@ -453,13 +451,13 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
             day = m_klines.at(i);
             DrawKline(&dc,nDay,visible_klines,day.price_open,day.price_close,
                          day.price_max,day.price_min,
-                         rect_price_max,rect_price_min,0,10,m_width,
-                         m_height*0.7-20,m_klineWidth,m_klineSpan);
+                         rect_price_max,rect_price_min,0,m_paddingTop,GetInnerWidth(),
+                         GetInnerHeight(),m_klineWidth,m_klineSpan);
             nDay++;
         }
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
-       // DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
+        DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
     }
 }
 
@@ -514,6 +512,7 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                 m_crossLinePt = GetCrossLinePt(m_crossLine);
             }
         }
+        std::cout<<"RIGHT KEY PRESS DOWN"<<std::endl;
     }else if(key == WXK_UP){ //scale up klines
         if(m_crossLine != NO_CROSS_LINE &&
            m_crossLine <= m_klineRng.begin &&
@@ -615,10 +614,10 @@ void KlineCtrl::OnLeftMouseDown(wxMouseEvent& event)
         if(this->m_klineWidth == 1){
             m_crossLinePt.x = x;
             m_crossLinePt.y = y;
-            m_crossLine = m_klineRng.end - x*(m_klineRng.end - m_klineRng.begin)/m_width;
+            m_crossLine = m_klineRng.begin + x*(m_klineRng.end - m_klineRng.begin)/m_width;
         }else{ //获取最靠近的K线
             int k = x/(m_klineWidth+m_klineSpan);
-            m_crossLine = m_klineRng.end-k;
+            m_crossLine = m_klineRng.begin + k;
             m_crossLinePt = GetCrossLinePt(m_crossLine);
         }
         this->Refresh(false);

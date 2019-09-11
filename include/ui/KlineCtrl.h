@@ -51,7 +51,8 @@ class KlineCtrl:public wxControl
         void OnLeftMouseDown(wxMouseEvent& event);
     protected:
         bool ReadCsv();
-
+        int  GetInnerWidth();
+        int  GetInnerHeight();
         //draw helper functions
         void DrawKline(wxDC* pDC,int nKLine,int visibleKLineCount,
                       float price_open,float price_close,
@@ -62,9 +63,6 @@ class KlineCtrl:public wxControl
         void DrawAnalysisBar(wxDC* pDC);
         wxVector<KlineItem> GetWeekKlines();
         wxVector<KlineItem> GetMonthKlines();
-        // volume bar event
-        void NotifyVolumeBarSizeChange();
-        double GetMaxValue(int member, int klineType);
         float GetRectMinPrice(wxVector<KlineItem>& data,int begin, int end);
         float GetRectMaxPrice(wxVector<KlineItem>& data,int begin, int end);
         KlineRange  GetKlineRangeZoomIn(long totalKLines, long widthContainer,
@@ -90,6 +88,9 @@ class KlineCtrl:public wxControl
         wxVector<KlineItem> m_weekKlines; //week k line data;
         wxVector<KlineItem> m_monthKlines; //month k line data;
         KlineRange m_klineRng;
+        int m_paddingTop; // padding top for klines control
+        int m_paddingBottom; // padding bottom for klines control
+        int m_paddingRight; // padding right for klines control
         // volume bar ctrl
         VolumeBarCtrl* m_pVolumeBar;
         bool m_showAnalysisBar; // if true, draw volume,MCDA,KDJ index
