@@ -60,6 +60,7 @@ void KlineCtrl::Init()
     m_paddingTop = 10;
     m_paddingBottom = 10;
     m_paddingRight =10;
+    m_crossLine = NO_CROSS_LINE;
 }
 
 bool KlineCtrl::Create(wxWindow* parent,
@@ -460,6 +461,7 @@ void KlineCtrl::OnPaint(wxPaintEvent& event)
         // draw volume bar
         m_pVolumeBar->OnDraw(&dc);
         DrawCrossLine(&dc,m_crossLinePt.x,m_crossLinePt.y,m_width,m_height*0.7);
+        m_pInfoToolbar->OnDraw(&dc);
     }
 }
 
@@ -591,7 +593,6 @@ void KlineCtrl::OnKeyDown(wxKeyEvent& event)
                 }
                 m_klineRng = GetKlineRangeZoomIn(max,m_width,m_klineWidth,m_klineSpan);
             }
-            std::cout<<"rng = ( "<<m_klineRng.begin<<" , "<<m_klineRng.end<<" )"<<std::endl;
         }
     }
     if(m_klineRng.begin <= 0){

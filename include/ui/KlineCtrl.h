@@ -13,7 +13,7 @@
 #define KLINE_MODE_MONTH 4
 #define KLINE_MODE_YEAR 8
 #define KLINE_MODES (KLINE_MODE_DAY|KLINE_MODE_WEEK|KLINE_MODE_MONTH|KLINE_MODE_YEAR)
-#define NO_CROSS_LINE 0
+#define NO_CROSS_LINE -1
 
 class VolumeBarCtrl;
 class KlineInfoCtrl;

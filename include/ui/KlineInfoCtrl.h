@@ -2,6 +2,7 @@
 #define KLINEINFOCTRL_H
 #include <ui/AnalysisCtrl.h>
 #include <wx/dcclient.h>
+#include "core/Stock.h"
 
 class KlineCtrl;
 class KlineInfoCtrl:public AnalysisCtrl
@@ -10,6 +11,10 @@ class KlineInfoCtrl:public AnalysisCtrl
         KlineInfoCtrl(KlineCtrl* pKlineCtrl, long x=0,long y=0,long w=0,long h=0);
         virtual ~KlineInfoCtrl();
         void OnDraw(wxDC* pDC);
+        KlineItem GetCurrentKlineInfo();
+        KlineItem GetPrevKlineInfo();
+        wxString FormatDay(wxString);
+        wxString GetWeek(wxString day);
     protected:
         KlineCtrl* m_pKlineCtrl;
 };
