@@ -17,6 +17,7 @@
 #include <wx/textfile.h>
 #include <lib/pinyin/PinYin.h>
 #include <spider/IfengSpider.h>
+#include <spider/BaiduPolyphoneSpider.h>
 
 //(*InternalHeaders(sniperFrame)
 #include <wx/intl.h>
@@ -94,9 +95,10 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     //*)
 
     // create day k line control
-     KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
-     pKlineCtrl->Show();
-
+//     KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
+//     pKlineCtrl->Show();
+    BaiduPolyphoneSpider spider;
+    spider.Run();
     // wxString 测试
 //    wxCSConv gbkConv(wxFONTENCODING_CP936);
 //    std::string str_gbk(gbkConv.cWX2MB(_T("z国"))); //gbk格式

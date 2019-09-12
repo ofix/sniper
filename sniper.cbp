@@ -60,6 +60,7 @@
 					<Add directory="lib" />
 					<Add directory="include" />
 					<Add directory="include/ui" />
+					<Add directory="include/spider" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -114,6 +115,7 @@
 		<Unit filename="include/core/SpiderManager.h" />
 		<Unit filename="include/core/Stock.h" />
 		<Unit filename="include/core/TrieTree.h" />
+		<Unit filename="include/spider/BaiDuPolyphoneSpider.h" />
 		<Unit filename="include/spider/EastMoneySpider.h" />
 		<Unit filename="include/spider/HistoryStockSpider.h" />
 		<Unit filename="include/spider/IfengSpider.h" />
@@ -160,6 +162,7 @@
 		<Unit filename="src/core/FileManager.cpp" />
 		<Unit filename="src/core/SpiderManager.cpp" />
 		<Unit filename="src/core/TrieTree.cpp" />
+		<Unit filename="src/spider/BaiDuPolyphoneSpider.cpp" />
 		<Unit filename="src/spider/EastMoneySpider.cpp" />
 		<Unit filename="src/spider/HistoryStockSpider.cpp" />
 		<Unit filename="src/spider/IfengSpider.cpp" />
