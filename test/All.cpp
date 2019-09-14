@@ -10,7 +10,6 @@ void Test::RunAll()
 void Test::mark_down()
 {
     wxString strExe = getExecDir();
-    MarkDown md(_T("D:\work_c++\openssl-1.1.1d\INSTALL"),strExe+_T("INSTALL.md"));
+    MarkDown md(strExe+_T("install.txt"),strExe+_T("install.md"));
     md.CsvToMd();
-
 }
