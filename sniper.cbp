@@ -24,6 +24,8 @@
 					<Add directory="include/core" />
 					<Add directory="include/ui" />
 					<Add directory="lib/pinyin" />
+					<Add directory="include/tool" />
+					<Add directory="test/" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
@@ -61,6 +63,8 @@
 					<Add directory="include" />
 					<Add directory="include/ui" />
 					<Add directory="include/spider" />
+					<Add directory="include/tool" />
+					<Add directory="test/" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -123,6 +127,7 @@
 		<Unit filename="include/spider/Spider.h" />
 		<Unit filename="include/spider/StockSpider.h" />
 		<Unit filename="include/spider/StockStarSpider.h" />
+		<Unit filename="include/tool/MarkDown.h" />
 		<Unit filename="include/ui/AnalysisCtrl.h" />
 		<Unit filename="include/ui/KlineCtrl.h" />
 		<Unit filename="include/ui/KlineInfoCtrl.h" />
@@ -170,12 +175,15 @@
 		<Unit filename="src/spider/Spider.cpp" />
 		<Unit filename="src/spider/StockSpider.cpp" />
 		<Unit filename="src/spider/StockStarSpider.cpp" />
+		<Unit filename="src/tool/MarkDown.cpp" />
 		<Unit filename="src/ui/AnalysisCtrl.cpp" />
 		<Unit filename="src/ui/KlineCtrl.cpp" />
 		<Unit filename="src/ui/KlineInfoCtrl.cpp" />
 		<Unit filename="src/ui/TimelineCtrl.cpp" />
 		<Unit filename="src/ui/VolumeBarCtrl.cpp" />
 		<Unit filename="src/util/Helper.cpp" />
+		<Unit filename="test/All.cpp" />
+		<Unit filename="test/All.h" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>
 			<code_completion />
