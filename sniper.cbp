@@ -128,6 +128,7 @@
 		<Unit filename="include/spider/StockSpider.h" />
 		<Unit filename="include/spider/StockStarSpider.h" />
 		<Unit filename="include/tool/MarkDown.h" />
+		<Unit filename="include/tool/TextFile.h" />
 		<Unit filename="include/ui/AnalysisCtrl.h" />
 		<Unit filename="include/ui/KlineCtrl.h" />
 		<Unit filename="include/ui/KlineInfoCtrl.h" />
@@ -176,6 +177,7 @@
 		<Unit filename="src/spider/StockSpider.cpp" />
 		<Unit filename="src/spider/StockStarSpider.cpp" />
 		<Unit filename="src/tool/MarkDown.cpp" />
+		<Unit filename="src/tool/TextFile.cpp" />
 		<Unit filename="src/ui/AnalysisCtrl.cpp" />
 		<Unit filename="src/ui/KlineCtrl.cpp" />
 		<Unit filename="src/ui/KlineInfoCtrl.cpp" />

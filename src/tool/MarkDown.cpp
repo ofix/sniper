@@ -1,5 +1,5 @@
 #include "include/tool/MarkDown.h"
-#include <wx/textfile.h>
+#include "include/tool/TextFile.h"
 #include <map>
 #include <vector>
 #include <iostream>
@@ -47,14 +47,14 @@ bool MarkDown::CsvToMd()
         }
     }
     // write MD content to file
-    wxTextFile mdFile(m_strDestFile);
+    TextFile mdFile(m_strDestFile);
     if(mdFile.Exists()){
-        mdFile.Clear();
         std::cout<<"xxxx empty file"<<std::endl;
     }else{
         mdFile.Create();
     }
-    mdFile.Open();
+    mdFile.Clear();
+    mdFile.Open(wxFile::write);
     wxString mdline= wxT("|选项|选项说明|");
     mdFile.AddLine(mdline);
     mdline = wxT("|:--|:--|");
