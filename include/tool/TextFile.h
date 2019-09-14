@@ -10,7 +10,7 @@ class TextFile : public wxTextFile
          // constructors
         TextFile();
         TextFile(const wxString& strFileName);
-        bool Open(wxFile::OpenMode openMode);
+        virtual bool OnOpen(const wxString &strBufferName, wxTextBufferOpenMode openMode);
         virtual ~TextFile();
     protected:
         wxTextFile m_textFile;

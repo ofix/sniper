@@ -48,13 +48,11 @@ bool MarkDown::CsvToMd()
     }
     // write MD content to file
     TextFile mdFile(m_strDestFile);
-    if(mdFile.Exists()){
-        std::cout<<"xxxx empty file"<<std::endl;
-    }else{
+    if(!mdFile.Exists()){
         mdFile.Create();
     }
     mdFile.Clear();
-    mdFile.Open(wxFile::write);
+    mdFile.Open();
     wxString mdline= wxT("|选项|选项说明|");
     mdFile.AddLine(mdline);
     mdline = wxT("|:--|:--|");
