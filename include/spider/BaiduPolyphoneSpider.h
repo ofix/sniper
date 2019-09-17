@@ -1,6 +1,14 @@
 #ifndef BAIDUPOLYPHONESPIDER_H
 #define BAIDUPOLYPHONESPIDER_H
 #include <spider/Spider.h>
+#include <map>
+#include <vector>
+
+struct Polyphone{
+    wxString strUrl;//query Url;
+    wxString strZh;//汉字词组
+    std::vector<wxString> strPinYin; //汉字 用|分割
+};
 
 class BaiduPolyphoneSpider:public Spider
 {
@@ -9,9 +17,15 @@ class BaiduPolyphoneSpider:public Spider
         virtual bool Run();
         virtual ~BaiduPolyphoneSpider();
         int RemoveDirtyWords(wxString& strResponse);
+        bool QueryFromHtml();
+        bool QueryFromApi();
+        bool QueryPhases();
+        wxString GetApiUrl(int nPageIndex=0, int nPageSize = 64);
     protected:
-        uint32_t m_totalPages;
-        uint32_t m_curPage;
+        long m_totalPages;
+        long m_curPage;
+        long m_totalRecords;
+        std::map<wxString,Polyphone> m_dyz; //多音字
 };
 
 #endif // BAIDUPOLYPHONESPIDER_H

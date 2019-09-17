@@ -15,7 +15,6 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-m64" />
-					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
 					<Add directory="lib" />
