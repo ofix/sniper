@@ -1581,9 +1581,10 @@ wxJSONReader::AppendUES( wxMemoryBuffer& utf8Buff, const char* uesBuffer )
 
     // seems that the wxMBConv classes always appends a NULL byte to
     // the converted buffer
-    if ( len > 1 )    {
-        len = len - 1;
-    }
+    // FIXED! MUST remove, OR ReadString ConvString would FAILED!!!
+//    if ( len > 1 )    {
+//        len = len - 1;
+//    }
     utf8Buff.AppendData( buffer, len );
 
     // sould never fail
