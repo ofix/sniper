@@ -37,7 +37,7 @@ bool BaiduPolyphoneSpider::Run()
     }
     wxString response;
     bdFile.ReadAll(&response);
-    wxString pattern("class=\"op_exactqa_item.*\">[^<]*<p><a\\s+href='([^']*)'[^>]*>(.?)</a>.*</p>");
+    wxString pattern("class=\"op_exactqa_item[^\"]*\">[^<]*<p><a\\s+href='([^']*)'[^>]*>(.?)</a>");
     wxRegEx re(pattern,wxRE_ADVANCED); // must use wxRE_ADVANCED, or \\d+ would not work correctly.
     wxString processText = response;
     while(re.Matches(processText)){
@@ -48,8 +48,9 @@ bool BaiduPolyphoneSpider::Run()
         wxString strZh = re.GetMatch(processText,2);
         std::cout<<"strUrlZh: "<<strUrlZh<<std::endl;
         std::cout<<"strZh: "<<strZh<<std::endl;
-        zhMap[strUrlZh] = strZh;
+        zhMap[strZh] = strUrlZh;
         processText = processText.Mid(start+len);
+        std::cout<<"processText: "<<processText.length()<<std::endl;
     }
     return true;
 }
