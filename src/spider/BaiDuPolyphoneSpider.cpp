@@ -41,7 +41,6 @@ bool BaiduPolyphoneSpider::Run()
     wxRegEx re(pattern,wxRE_ADVANCED); // must use wxRE_ADVANCED, or \\d+ would not work correctly.
     wxString processText = response;
     while(re.Matches(processText)){
-        std::cout<<"XXXXXXXXXXXXXXXXX"<<std::endl;
         size_t start, len;
         re.GetMatch(&start, &len, 0);
         wxString strUrlZh = re.GetMatch(processText,1); // url
