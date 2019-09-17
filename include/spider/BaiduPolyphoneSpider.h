@@ -1,14 +1,9 @@
 #ifndef BAIDUPOLYPHONESPIDER_H
 #define BAIDUPOLYPHONESPIDER_H
 #include <spider/Spider.h>
+#include "include/util/Macro.h"
 #include <map>
 #include <vector>
-
-struct Polyphone{
-    wxString strUrl;//query Url;
-    wxString strZh;//汉字词组
-    std::vector<wxString> strPinYin; //汉字 用|分割
-};
 
 class BaiduPolyphoneSpider:public Spider
 {
@@ -20,6 +15,7 @@ class BaiduPolyphoneSpider:public Spider
         bool QueryFromHtml();
         bool QueryFromApi();
         bool QueryPhases();
+        void DumpToFile();
         wxString GetApiUrl(int nPageIndex=0, int nPageSize = 64);
     protected:
         long m_totalPages;

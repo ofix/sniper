@@ -25,6 +25,7 @@
 					<Add directory="lib/pinyin" />
 					<Add directory="include/tool" />
 					<Add directory="test/" />
+					<Add directory="include/util" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
@@ -64,6 +65,7 @@
 					<Add directory="include/spider" />
 					<Add directory="include/tool" />
 					<Add directory="test/" />
+					<Add directory="include/util" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
@@ -134,6 +136,7 @@
 		<Unit filename="include/ui/TimelineCtrl.h" />
 		<Unit filename="include/ui/VolumeBarCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
+		<Unit filename="include/util/Macro.h" />
 		<Unit filename="lib/pinyin/PinYin.cpp" />
 		<Unit filename="lib/pinyin/PinYin.h" />
 		<Unit filename="lib/thread_pool/BossThread.cpp" />

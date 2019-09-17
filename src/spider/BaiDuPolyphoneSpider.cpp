@@ -132,13 +132,26 @@ bool BaiduPolyphoneSpider::QueryFromApi()
     return true;
 }
 
+void BaiduPolyphoneSpider::DumpToFile()
+{
+    OPEN_TEXT_FILE(getExecDir()+"baidu.polyphone.txt",file,line);
+    std::map<wxString,Polyphone>::const_iterator it;
+    for(it=m_dyz.begin();it!=m_dyz.end();++it)
+    {
+        wxString url = it->second.strUrl;
+        wxString name = it->first;
+        line = name+","+url;
+        file.AddLine(line);
+    }
+    CLOSE_TEXT_FILE(file);
+}
+
 bool BaiduPolyphoneSpider::QueryPhases()
 {
     std::map<wxString,Polyphone>::const_iterator it;
     for(it=m_dyz.begin();it!=m_dyz.end();++it)
     {
         wxString url = it->second.strUrl;
-        std::cout<<"### phase url: "<<url<<std::endl;
         wxString response;
         http(url,response,wxFONTENCODING_UTF8); // https is not valid
         std::cout<<response<<std::endl;
@@ -152,6 +165,8 @@ bool BaiduPolyphoneSpider::Run()
     if(!QueryFromApi()){
         return false;
     }
+    DumpToFile();
+    return true;
     if(!QueryPhases()){
         return false;
     }
