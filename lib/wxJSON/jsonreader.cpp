@@ -20,7 +20,6 @@
 #include <wx/log.h>
 
 
-
 /*! \class wxJSONReader
  \brief The JSON parser
 
@@ -1581,14 +1580,17 @@ wxJSONReader::AppendUES( wxMemoryBuffer& utf8Buff, const char* uesBuffer )
 
     // seems that the wxMBConv classes always appends a NULL byte to
     // the converted buffer
-    // FIXED! MUST remove, OR ReadString ConvString would FAILED!!!
-//    if ( len > 1 )    {
-//        len = len - 1;
-//    }
-    utf8Buff.AppendData( buffer, len );
 
-    // sould never fail
-    wxASSERT( len != wxCONV_FAILED );
+    // FIXED! MUST remove, OR ReadString ConvString would FAILED!!!
+    // if ( len > 1 )    {
+    //    len = len - 1;
+    // }
+    if(len != wxCONV_FAILED){ //生僻汉字转换失败忽略
+        utf8Buff.AppendData( buffer, len );
+    }
+
+    // sould never fail,remove failed Debug
+    //wxASSERT( len != wxCONV_FAILED );
     return 0;
 }
 
