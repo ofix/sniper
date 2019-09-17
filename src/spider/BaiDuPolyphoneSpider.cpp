@@ -134,10 +134,9 @@ bool BaiduPolyphoneSpider::QueryFromApi()
 
 void BaiduPolyphoneSpider::DumpToFile()
 {
-    OPEN_TEXT_FILE(getExecDir()+"baidu.polyphone.txt",file,line);
+    OPEN_TEXT_FILE(EXE_DIR +"baidu.polyphone.txt",file,line);
     std::map<wxString,Polyphone>::const_iterator it;
-    for(it=m_dyz.begin();it!=m_dyz.end();++it)
-    {
+    LOOP(m_dyz,it){
         wxString url = it->second.strUrl;
         wxString name = it->first;
         line = name+","+url;
