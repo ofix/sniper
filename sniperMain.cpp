@@ -98,12 +98,13 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     // create day k line control
 //     KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
 //     pKlineCtrl->Show();
+    #define DEBUG_SPIDER
+
     #ifdef DEBUG_SPIDER
         BaiduPolyphoneSpider spider;
         spider.Run();
     #endif // DEBUG_SPIDER
 
-    #define TEST_ALL
     #ifdef TEST_ALL
         Test::RunAll();
     #endif // DEBUG_MARKDOWN
