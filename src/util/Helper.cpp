@@ -218,15 +218,36 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,int nKey
         re.GetMatch(&start, &len, 0);
         if(nType == 1){ //vector
             wxString strMatch;
-            size_t i=0;
-            while(i<size){
-                result->push_back(re.GetMatch(text,i));
+            if(cnt==1){
+                result->push_back(re.GetMatch(text,1)); //只有1个子匹配
+            }else if(cnt>1){
+                std::vector<wxString> vec;
+                size_t i=1;
+                while(i<size){
+                    vec.push_back(re.GetMatch(text,i));
+                    i++;
+                }
+                result->push_back(vec);
             }
-        }else if(nType == 2){
-            REG_MATCH_MAP(re,text,cnt,result);
+        }else if(nType == 2 && cnt>=2){//map
+            wxString strKey;
+            strKey = re.GetMatch(text,nKeyIndex);
+            if(cnt == 2){
+                result->first[strKey] = re.GetMatch(text,0x03|(~nKeyIndex));
+            }else{
+                size_t i=1;
+                std::vector<wxString> vec;
+                while(i<size){
+                    if(i!==nKeyIndex){
+                        vec.push_back(re.GetMatch(text,i));
+                    }
+                    result->first[strKey] = vec;
+                    i++
+                }
+            }
         }
-
         re.GetMatch(text,1);
         text = text.Mid(start+len);
     }
+    return true;
 }
