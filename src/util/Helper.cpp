@@ -212,33 +212,21 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,int nKey
     if(nKeyIndex>=cnt){
         return false;
     }
-    wxString processText = strExpress;
-    while(reg.Matches(processText)){
+    wxString text = strExpress;
+    while(reg.Matches(text)){
         size_t start, len;
         re.GetMatch(&start, &len, 0);
-        int _cnt = cnt;
-        if(cnt==1){
-            REG_MATCH_1(re,processText) //第1个结果
-        }else if(cnt==2){
-            REG_MATCH_2(re,processText) //第2个结果
-        }else if(cnt==3){
-            REG_MATCH_3(re,processText) //第3个结果
-        }else if(cnt==4){
-            REG_MATCH_4(re,processText) //第4个结果
-        }else if(cnt==5){
-            REG_MATCH_5(re,processText) //第5个结果
-        }else if(cnt==6){
-            REG_MATCH_6(re,processText) //第6个结果
-        }else if(cnt==7){
-            REG_MATCH_7(re,processText) //第7个结果
-        }else if(cnt==8){
-            REG_MATCH_8(re,processText) //第8个结果
-        }else if(cnt==9){
-            REG_MATCH_9(re,processText) //第9个结果
-        }else if(cnt==10){
-            REG_MATCH_10(re,processText) //第10个结果
+        if(nType == 1){ //vector
+            wxString strMatch;
+            size_t i=0;
+            while(i<size){
+                result->push_back(re.GetMatch(text,i));
+            }
+        }else if(nType == 2){
+            REG_MATCH_MAP(re,text,cnt,result);
         }
-        re.GetMatch(processText,1);
-        processText = processText.Mid(start+len);
+
+        re.GetMatch(text,1);
+        text = text.Mid(start+len);
     }
 }
