@@ -26,5 +26,14 @@ std::string stringToHex(std::string str, std::string separator = " ");
 std::string wstringToHex(std::wstring str,std::string separator = " ");
 std::string uint16ToHex(uint16_t num,bool bPrefix=true);
 uint16_t StringToGbk(std::string str);
+/******************
+ *@param strRegex 匹配的表达式
+ *@param strSrc 匹配的字符串
+ *@param nType 返回的结果类型
+ *@param result 返回的结果
+ *@param nKeyIndex 将第几个匹配表达式作为返回结果
+ *@param return bool 1找到了，0未找到
+ ******************/
+bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,int nKeyIndex,void* result);
 
 #endif // COMMON_H

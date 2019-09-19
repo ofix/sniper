@@ -17,6 +17,7 @@ class BaiduPolyphoneSpider:public Spider
         bool QueryPhases();
         void DumpToFile();
         wxString GetApiUrl(int nPageIndex=0, int nPageSize = 64);
+        bool HasMorePhases(wxString strHtml,wxString& strUrl);
     protected:
         long m_totalPages;
         long m_curPage;
