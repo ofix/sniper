@@ -7,6 +7,7 @@ namespace Test
 {
     void RunAll();
     void mark_down();
+    void regex_match();
     int symmetry_nums();
     template<typename T>
     std::string numToBits(T n);

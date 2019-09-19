@@ -2,14 +2,29 @@
 #include "include/tool/MarkDown.h"
 #include "include/util/Helper.h"
 #include <iomanip>
+#include "include/util/Macro.h"
 
 void Test::RunAll()
 {
     #ifdef xx
     mark_down();
-    #else
     symmetry_nums();
+    #else
+    regex_match();
     #endif
+}
+
+void Test::regex_match(){
+    wxString pattern(wxT("<(.*?)>.*?</\\1>"));
+    wxString strText(wxT("<xxx>value</xxx><tag>xxx</tag>"));
+    std::vector<wxString> result;
+    bool found = GetRegexMatches(pattern,strText,1,0,&result);
+    if(found){
+        std::vector<wxString>::const_iterator it;
+        LOOP(result,it){
+            std::cout<<"result "<<(*it)<<std::endl;
+        }
+    }
 }
 
 void Test::mark_down()

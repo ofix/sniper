@@ -197,56 +197,58 @@ uint16_t StringToGbk(std::string str){
 }
 
 
-bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,int nKeyIndex,void* result)
+bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,size_t nKeyIndex,void* result)
 {
-    wxASSERT(nType>0);
-    wxASSERT(nKeyIndex >0);
-    wxRegEx reg(strPattern,wxRE_ADVANCED);
-    if(!reg.Compile(strPattern,wxRE_ADVANCED)){
+    wxASSERT(nType==1||nType==2);
+    if(nType ==2){
+        wxASSERT(nKeyIndex >0);
+    }
+    wxRegEx re(strPattern,wxRE_ADVANCED);
+    if(!re.Compile(strPattern,wxRE_ADVANCED)){
         return false;
     }
     size_t cnt = 0;
-    if(!(cnt=reg.GetMatchCount())){
+    if(!(cnt=re.GetMatchCount())){
         return false; //返回失败
     }
     if(nKeyIndex>=cnt){
         return false;
     }
     wxString text = strExpress;
-    while(reg.Matches(text)){
+    while(re.Matches(text)){
         size_t start, len;
         re.GetMatch(&start, &len, 0);
+        std::cout<<"start len "<<start<<" , "<<len<<std::endl;
         if(nType == 1){ //vector
             wxString strMatch;
-            if(cnt==1){
-                result->push_back(re.GetMatch(text,1)); //只有1个子匹配
-            }else if(cnt>1){
+            if(cnt==2){
+                ((std::vector<wxString>*)result)->push_back(re.GetMatch(text,1)); //只有1个子匹配
+            }else if(cnt>2){
                 std::vector<wxString> vec;
                 size_t i=1;
-                while(i<size){
+                while(i<=cnt){
                     vec.push_back(re.GetMatch(text,i));
                     i++;
                 }
-                result->push_back(vec);
+                ((std::vector<std::vector<wxString>>*)result)->push_back(vec);
             }
         }else if(nType == 2 && cnt>=2){//map
             wxString strKey;
             strKey = re.GetMatch(text,nKeyIndex);
             if(cnt == 2){
-                result->first[strKey] = re.GetMatch(text,0x03|(~nKeyIndex));
+                (*(std::map<wxString,wxString>*)result)[strKey] = re.GetMatch(text,0x03|(~nKeyIndex));
             }else{
                 size_t i=1;
                 std::vector<wxString> vec;
-                while(i<size){
-                    if(i!==nKeyIndex){
+                while(i<=cnt){
+                    if(i!=nKeyIndex){
                         vec.push_back(re.GetMatch(text,i));
                     }
-                    result->first[strKey] = vec;
-                    i++
+                    (*(std::map<wxString,std::vector<wxString>>*)result)[strKey] = vec;
+                    i++;
                 }
             }
         }
-        re.GetMatch(text,1);
         text = text.Mid(start+len);
     }
     return true;

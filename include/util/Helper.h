@@ -34,6 +34,6 @@ uint16_t StringToGbk(std::string str);
  *@param nKeyIndex 将第几个匹配表达式作为返回结果
  *@param return bool 1找到了，0未找到
  ******************/
-bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,int nKeyIndex,void* result);
+bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyIndex,void* result);
 
 #endif // COMMON_H

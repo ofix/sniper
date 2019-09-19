@@ -159,10 +159,10 @@ bool BaiduPolyphoneSpider::QueryPhases()
     return true;
 }
 //查看页面是否可以查看更多词组
-bool BaiduPolyphoneSpider::bool HasMorePhases(wxString strHtml,wxString& strUrl)
+bool BaiduPolyphoneSpider::HasMorePhases(wxString strHtml,wxString& strUrl)
 {
     //先查看是否有相关词组
-
+    return false;
 }
 
 bool BaiduPolyphoneSpider::Run()
