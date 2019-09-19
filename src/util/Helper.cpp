@@ -223,19 +223,19 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,int nKey
             REG_MATCH_2(re,processText) //第2个结果
         }else if(cnt==3){
             REG_MATCH_3(re,processText) //第3个结果
-         }else if(cnt==4){
+        }else if(cnt==4){
             REG_MATCH_4(re,processText) //第4个结果
-         }else if(cnt==5){
+        }else if(cnt==5){
             REG_MATCH_5(re,processText) //第5个结果
-         }else if(cnt==6){
+        }else if(cnt==6){
             REG_MATCH_6(re,processText) //第6个结果
-         }else if(cnt==7){
+        }else if(cnt==7){
             REG_MATCH_7(re,processText) //第7个结果
-         }else if(cnt==8){
+        }else if(cnt==8){
             REG_MATCH_8(re,processText) //第8个结果
-         }else if(cnt==9){
+        }else if(cnt==9){
             REG_MATCH_9(re,processText) //第9个结果
-         }else if(cnt==10){
+        }else if(cnt==10){
             REG_MATCH_10(re,processText) //第10个结果
         }
         re.GetMatch(processText,1);

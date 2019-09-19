@@ -25,6 +25,63 @@
 #define REG_RESULT_MAP 1
 #define REG_RESULT_VECTOR 2
 #define REG_RESULT_STRING 3
+#DEFINE REG_ASSIGN(nType,nIndex) \
+    if(nType == 1 && nIndex==1){ \
+        result->push_back(strMatch_1); \
+    }else if(nType == 1 && nIndex==2){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+    }else if(nType == 1 && nIndex ==3){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+    }else if(nType == 1 && nIndex ==4){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4; \
+    }else if(nType == 1 && nIndex ==5){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4); \
+        result->push_back(strMatch_5); \
+    }else if(nType == 1 && nIndex ==6){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4); \
+        result->push_back(strMatch_5); \
+        result->push_back(strMatch_6); \
+    }else if(nType == 1 && nIndex ==7){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4); \
+        result->push_back(strMatch_5); \
+        result->push_back(strMatch_6); \
+        result->push_back(strMatch_7); \
+    }else if(nType == 1 && nIndex ==8){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4); \
+        result->push_back(strMatch_5); \
+        result->push_back(strMatch_6); \
+        result->push_back(strMatch_7); \
+        result->push_back(strMatch_8); \
+    }else if(nType == 1 && nIndex ==9){ \
+        result->push_back(strMatch_1); \
+        result->push_back(strMatch_2); \
+        result->push_back(strMatch_3); \
+        result->push_back(strMatch_4); \
+        result->push_back(strMatch_5); \
+        result->push_back(strMatch_6); \
+        result->push_back(strMatch_7); \
+        result->push_back(strMatch_8); \
+        result->push_back(strMatch_9); \
+        result->push_back(strMatch_10); \
+    }
 #define REG_MATCH_1(re,text) \
     wxString strMatch_1; \
     strMatch_1 = re.GetMatch(text,1);
@@ -146,9 +203,6 @@
     strMatch_9 = re.GetMatch(text,9); \
     strMatch_10 = re.GetMatch(text,10); \
     (re.GetMatch(text,1);
-#define REG_MATCH_1(re,text) (re.GetMatch(text,1);
-#define REG_MATCH_1(re,text) (re.GetMatch(text,1);
-#define REG_MATCH_1(re,text) (re.GetMatch(text,1);
 
 struct Polyphone{
     wxString strUrl;//query Url;
