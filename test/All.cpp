@@ -9,9 +9,38 @@ void Test::RunAll()
     #ifdef xx
     mark_down();
     symmetry_nums();
-    #else
     regex_match();
+    #else
+    char* str = "Hello World XXX YYY ZZZ";
+    ReplaceSpace(&str,strlen(str));
+    std::cout<<str<<std::endl;
+    getchar();
     #endif
+}
+
+void Test::ReplaceSpace(char** str,int length)
+{
+    //统计空格的个数
+    int space=0;
+    for(int i=0; i<length; i++){
+        if(isspace(*((*str)+i))){
+            space++;
+        }
+    }
+
+    char* new_str =new char[(length+space*2+1)*sizeof(char)];
+    int j=0;
+    for(int i=0;i<length;i++){
+        if(isspace(*((*str)+i))){
+            *(new_str+j++) = '%';
+            *(new_str+j++) = '2';
+            *(new_str+j++) = '0';
+        }else{
+            *(new_str+j++) = *((*str)+i);
+        }
+    }
+    *(new_str+j) = '\0';
+    *str = new_str;
 }
 
 void Test::regex_match(){

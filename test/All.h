@@ -13,6 +13,7 @@ namespace Test
     std::string numToBits(T n);
     template<typename T>
     bool is_num_symmetry(T num);
+    void ReplaceSpace(char** str,int length);
 }
 
 #endif // ALL_H
