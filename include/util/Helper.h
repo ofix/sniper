@@ -10,8 +10,8 @@
 #include <wx/stdpaths.h>
 #include <wx/string.h>
 #include <wx/regex.h>
-#include "core/Global.h"
-#include "core/Map.h"
+#include "include/core/Global.h"
+#include "include/core/Map.h"
 
 
 bool saveTo(wxString path, const wxString& text);

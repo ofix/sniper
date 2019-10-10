@@ -13,6 +13,7 @@ namespace Test
     std::string numToBits(T n);
     template<typename T>
     bool is_num_symmetry(T num);
+    int CurlHttps();
     void ReplaceSpace(char** str,int length);
 }
 

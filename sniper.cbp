@@ -14,22 +14,12 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
+					<Add option="-std=c11" />
 					<Add option="-m64" />
+					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
-					<Add directory="lib" />
-					<Add directory="include" />
-					<Add directory="include/spider" />
-					<Add directory="include/core" />
-					<Add directory="include/ui" />
-					<Add directory="lib/pinyin" />
-					<Add directory="include/tool" />
-					<Add directory="test/" />
-					<Add directory="include/util" />
+					<Add directory="$(#wx)/gcc_dll_debug_x64/mswu" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswu" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="-m64" />
 					<Add library="libwxmsw31ud_richtext.a" />
@@ -46,8 +36,8 @@
 					<Add library="libwxtiffd.a" />
 					<Add library="libwxzlibd.a" />
 					<Add library="libwxregexud.a" />
-					<Add directory="$(#wx)/lib/gcc_dll_debug_x64" />
-					<Add directory="$(#wx)/lib/gcc_dll_debug_x64/mswud" />
+					<Add directory="$(#wx)/gcc_dll_debug_x64" />
+					<Add directory="$(#wx)/gcc_dll_debug_x64/mswud" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -57,21 +47,14 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-O2" />
-					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
-					<Add directory="lib" />
-					<Add directory="include" />
-					<Add directory="include/ui" />
-					<Add directory="include/spider" />
-					<Add directory="include/tool" />
-					<Add directory="test/" />
-					<Add directory="include/util" />
+					<Add option="-std=c++0x" />
+					<Add option="-m64" />
+					<Add option="-DRELEASE" />
+					<Add directory="$(#wx)/gcc_dll_release_x64" />
+					<Add directory="$(#wx)/gcc_dll_release_x64/mswu" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
-				</ResourceCompiler>
 				<Linker>
-					<Add option="-s" />
+					<Add option="-m64" />
 					<Add library="libwxmsw31u_richtext.a" />
 					<Add library="libwxmsw31u_aui.a" />
 					<Add library="libwxmsw31u_media.a" />
@@ -86,8 +69,8 @@
 					<Add library="libwxtiff.a" />
 					<Add library="libwxzlib.a" />
 					<Add library="libwxregexu.a" />
-					<Add directory="$(#wx)/lib/gcc_dll_release_x64" />
-					<Add directory="$(#wx)/lib/gcc_dll_release_x64/mswu" />
+					<Add directory="$(#wx)/gcc_dll_release_x64" />
+					<Add directory="$(#wx)/gcc_dll_release_x64/mswu" />
 				</Linker>
 			</Target>
 		</Build>
@@ -95,8 +78,6 @@
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
 			<Add option="-m64" />
-			<Add option="-Og" />
-			<Add option="-g" />
 			<Add option="-pipe" />
 			<Add option="-mthreads" />
 			<Add option="-D__GNUWIN32__" />
@@ -105,6 +86,7 @@
 			<Add option="-DwxUSE_UNICODE" />
 			<Add directory="$(#wx)/include" />
 			<Add directory="../sniper" />
+			<Add directory="include" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="$(#wx)/include" />
@@ -137,6 +119,17 @@
 		<Unit filename="include/ui/VolumeBarCtrl.h" />
 		<Unit filename="include/util/Helper.h" />
 		<Unit filename="include/util/Macro.h" />
+		<Unit filename="lib/curl/include/curl.h" />
+		<Unit filename="lib/curl/include/curlver.h" />
+		<Unit filename="lib/curl/include/easy.h" />
+		<Unit filename="lib/curl/include/mprintf.h" />
+		<Unit filename="lib/curl/include/multi.h" />
+		<Unit filename="lib/curl/include/stdcheaders.h" />
+		<Unit filename="lib/curl/include/system.h" />
+		<Unit filename="lib/curl/include/typecheck-gcc.h" />
+		<Unit filename="lib/curl/include/urlapi.h" />
+		<Unit filename="lib/curl/lib/libcurl.a" />
+		<Unit filename="lib/curl/lib/libcurl.dll.a" />
 		<Unit filename="lib/pinyin/PinYin.cpp" />
 		<Unit filename="lib/pinyin/PinYin.h" />
 		<Unit filename="lib/thread_pool/BossThread.cpp" />
@@ -199,6 +192,15 @@
 					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="0" i18n="1" name="sniperFrame" language="CPP" />
 				</resources>
 			</wxsmith>
+			<DoxyBlocks>
+				<comment_style block="4" line="2" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

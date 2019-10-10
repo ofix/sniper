@@ -1,5 +1,5 @@
-#include "include/tool/MarkDown.h"
-#include "include/tool/TextFile.h"
+#include "tool/MarkDown.h"
+#include "tool/TextFile.h"
 #include <map>
 #include <vector>
 #include <iostream>

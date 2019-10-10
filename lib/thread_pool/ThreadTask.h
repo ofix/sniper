@@ -1,7 +1,7 @@
 #ifndef ThreadTask_H
 #define ThreadTask_H
 #include <wx/buffer.h>
-#include "core/Global.h"
+#include "include/core/Global.h"
 #include <wx/thread.h>
 
 #define TASK_PRIORITY_HIGH 2

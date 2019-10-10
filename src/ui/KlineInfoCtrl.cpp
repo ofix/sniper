@@ -1,4 +1,4 @@
-#include "KlineInfoCtrl.h"
+#include "ui/KlineInfoCtrl.h"
 #include "ui/KlineCtrl.h"
 #include <wx/datetime.h>
 

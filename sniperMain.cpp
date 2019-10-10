@@ -96,19 +96,14 @@ sniperFrame::sniperFrame(wxWindow* parent,wxWindowID id)
     //*)
 
     // create day k line control
-//     KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
-//     pKlineCtrl->Show();
-
-    #define TEST_ALL
+//    KlineCtrl* pKlineCtrl = new KlineCtrl(wxT("600000"),this,wxID_ANY);
+//    pKlineCtrl->Show();
 
     #ifdef DEBUG_SPIDER
         BaiduPolyphoneSpider spider;
         spider.Run();
     #endif // DEBUG_SPIDER
-
-    #ifdef TEST_ALL
-        Test::RunAll();
-    #endif // DEBUG_MARKDOWN
+    Test::RunAll();
     // wxString 测试
 //    wxCSConv gbkConv(wxFONTENCODING_CP936);
 //    std::string str_gbk(gbkConv.cWX2MB(_T("z国"))); //gbk格式
