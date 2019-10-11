@@ -18,7 +18,7 @@ bool saveTo(wxString path, const wxString& text);
 bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet=wxFONTENCODING_CP936);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
 int fixBadJson(wxString& strJson);
-void console(wxString& strText);
+void console(wxString strText);
 wxString getExecDir();
 wxString buildUrlPara(kvMap para,bool bComma=true);
 wxVector<wxString> slice(wxString src,wxString delimiter=_T(","));
@@ -27,4 +27,6 @@ std::string wstringToHex(std::wstring str,std::string separator = " ");
 std::string uint16ToHex(uint16_t num,bool bPrefix=true);
 uint16_t StringToGbk(std::string str);
 bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyIndex,void* result);
+wxString GenerateRandomString(uint8_t width);
+unsigned int GetRandomNum(unsigned int min, unsigned int max);
 #endif // COMMON_H

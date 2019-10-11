@@ -5,6 +5,7 @@
 #include <map>
 #include "lib/wxJSON/jsonval.h"
 #include "lib/wxJSON/jsonreader.h"
+#include "tool/Https.h"
 
 BaiduPolyphoneSpider::BaiduPolyphoneSpider(wxString strUrl):Spider(strUrl)
             ,m_totalPages(0)
@@ -104,8 +105,6 @@ bool BaiduPolyphoneSpider::QueryFromApi()
         wxJSONValue  jsonArr;
         RemoveDirtyWords(response);
 
-        std::cout<<"@@@ Query Page: "<<iPage<<", total: "<<nPages<<std::endl;
-
         int numErrors = reader.Parse(response, &jsonArr);
         if(numErrors == 0){
             if(nPages == 10000){
@@ -152,9 +151,21 @@ bool BaiduPolyphoneSpider::QueryPhases()
     {
         wxString url = it->second.strUrl;
         wxString response;
-        http(url,response,wxFONTENCODING_UTF8); // https is not valid
-        std::cout<<response<<std::endl;
-        break;
+        console(url);
+        Https(url,response); // https is not valid
+        //匹配<href> 更多</href>
+        //console(response);
+        wxString pattern = wxT("<a href=\"([^\"]*)\">更多</a>");
+        std::vector<wxString> result;
+        bool found = GetRegexMatches(pattern,response,1,0,&result);
+        if(!found){//提取连接
+            continue;
+        }else{
+            wxString strUrl = result[0];
+            console(strUrl);
+            break;
+        }
+        std::cout<<"***********"<<std::endl;
     }
     return true;
 }
@@ -171,7 +182,6 @@ bool BaiduPolyphoneSpider::Run()
         return false;
     }
     DumpToFile();
-    return true;
     if(!QueryPhases()){
         return false;
     }

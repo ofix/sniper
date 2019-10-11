@@ -37,7 +37,6 @@ size_t curl_easy_write_callback(char *ptr, size_t size, size_t nmemb, void *user
  */
 CURLcode Https(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet)
 {
-    curl_global_init(CURL_GLOBAL_DEFAULT);
     CURL* curl = curl_easy_init();
     if(NULL == curl){
         return CURLE_FAILED_INIT;
@@ -75,6 +74,5 @@ CURLcode Https(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet)
     }
     curl_slist_free_all(list); /* free the list again */
     curl_easy_cleanup(curl);
-    curl_global_cleanup();
     return ret;
 }

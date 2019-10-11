@@ -81,7 +81,7 @@ int fixBadJson(wxString& strJson)
 }
 
 //output debug information to console window
-void console(wxString& strText)
+void console(wxString strText)
 {
     static int count = 1;
     wxString strCount = wxString::Format("%03d",count);
@@ -196,6 +196,40 @@ uint16_t StringToGbk(std::string str){
     return i;
 }
 
+wxString GenerateRandomString(uint8_t width)
+{
+    static std::vector<wxString> AlphaNum = {"0","a","b","R","S","T","V","W","U","9","X","c","1","3","f","g","h",
+                                        "i","j","k","4","o","p","d","e","2","q","v","5","6","w","x","y","z","A",
+                                        "B","E","D","F","C","r","s","t","u","O","I","J","K","8","Y","Z","P","Q",
+                                        "7","G","H"};
+    wxString strRandom = wxT("");
+    if(width <=6){
+        width = 8;
+    }
+    if(width >= 30){
+        width = 30;
+    }
+    uint16_t MAX_ALPHA = AlphaNum.size();
+
+    unsigned int seed = (unsigned int)time(0);
+    srand(seed);
+    while(width--){
+        unsigned int i = GetRandomNum(0,MAX_ALPHA-1); // 0 ~ MAX_ALPHA-1
+        strRandom.Append(AlphaNum.at(i));
+    }
+    return strRandom;
+}
+
+unsigned int GetRandomNum(unsigned int min, unsigned int max){
+    if(min >= max){
+        unsigned int tmp = max;
+        max = min;
+        min = tmp;
+    }
+    unsigned int  num = rand() % (max-min+1) + min;
+    return num;
+}
+
 /******************
  *@param strRegex 匹配的表达式
  *@param strSrc 匹配的字符串
@@ -215,14 +249,19 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,size_t n
         return false;
     }
     size_t cnt = 0;
-    if(!(cnt=re.GetMatchCount())){
+    if((cnt=re.GetMatchCount())<2){ // 没有子表达式
         return false; //返回失败
     }
-    if(nKeyIndex>=cnt){
+
+    if(nKeyIndex>=cnt-1){
         return false;
     }
     wxString text = strExpress;
+    wxString rand = GenerateRandomString(8);
+    saveTo(EXE_DIR+rand+".txt",text);
+    bool bFound = false;
     while(re.Matches(text)){
+        bFound = true;
         size_t start, len;
         re.GetMatch(&start, &len, 0);
         std::cout<<"start len "<<start<<" , "<<len<<std::endl;
@@ -258,5 +297,5 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,size_t n
         }
         text = text.Mid(start+len);
     }
-    return true;
+    return bFound;
 }
