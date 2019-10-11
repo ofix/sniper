@@ -17,7 +17,10 @@ void Test::RunAll()
     std::cout<<str<<std::endl;
     #else
         wxString strResponse;
-        Https(wxT("https://www.baidu.com"),strResponse);
+        CURLcode ret = Https(wxT("http://www.baidu.com/"),strResponse);
+        if(ret == CURLE_OK){
+            saveTo(EXE_DIR+"df.txt",strResponse);
+        }
     #endif
 }
 
