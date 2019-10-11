@@ -1,12 +1,12 @@
 #ifndef KLINECTRL_H
 #define KLINECTRL_H
+#include "util/Helper.h"
 #include <wx/control.h>
 #include <wx/vector.h>
 #include <wx/textfile.h>
 #include <wx/dcclient.h>
 #include <wx/dcbuffer.h>
 #include "core/Stock.h"
-#include "util/Helper.h"
 
 #define KLINE_MODE_DAY 1
 #define KLINE_MODE_WEEK 2

@@ -19,6 +19,7 @@
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
 					<Add directory="$(#wx)/gcc_dll_debug_x64/mswu" />
+					<Add directory="include/tool" />
 				</Compiler>
 				<Linker>
 					<Add option="-m64" />
@@ -36,8 +37,10 @@
 					<Add library="libwxtiffd.a" />
 					<Add library="libwxzlibd.a" />
 					<Add library="libwxregexud.a" />
+					<Add library="lib/curl/lib/libcurl.dll.a" />
 					<Add directory="$(#wx)/gcc_dll_debug_x64" />
 					<Add directory="$(#wx)/gcc_dll_debug_x64/mswud" />
+					<Add directory="lib/curl/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -52,6 +55,7 @@
 					<Add option="-DRELEASE" />
 					<Add directory="$(#wx)/gcc_dll_release_x64" />
 					<Add directory="$(#wx)/gcc_dll_release_x64/mswu" />
+					<Add directory="include/tool" />
 				</Compiler>
 				<Linker>
 					<Add option="-m64" />
@@ -110,6 +114,7 @@
 		<Unit filename="include/spider/Spider.h" />
 		<Unit filename="include/spider/StockSpider.h" />
 		<Unit filename="include/spider/StockStarSpider.h" />
+		<Unit filename="include/tool/Https.h" />
 		<Unit filename="include/tool/MarkDown.h" />
 		<Unit filename="include/tool/TextFile.h" />
 		<Unit filename="include/ui/AnalysisCtrl.h" />
@@ -171,6 +176,7 @@
 		<Unit filename="src/spider/Spider.cpp" />
 		<Unit filename="src/spider/StockSpider.cpp" />
 		<Unit filename="src/spider/StockStarSpider.cpp" />
+		<Unit filename="src/tool/Https.cpp" />
 		<Unit filename="src/tool/MarkDown.cpp" />
 		<Unit filename="src/tool/TextFile.cpp" />
 		<Unit filename="src/ui/AnalysisCtrl.cpp" />

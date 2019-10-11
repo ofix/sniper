@@ -3,8 +3,7 @@
 #include "util/Helper.h"
 #include <iomanip>
 #include "util/Macro.h"
-#include "lib/curl/include/curl.h"
-#include "lib/curl/include/easy.h"
+#include "tool/Https.h"
 
 void Test::RunAll()
 {
@@ -17,36 +16,9 @@ void Test::RunAll()
     ReplaceSpace(&str,strlen(str));
     std::cout<<str<<std::endl;
     #else
-        CurlHttps();
+        wxString strResponse;
+        Https(wxT("https://www.baidu.com"),strResponse);
     #endif
-}
-
-int Test::CurlHttps()
-{
-    CURLcode res;
-    CURL* curl = curl_easy_init();
-    if(NULL == curl)
-    {
-        return CURLE_FAILED_INIT;
-    }
-    const char* url = "https://www.baidu.com";
-    wxString strCertPath = EXE_DIR+"cacert.pem";
-    const char* pCaPath = strCertPath.c_str();
-    //...
-    if(pCaPath){
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);//openssl编译时使用curl官网或者firefox导出的第三方根证书文件
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L);
-        curl_easy_setopt(curl, CURLOPT_CAINFO, pCaPath);/*pCaPath为证书路径 */
-    }
-    curl_easy_setopt(curl, CURLOPT_URL, url);
-    //...
-    res = curl_easy_perform(curl);
-    if(res != CURLE_OK){
-        std::cout<<"curl url "<<url<<" ERROR!"<<std::endl;
-    }else{
-        std::cout<<"###### Request Https Baidu Success!"<<std::endl;
-    }
-    curl_easy_cleanup(curl);
 }
 
 void Test::ReplaceSpace(char** str,int length)

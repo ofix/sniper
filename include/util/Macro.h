@@ -1,5 +1,8 @@
 #ifndef MACRO_H
 #define MACRO_H
+
+#include <vector>
+
 // open text file
 #define OPEN_TEXT_FILE(filePath,file,line) \
     wxTextFile file(filePath); \
