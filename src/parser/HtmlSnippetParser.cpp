@@ -42,12 +42,21 @@ bool HtmlSnippetParser::Analysis()
                    &&(m_strHtml(m_pos++) =='-')
                    &&(m_strHtml(m_pos++) =='-')){
                         SkipComment();
+                }else if(state == STATE_UNKNOWN || state == STATE_NODE_END_2){
+                    word = ReadUntilChar(" ");
+                    pLastNode = pCurNode;
+                    pCurNode = new HtmlNode(word);
+                    state = STATE_NODE_BEGIN_1;
+                    word = "";
+                }else if(state == STATE_NODE_BEGIN_2){
+                    word = ReadUntilChar(" ");
+                    pLastNode = pCurNode;
+                    pCurNode = new HtmlNode(word);
+                    pCurNode->parent = pLastNode; //父级节点，相当于压栈
+                    state = STATE_NODE_BEGIN_1;
+                    word = "";
+
                 }
-                word = ReadUntilChar(" ");
-                pLastNode = pCurNode;
-                pCurNode = new HtmlNode(word);
-                state = STATE_NODE_BEGIN_1;
-                word = "";
                 break;
             },
             case '=':{
@@ -56,10 +65,12 @@ bool HtmlSnippetParser::Analysis()
                 break;
             },
             case '>':{
-
-            },
-            case '\':{
-              break;
+                if(state == STATE_NODE_BEGIN_1){
+                    state = STATE_NODE_BEGIN_2;
+                }else if(state == STATE_NODE_END_1){
+                    state = STATE_NODE_END_2;
+                }
+                break;
             },
             case '"':{
                 attr_value = ReadAttrValue();
@@ -90,20 +101,56 @@ void HtmlSnippetParser::SkipComment(){
     }
 }
 
+
+void HtmlSnippetParser::CleanUp(HtmlNode* pNode)
+{
+    while(pNode){ //深度优先删除
+       if(pNode->children){
+            for(size_t i=0; i<pNode->children_size; i++){
+                CleanUp(pNode->children[i]);
+            }
+        }
+        HtmlNode* pBrotherNode=nullptr;
+        if(pNode->right){
+            CleanUp(pNode->right);
+        }
+    }
+    //删除属性
+    pNode->attrs.clear();
+    pNode->children.clear(); //删除子元素
+    pNode = nullptr; //删除自身
+    pNode->left = nullptr;
+    pNode->right = nullptr;
+    pNode->children_size = 0;
+    pNode->brother_size = 0;
+    pNode->attr_size = 0;
+    delete pNode;
+}
+
 wxString HtmlSnippetParser::ReadAttrValue()
 {
-
+   wxString value ="";
+   for(;;){
+        if(m_strHtml(m_pos++)=='\\'){
+            m_pos++;
+        }
+        if(m_strHtml(m_pos++)=='"'){
+            break;
+        }
+        value += m_strHtml(m_pos);
+   }
+   return value;
 }
 
 void HtmlSnippetParser::SkipWhiteSpace()
 {
-    while(NextToken(m_pos++)==" ");
+    while(m_strHtml(m_pos++)==" ");
 }
 
 wxString HtmlSnippetParser::ReadUntilChar(wxUniChar ch)
 {
     wxString word="";
-    while(NextToken(m_pos++)&&m_ch!=ch){
+    while(m_strHtml(m_pos++)!=ch){
         word += m_ch;
     }
     m_pos--;
@@ -113,7 +160,7 @@ wxString HtmlSnippetParser::ReadUntilChar(wxUniChar ch)
 
 void HtmlSnippetParser::SkipWith(wxUniChar ch)
 {
-    if(NextToken(m_pos++) && m_ch !=ch){
+    if(m_strHtml(m_pos++) !=ch){
         throw new exception(ch+" required!");
     }
 }

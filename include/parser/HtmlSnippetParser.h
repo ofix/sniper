@@ -29,8 +29,10 @@ class HtmlSnippetParser
         void SkipComment();
         void SkipWhiteSpace();
         void SkipWith(wxUniChar ch);
+        void CleanUp();
     private:
         wxString m_strHtml; //HTML片段
+        HtmlNode* m_pRoot; //解析后的节点
         size_t m_size; //HTML片段长度
         size_t m_pos; //当前位置
 };
