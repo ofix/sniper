@@ -31,47 +31,75 @@ bool HtmlSnippetParser::Analysis()
     HtmlNode* pRoot = nullptr; //根节点
     HtmlNode* pCurNode = pRoot;
     HtmlNode* pLastNode = pRoot;
-    NextToken(m_pos++);
-    while(NextToken(m_pos++)){
-        switch(m_ch){
-            case "<":{
-                state = STATE_NODE_BEGIN_1;
-                word = ReadUntilEncounter(" ");
-                pCurNode = new HtmlNode(word);
-            },
-            case "=":{
 
-            },
-            case " ":{
-                if(state == STATE_NODE_BEGIN_1){
-
+    for(;;){
+        switch(m_strHtml(m_pos++)){
+            case '<':{
+                //检查是否是注释
+                if(m_strHtml(m_pos++)=='!')
+                   &&(m_strHtml(m_pos++) =='-')
+                   &&(m_strHtml(m_pos++) =='-')){
+                        SkipComment();
                 }
+                word = ReadUntilEncounter(" ");
+                pLastNode = pCurNode;
+                pCurNode = new HtmlNode(word);
+                state = STATE_NODE_BEGIN_1;
+                SkipWhiteSpace();
+                word = "";
+                break;
             },
-            case ">":{
-                EndNode();
+            case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
+            case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
+            case 'm': case 'n': case 'o': case 'p': case 'q': case 'r':
+            case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+            case 'y': case 'z': case 'A': case 'B': case 'C': case 'D':
+            case 'E': case 'F': case 'G': case 'H': case 'I': case 'J':
+            case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+            case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V':
+            case 'W': case 'X': case 'Y': case 'Z': case '-':{
+                word+= m_ch;
+                m_pos++;
+                break;
             },
-            case "\"":{
+            case '!':{
 
             },
-            case "/":{
+            case '':{
+
+            },
+            case '=':{
+
+            },
+            case ' ':{
+
+            },
+            case '>':{
+
+            },
+            case '"':{
+
+            },
+            case '/':{
 
             }
             default:
                 break;
         }
     }
+}
 
-        if(bLeftBracket){
-            NextToken(m_pos++);
-            if(m_ch !=" "){
-                nodeName.Append(m_ch);
-            }
-            if(pRoot == nullptr){
-                pRoot =
-            }
+/**********************************
+ * @todo skip comments,
+ * comment can't resid in attrs
+ **********************************/
+void HtmlSnippetParser::SkipComment(){
+    for(;;){
+        if((m_strHtml(m_pos++)=='-')
+            &&(m_strHtml(m_pos++)=='-')
+            &&(m_strHtml(m_pos++)=='>')){
+               break;
         }
-        bLeftBracket = false;
-        bInNode = true;
     }
 }
 
@@ -91,6 +119,7 @@ wxString HtmlSnippetParser::ReadUntilEncounter(wxUniChar ch)
     while(NextToken(m_pos++)&&m_ch!=ch){
         word += m_ch;
     }
+    m_pos--;
     return word;
 }
 

@@ -24,15 +24,15 @@ class HtmlSnippetParser
         bool Analysis();
 
     protected:
-        inline bool NextToken(size_it i){ if(i<m_size){ m_ch=m_strHtml(i);return true;}else{return false;}};
+        inline bool NextToken(){ if(m_pos++<m_size){ m_ch=m_strHtml(m_pos); return true;}else{return false;}};
         wxString ReadUntilEncounter(wxUniChar ch);
+        void SkipComment();
         void SkipWhiteSpace();
         void SkipWith(wxUniChar ch);
     private:
         wxString m_strHtml; //HTML片段
         size_t m_size; //HTML片段长度
         size_t m_pos; //当前位置
-        wxUniChar m_ch; //当前字符
 };
 
 #endif // CODESNIPPETPARSER_H
