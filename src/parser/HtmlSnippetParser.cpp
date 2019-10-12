@@ -1,6 +1,6 @@
 #include "HtmlSnippetParser.h"
 
-HtmlSnippetParser::HtmlSnippetParser(wxString strHtml):m_strHtml(strHtml),m_pos(0),m_ch("")
+HtmlSnippetParser::HtmlSnippetParser(wxString strHtml):m_strHtml(strHtml),m_pos(0),m_ch(""),m_lineNo(0)
 {
    m_size = strHtml.length();
 }

@@ -35,6 +35,7 @@ class HtmlSnippetParser
         HtmlNode* m_pRoot; //解析后的节点
         size_t m_size; //HTML片段长度
         size_t m_pos; //当前位置
+        size_t m_lineNo; //行号，方便调试查找错误
 };
 
 #endif // CODESNIPPETPARSER_H
