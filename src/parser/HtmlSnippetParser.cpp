@@ -104,26 +104,27 @@ void HtmlSnippetParser::SkipComment(){
 
 void HtmlSnippetParser::CleanUp(HtmlNode* pNode)
 {
-    while(pNode){ //深度优先删除
+    HtmlNode* pNext = null;
+    while(pNode != nullptr){ //深度优先删除
        if(pNode->children){
             for(size_t i=0; i<pNode->children_size; i++){
                 CleanUp(pNode->children[i]);
             }
         }
         HtmlNode* pBrotherNode=nullptr;
-        if(pNode->right){
-            CleanUp(pNode->right);
-        }
+        //删除属性
+        pNode->attrs.clear();
+        pNode->children.clear(); //删除子元素
+        pNode = nullptr; //删除自身
+        pNode->left = nullptr;
+        pNode->right = nullptr;
+        pNode->children_size = 0;
+        pNode->brother_size = 0;
+        pNode->attr_size = 0;
+        delete pNode;
+        pNode = pNode->right;
     }
-    //删除属性
-    pNode->attrs.clear();
-    pNode->children.clear(); //删除子元素
-    pNode = nullptr; //删除自身
-    pNode->left = nullptr;
-    pNode->right = nullptr;
-    pNode->children_size = 0;
-    pNode->brother_size = 0;
-    pNode->attr_size = 0;
+
     delete pNode;
 }
 
