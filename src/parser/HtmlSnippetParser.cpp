@@ -31,7 +31,9 @@ bool HtmlSnippetParser::Analysis()
     HtmlNode* pRoot = nullptr; //¸ù½Úµã
     HtmlNode* pCurNode = pRoot;
     HtmlNode* pLastNode = pRoot;
-
+    std::vector<wxString,wxString> attrs;
+    wxString attr_name="";
+    wxString attr_value="";
     for(;;){
         switch(m_strHtml(m_pos++)){
             case '<':{
@@ -41,49 +43,34 @@ bool HtmlSnippetParser::Analysis()
                    &&(m_strHtml(m_pos++) =='-')){
                         SkipComment();
                 }
-                word = ReadUntilEncounter(" ");
+                word = ReadUntilChar(" ");
                 pLastNode = pCurNode;
                 pCurNode = new HtmlNode(word);
                 state = STATE_NODE_BEGIN_1;
-                SkipWhiteSpace();
                 word = "";
                 break;
             },
-            case 'a': case 'b': case 'c': case 'd': case 'e': case 'f':
-            case 'g': case 'h': case 'i': case 'j': case 'k': case 'l':
-            case 'm': case 'n': case 'o': case 'p': case 'q': case 'r':
-            case 's': case 't': case 'u': case 'v': case 'w': case 'x':
-            case 'y': case 'z': case 'A': case 'B': case 'C': case 'D':
-            case 'E': case 'F': case 'G': case 'H': case 'I': case 'J':
-            case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
-            case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V':
-            case 'W': case 'X': case 'Y': case 'Z': case '-':{
-                word+= m_ch;
-                m_pos++;
-                break;
-            },
-            case '!':{
-
-            },
-            case '':{
-
-            },
             case '=':{
-
-            },
-            case ' ':{
-
+                attr_name = word;
+                SkipWhiteSpace();
+                break;
             },
             case '>':{
 
             },
+            case '\':{
+              break;
+            },
             case '"':{
-
+                attr_value = ReadAttrValue();
+                attrs.push_back(attr_name,attr_value);
+                break;
             },
             case '/':{
 
             }
             default:
+                word += m_strHtml(m_pos++);
                 break;
         }
     }
@@ -91,7 +78,7 @@ bool HtmlSnippetParser::Analysis()
 
 /**********************************
  * @todo skip comments,
- * comment can't resid in attrs
+ * comment can't reside in node's attrs
  **********************************/
 void HtmlSnippetParser::SkipComment(){
     for(;;){
@@ -103,7 +90,7 @@ void HtmlSnippetParser::SkipComment(){
     }
 }
 
-void HtmlSnippetParser::BeginNode()
+wxString HtmlSnippetParser::ReadAttrValue()
 {
 
 }
@@ -113,7 +100,7 @@ void HtmlSnippetParser::SkipWhiteSpace()
     while(NextToken(m_pos++)==" ");
 }
 
-wxString HtmlSnippetParser::ReadUntilEncounter(wxUniChar ch)
+wxString HtmlSnippetParser::ReadUntilChar(wxUniChar ch)
 {
     wxString word="";
     while(NextToken(m_pos++)&&m_ch!=ch){

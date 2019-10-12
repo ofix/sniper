@@ -25,7 +25,7 @@ class HtmlSnippetParser
 
     protected:
         inline bool NextToken(){ if(m_pos++<m_size){ m_ch=m_strHtml(m_pos); return true;}else{return false;}};
-        wxString ReadUntilEncounter(wxUniChar ch);
+        wxString ReadUntilChar(wxUniChar ch);
         void SkipComment();
         void SkipWhiteSpace();
         void SkipWith(wxUniChar ch);
