@@ -5,7 +5,7 @@
 		<Option title="sniper" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="lib\;doc\;include\;" />
+		<Option virtualFolders="lib/;doc/;include/" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/sniper" prefix_auto="1" extension_auto="1" />
@@ -18,30 +18,44 @@
 					<Add option="-m64" />
 					<Add option="-g" />
 					<Add option="-DDEBUG" />
-					<Add directory="$(#wx)/gcc_dll_debug_x64/mswu" />
 					<Add directory="include/tool" />
 					<Add directory="include/parser" />
+					<Add directory="lib" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswud" />
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
 				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
+				</ResourceCompiler>
 				<Linker>
 					<Add option="-m64" />
-					<Add library="libwxmsw31ud_richtext.a" />
-					<Add library="libwxmsw31ud_aui.a" />
-					<Add library="libwxmsw31ud_media.a" />
-					<Add library="libwxbase31ud_net.a" />
-					<Add library="libwxbase31ud_xml.a" />
-					<Add library="libwxmsw31ud_adv.a" />
-					<Add library="libwxmsw31ud_html.a" />
-					<Add library="libwxmsw31ud_core.a" />
-					<Add library="libwxbase31ud.a" />
-					<Add library="libwxpngd.a" />
-					<Add library="libwxjpegd.a" />
-					<Add library="libwxtiffd.a" />
-					<Add library="libwxzlibd.a" />
-					<Add library="libwxregexud.a" />
 					<Add library="lib/curl/lib/libcurl.dll.a" />
-					<Add directory="$(#wx)/gcc_dll_debug_x64" />
-					<Add directory="$(#wx)/gcc_dll_debug_x64/mswud" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxscintilla.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_stc.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud_net.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud_xml.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxexpatd.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxjpegd.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxscintillad.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_adv.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_aui.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_core.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_gl.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_html.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_media.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_propgrid.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_ribbon.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_richtext.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_webview.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxpngd.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxregexud.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxtiffd.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxzlibd.a" />
 					<Add directory="lib/curl/lib" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswud" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll" />
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -51,32 +65,44 @@
 				<Option compiler="gcc" />
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-std=c++0x" />
 					<Add option="-m64" />
+					<Add option="-std=c++0x" />
 					<Add option="-DRELEASE" />
-					<Add directory="$(#wx)/gcc_dll_release_x64" />
-					<Add directory="$(#wx)/gcc_dll_release_x64/mswu" />
 					<Add directory="include/tool" />
 					<Add directory="include/parser" />
+					<Add directory="lib" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswu" />
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
 				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
+				</ResourceCompiler>
 				<Linker>
 					<Add option="-m64" />
-					<Add library="libwxmsw31u_richtext.a" />
-					<Add library="libwxmsw31u_aui.a" />
-					<Add library="libwxmsw31u_media.a" />
-					<Add library="libwxbase31u_net.a" />
-					<Add library="libwxbase31u_xml.a" />
-					<Add library="libwxmsw31u_adv.a" />
-					<Add library="libwxmsw31u_html.a" />
-					<Add library="libwxmsw31u_core.a" />
-					<Add library="libwxbase31u.a" />
-					<Add library="libwxpng.a" />
-					<Add library="libwxjpeg.a" />
-					<Add library="libwxtiff.a" />
-					<Add library="libwxzlib.a" />
-					<Add library="libwxregexu.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_richtext.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxscintilla.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_stc.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u_net.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u_xml.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxexpat.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxjpeg.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_adv.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_core.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_html.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_media.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_propgrid.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_ribbon.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_webview.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_xrc.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxpng.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxregexu.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxtiff.a" />
+					<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxzlib.a" />
 					<Add directory="$(#wx)/gcc_dll_release_x64" />
-					<Add directory="$(#wx)/gcc_dll_release_x64/mswu" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswu" />
+					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll" />
+					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
 				</Linker>
 			</Target>
 		</Build>
@@ -90,9 +116,10 @@
 			<Add option="-D__WXMSW__" />
 			<Add option="-DWXUSINGDLL" />
 			<Add option="-DwxUSE_UNICODE" />
-			<Add directory="$(#wx)/include" />
 			<Add directory="../sniper" />
 			<Add directory="include" />
+			<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswud" />
+			<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="$(#wx)/include" />
@@ -100,6 +127,46 @@
 		<Linker>
 			<Add option="-m64" />
 			<Add option="-mthreads" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_richtext.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxscintilla.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_stc.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u_net.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31u_xml.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud_net.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxbase31ud_xml.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxexpat.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxexpatd.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxjpeg.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxjpegd.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_adv.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_core.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_html.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_media.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_propgrid.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_ribbon.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxscintillad.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_webview.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31u_xrc.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_adv.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_aui.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_core.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_gl.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_html.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_media.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_propgrid.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_ribbon.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_richtext.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxmsw31ud_webview.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxpng.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxpngd.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxregexu.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxregexud.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxtiff.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxtiffd.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxzlib.a" />
+			<Add library="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/libwxzlibd.a" />
 		</Linker>
 		<Unit filename="include/core/Expma.h" />
 		<Unit filename="include/core/FileManager.h" />
@@ -141,6 +208,8 @@
 		<Unit filename="lib/curl/lib/libcurl.dll.a" />
 		<Unit filename="lib/pinyin/PinYin.cpp" />
 		<Unit filename="lib/pinyin/PinYin.h" />
+		<Unit filename="lib/printer/HtmlPrinter.cpp" />
+		<Unit filename="lib/printer/HtmlPrinter.h" />
 		<Unit filename="lib/thread_pool/BossThread.cpp" />
 		<Unit filename="lib/thread_pool/BossThread.h" />
 		<Unit filename="lib/thread_pool/ThreadEvent.h" />
@@ -195,15 +264,6 @@
 		<Unit filename="test/All.h" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
-			<wxsmith version="1">
-				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
-				<resources>
-					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="0" i18n="1" name="sniperFrame" language="CPP" />
-				</resources>
-			</wxsmith>
 			<DoxyBlocks>
 				<comment_style block="4" line="2" />
 				<doxyfile_project />
@@ -213,6 +273,12 @@
 				<doxyfile_dot />
 				<general />
 			</DoxyBlocks>
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
+				<resources>
+					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="0" i18n="1" name="sniperFrame" language="CPP" />
+				</resources>
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
