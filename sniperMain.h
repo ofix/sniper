@@ -12,8 +12,9 @@
 
 //(*Headers(sniperFrame)
 #include <wx/frame.h>
-#include <wx/menu.h>
-#include <wx/statusbr.h>
+class wxMenu;
+class wxMenuBar;
+class wxStatusBar;
 //*)
 
 class sniperFrame: public wxFrame
@@ -28,15 +29,19 @@ private:
     //(*Handlers(sniperFrame)
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnMenuItemSyncChinaStockList(wxCommandEvent& event);
     //*)
 
     //(*Identifiers(sniperFrame)
     static const long ID_MENUITEM1;
     static const long idMenuAbout;
+    static const long ID_SYNC_STOCK_LIST_MENUITEM;
     static const long ID_STATUSBAR1;
     //*)
 
     //(*Declarations(sniperFrame)
+    wxMenu* Menu3;
+    wxMenuItem* MenuItemSyncChinaStockList;
     wxStatusBar* StatusBar1;
     //*)
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxFrame" name="sniperFrame">
+		<size>910,541</size>
 		<parent_arg>0</parent_arg>
 		<id_arg>0</id_arg>
 		<object class="wxMenuBar" variable="MenuBar1" member="no">
@@ -20,6 +21,15 @@
 					<accel>F1</accel>
 					<help>Show info about this application</help>
 					<handler function="OnAbout" entry="EVT_MENU" />
+				</object>
+			</object>
+			<object class="wxMenu" variable="Menu3" member="yes">
+				<label>数据同步</label>
+				<object class="wxMenuItem" name="ID_SYNC_STOCK_LIST_MENUITEM" variable="MenuItemSyncChinaStockList" member="yes">
+					<label>沪深股票列表</label>
+					<accel>F2</accel>
+					<help>同步沪深股票列表</help>
+					<handler function="OnMenuItemSyncChinaStockList" entry="EVT_MENU" />
 				</object>
 			</object>
 		</object>
