@@ -276,7 +276,7 @@
 			<wxsmith version="1">
 				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
 				<resources>
-					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="0" i18n="1" name="sniperFrame" language="CPP" />
+					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="1" i18n="0" name="sniperFrame" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>
