@@ -1,6 +1,8 @@
 #ifndef HTMLNODE_H
 #define HTMLNODE_H
 #include <map>
+#include <wx/string.h>
+#include <vector>
 
 class HtmlNode
 {

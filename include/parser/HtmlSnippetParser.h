@@ -24,7 +24,7 @@ class HtmlSnippetParser
         bool Analysis();
 
     protected:
-        inline bool NextToken(){ if(m_pos++<m_size){ m_ch=m_strHtml(m_pos); return true;}else{return false;}};
+        inline bool NextToken(){ if(m_pos++<m_size){ m_ch=m_strHtml.Mid(m_pos,1); return true;}else{return false;}};
         wxString ReadUntilChar(wxUniChar ch);
         void SkipComment();
         void SkipWhiteSpace();
@@ -36,6 +36,7 @@ class HtmlSnippetParser
         size_t m_size; //HTML片段长度
         size_t m_pos; //当前位置
         size_t m_lineNo; //行号，方便调试查找错误
+        wxString m_ch;
 };
 
 #endif // CODESNIPPETPARSER_H

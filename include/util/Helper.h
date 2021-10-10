@@ -12,6 +12,7 @@
 #include <wx/regex.h>
 #include "include/core/Global.h"
 #include "include/core/Map.h"
+#include <map>
 
 
 bool saveTo(wxString path, const wxString& text);
@@ -26,6 +27,7 @@ std::string stringToHex(std::string str, std::string separator = " ");
 std::string wstringToHex(std::wstring str,std::string separator = " ");
 std::string uint16ToHex(uint16_t num,bool bPrefix=true);
 uint16_t StringToGbk(std::string str);
+bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyIndex,std::map<wxString,wxString> result);
 bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyIndex,void* result);
 wxString GenerateRandomString(uint8_t width);
 unsigned int GetRandomNum(unsigned int min, unsigned int max);
