@@ -3467,7 +3467,7 @@ wxJSONValue::AsUInt64() const
     wxJSON_ASSERT( data );
     wxUint64 ui64 = data->m_value.m_valUInt64;
 
-    wxJSON_ASSERT( IsUInt64());  // exapnds only in debug builds
+    // wxJSON_ASSERT( IsUInt64());  // exapnds only in debug builds
     return ui64;
 }
 
