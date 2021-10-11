@@ -8,13 +8,13 @@
 // http request
 bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet)
 {
-    try{
+    try {
         wxURL _url(strUrl);
         wxCSConv conv(enumCharSet);
         wxStringOutputStream out_stream(&strResponse,conv);
         _url.GetInputStream()->Read(out_stream);
         return true;
-    }catch(...){
+    } catch(...) {
         return false;
     }
 }
@@ -24,15 +24,16 @@ bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet)
  *@notice 注意参数 const 要和 声明的一致，遗漏了会报错 undefined referenced to xxx
  *@author code lighter
  */
-bool saveTo(wxString strPath, const wxString& strText){
-  wxFile file;
-  bool bRet = false;
-  if(file.Create(strPath,true)){
-     bRet = file.Write(strText);
-     file.Flush();
-     file.Close();
-  }
-  return bRet;
+bool saveTo(wxString strPath, const wxString& strText)
+{
+    wxFile file;
+    bool bRet = false;
+    if(file.Create(strPath,true)) {
+        bRet = file.Write(strText);
+        file.Flush();
+        file.Close();
+    }
+    return bRet;
 }
 
 
@@ -70,12 +71,12 @@ wxString getExecDir()
 // fix bad json without "" in keys
 int fixBadJson(wxString& strJson)
 {
-    try{
-     wxRegEx reg(_T("([a-zA-Z]\\w*):"),wxRE_ADVANCED);
-     int nReplace =  reg.ReplaceAll(&strJson,"\"\\1\":");
-     return nReplace;
-    }catch(std::exception& e){
-        std::wcout<<e.what()<<std::endl;
+    try {
+        wxRegEx reg(_T("([a-zA-Z]\\w*):"),wxRE_ADVANCED);
+        int nReplace =  reg.ReplaceAll(&strJson,"\"\\1\":");
+        return nReplace;
+    } catch(std::exception& e) {
+        std::cout<<e.what()<<std::endl;
         return 0;
     }
 }
@@ -93,13 +94,14 @@ void console(wxString strText)
 
 
 //return URL parameter in wxString
-wxString buildUrlPara(kvMap para,bool bComma){
+wxString buildUrlPara(kvMap para,bool bComma)
+{
     wxString s= wxT("");
-    if(bComma){
+    if(bComma) {
         s.Append("?");
     }
     kvMap::iterator it;
-    for(it=para.begin();it!=para.end();++it){
+    for(it=para.begin(); it!=para.end(); ++it) {
         s.Append(it->first);
         s.Append("=");
         s.Append(it->second);
@@ -117,14 +119,14 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
     size_t nPos, nPrevPos;
     nPos = nPrevPos = 0;
     bool quotation = 0;
-    for(it=src.begin(); it!=src.end(); ++it,nPos++){ //引号内的字符串不分割
-        if(*it == '"'){
+    for(it=src.begin(); it!=src.end(); ++it,nPos++) { //引号内的字符串不分割
+        if(*it == '"') {
             quotation = !quotation;
         }
-        if(quotation==0){
-            if(*it != delimiter){
-               continue;
-            }else{
+        if(quotation==0) {
+            if(*it != delimiter) {
+                continue;
+            } else {
                 vec.push_back(src.SubString(nPrevPos,nPos-1));
                 nPrevPos = nPos+1;
             }
@@ -143,15 +145,14 @@ wxVector<wxString> slice(wxString src,wxString delimiter)
  */
 std::string stringToHex(std::string str, std::string separator)
 {
-	const std::string hex = "0123456789ABCDEF";
-	std::stringstream ss;
-	for (std::string::size_type i = 0; i<str.size(); ++i)
-	{
-		ss << hex[(unsigned char)str[i] >> 4]
-		   << hex[(unsigned char)str[i] & 0x0f]
-		   << separator;
-	}
-	return ss.str();
+    const std::string hex = "0123456789ABCDEF";
+    std::stringstream ss;
+    for (std::string::size_type i = 0; i<str.size(); ++i) {
+        ss << hex[(unsigned char)str[i] >> 4]
+           << hex[(unsigned char)str[i] & 0x0f]
+           << separator;
+    }
+    return ss.str();
 }
 
 /**
@@ -162,18 +163,17 @@ std::string stringToHex(std::string str, std::string separator)
  */
 std::string wstringToHex(std::wstring str, std::string separator)
 {
-	const std::string hex = "0123456789ABCDEF";
-	std::stringstream ss;
-	for (std::wstring::size_type i = 0; i < str.size(); ++i)
-	{
+    const std::string hex = "0123456789ABCDEF";
+    std::stringstream ss;
+    for (std::wstring::size_type i = 0; i < str.size(); ++i) {
         ss << hex[(uint16_t)str[i] >> 12 & 0x0f]
            << hex[(uint16_t)str[i] >> 8 & 0x0f]
            << separator
-		   << hex[(uint16_t)str[i] >> 4 & 0x0f]
-	       << hex[(uint16_t)str[i] & 0x0f]
-	       << separator;
-	}
-	return ss.str();
+           << hex[(uint16_t)str[i] >> 4 & 0x0f]
+           << hex[(uint16_t)str[i] & 0x0f]
+           << separator;
+    }
+    return ss.str();
 }
 
 //十六进制
@@ -185,13 +185,14 @@ std::string uint16ToHex(uint16_t num,bool bPrefix)
     s += hex[num>>8&0x0f];
     s += hex[num>>4&0x0f];
     s += hex[num&0x0f];
-    if(bPrefix){
+    if(bPrefix) {
         s = "0x" +s;
     }
     return s;
 }
 
-uint16_t StringToGbk(std::string str){
+uint16_t StringToGbk(std::string str)
+{
     uint16_t i= (str[0]<<8&0xFF00)|(str[1]&0x00FF);
     return i;
 }
@@ -199,29 +200,31 @@ uint16_t StringToGbk(std::string str){
 wxString GenerateRandomString(uint8_t width)
 {
     static std::vector<wxString> AlphaNum = {"0","a","b","R","S","T","V","W","U","9","X","c","1","3","f","g","h",
-                                        "i","j","k","4","o","p","d","e","2","q","v","5","6","w","x","y","z","A",
-                                        "B","E","D","F","C","r","s","t","u","O","I","J","K","8","Y","Z","P","Q",
-                                        "7","G","H"};
+                                             "i","j","k","4","o","p","d","e","2","q","v","5","6","w","x","y","z","A",
+                                             "B","E","D","F","C","r","s","t","u","O","I","J","K","8","Y","Z","P","Q",
+                                             "7","G","H"
+                                            };
     wxString strRandom = wxT("");
-    if(width <=6){
+    if(width <=6) {
         width = 8;
     }
-    if(width >= 30){
+    if(width >= 30) {
         width = 30;
     }
     uint16_t MAX_ALPHA = AlphaNum.size();
 
     unsigned int seed = (unsigned int)time(0);
     srand(seed);
-    while(width--){
+    while(width--) {
         unsigned int i = GetRandomNum(0,MAX_ALPHA-1); // 0 ~ MAX_ALPHA-1
         strRandom.Append(AlphaNum.at(i));
     }
     return strRandom;
 }
 
-unsigned int GetRandomNum(unsigned int min, unsigned int max){
-    if(min >= max){
+unsigned int GetRandomNum(unsigned int min, unsigned int max)
+{
+    if(min >= max) {
         unsigned int tmp = max;
         max = min;
         min = tmp;
@@ -298,7 +301,7 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,size_t n
 //        text = text.Mid(start+len);
 //    }
 //    return bFound;
-return false;
+    return false;
 }
 
 /******************
@@ -369,5 +372,13 @@ bool GetRegexMatches(wxString strPattern,wxString& strExpress,int nType,size_t n
 //        text = text.Mid(start+len);
 //    }
 //    return bFound;
-return false;
+    return false;
+}
+
+// Get Current Timestamp in Milliseconds
+uint64_t CurrentTimestamp()
+{
+    using namespace std::chrono;
+    return static_cast<uint64_t>(duration_cast<milliseconds>(
+                                     system_clock::now().time_since_epoch()).count());
 }

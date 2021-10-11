@@ -13,6 +13,8 @@
 #include "include/core/Global.h"
 #include "include/core/Map.h"
 #include <map>
+#include <chrono>
+#include <sstream>
 
 
 bool saveTo(wxString path, const wxString& text);
@@ -31,4 +33,5 @@ bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyInd
 bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyIndex,void* result);
 wxString GenerateRandomString(uint8_t width);
 unsigned int GetRandomNum(unsigned int min, unsigned int max);
+uint64_t CurrentTimestamp();
 #endif // COMMON_H
