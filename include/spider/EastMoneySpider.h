@@ -2,6 +2,9 @@
 #define EASTMONEYSPIDER_H
 
 #include "StockSpider.h"
+#include "lib/wxJSON/jsonval.h"
+#include "lib/wxJSON/jsonreader.h"
+#include "core/Stock.h"
 
 /************************************************************
  *@class EastMoneySpider
@@ -16,7 +19,7 @@ class EastMoneySpider : public StockSpider
         virtual bool Run();
 
     protected:
-        wxString m_urlData;
+        wxString m_urlEastMoney;
 };
 
 #endif // EASTMONEYSPIDER_H

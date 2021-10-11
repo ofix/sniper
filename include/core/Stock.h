@@ -16,6 +16,28 @@ struct ShareBrief
     short market;  //stock original market, 1 - SHANG HAI,2 -SHEN ZHEN,3 - CHUAN YE BAN
 };
 
+struct ShareDetail{
+    wxString code; //stock code
+    wxString name; //stock name
+    double price_now;//最新价
+    double change_amount; //涨跌额
+    double change_rate; //涨跌幅度
+    uint64_t volume; //成交量
+    uint64_t amount; //成交额
+    double amplitude; //振幅
+    double price_max; //最高价
+    double price_min; //最低价
+    double price_open; //开盘价
+    double price_close; //收盘价
+    double qrr;// 量比 quantity relative ratio
+    double pe;//市盈率
+    double pb;//市净率
+    double turnover_rate; //换手率
+    uint64_t total_capital; //总市值
+    uint64_t trade_capital; //流通股本
+
+};
+
 // for k line drawing
 struct KlineRange{
     int begin; // beginning position of K lines

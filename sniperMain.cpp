@@ -17,6 +17,7 @@
 #include <wx/textfile.h>
 #include <lib/pinyin/PinYin.h>
 #include <spider/IfengSpider.h>
+#include <spider/EastMoneySpider.h>
 #include <spider/BaiduPolyphoneSpider.h>
 #include <test/All.h>
 
@@ -27,8 +28,7 @@
 //*)
 
 //helper functions
-enum wxbuildinfoformat
-{
+enum wxbuildinfoformat {
     short_f, long_f
 };
 
@@ -36,8 +36,7 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 {
     wxString wxbuild(wxVERSION_STRING);
 
-    if (format == long_f )
-    {
+    if (format == long_f ) {
 #if defined(__WXMSW__)
         wxbuild << _T("-Windows");
 #elif defined(__UNIX__)
@@ -172,13 +171,17 @@ void sniperFrame::OnAbout(wxCommandEvent& event)
 // save file name: shares.csv
 void sniperFrame::OnMenuItemSyncChinaStockList(wxCommandEvent& event)
 {
+    EastMoneySpider spiderEastMoney;
+    spiderEastMoney.Run();
+    return;
+    //////////////////////////////////////////
     MenuItemSyncChinaStockList->Enable(false);
     IfengSpider spider;
     spider.Run();
     wxVector<ShareBrief> data = spider.GetAllShares();
     wxString path = getExecDir()+wxT("shares.csv");
     wxTextFile shareFile(path);
-    if(!shareFile.Exists()){
+    if(!shareFile.Exists()) {
         shareFile.Create();
     }
     shareFile.Open();
@@ -186,7 +189,7 @@ void sniperFrame::OnMenuItemSyncChinaStockList(wxCommandEvent& event)
     wxVector<ShareBrief>::const_iterator it;
     wxString line = wxT("");
     PinYin py;
-    for(it = data.begin(); it!=data.end(); ++it){
+    for(it = data.begin(); it!=data.end(); ++it) {
         line = it->code+wxT(",");
         line += it->name+wxT(",");
         line += py.FirstLetter(it->name);
