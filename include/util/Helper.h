@@ -16,7 +16,8 @@
 #include <chrono>
 #include <sstream>
 
-
+#define RMB_UINT_YI   100000000
+#define RMB_UINT_WAN  10000
 bool saveTo(wxString path, const wxString& text);
 bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet=wxFONTENCODING_CP936);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);
@@ -34,4 +35,6 @@ bool GetRegexMatches(wxString strRegex,wxString& strSrc,int nType,size_t nKeyInd
 wxString GenerateRandomString(uint8_t width);
 unsigned int GetRandomNum(unsigned int min, unsigned int max);
 uint64_t CurrentTimestamp();
+wxString FormatDataWithUint(uint64_t data);
+wxString FormatDataWithPercent(double data);
 #endif // COMMON_H

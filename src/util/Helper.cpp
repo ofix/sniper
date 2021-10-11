@@ -382,3 +382,30 @@ uint64_t CurrentTimestamp()
     return static_cast<uint64_t>(duration_cast<milliseconds>(
                                      system_clock::now().time_since_epoch()).count());
 }
+
+// Format data with RMB Uint(亿,万)
+wxString FormatDataWithUint(uint64_t data)
+{
+    if(data >= RMB_UINT_YI) {
+        double _data = static_cast<double>(data/RMB_UINT_YI);
+        wxString str_data = wxString::Format("%.2f",_data);
+        wxString res = str_data + _T("亿");
+        return res;
+    } else if(data >= RMB_UINT_WAN) {
+        double _data = static_cast<double>(data/RMB_UINT_WAN);
+        wxString str_data = wxString::Format("%.2f",_data);
+        wxString res = str_data + _T("万");
+        return res;
+    } else {
+        wxString str_data = wxString::Format("%d",data);
+        return str_data;
+    }
+}
+
+wxString FormatDataWithPercent(double data)
+{
+    double _data = static_cast<double>(data/100);
+    wxString str_data = wxString::Format("%.2f",_data);
+    wxString res = str_data + _T("%");
+    return res;
+}
