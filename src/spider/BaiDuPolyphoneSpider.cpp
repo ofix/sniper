@@ -8,9 +8,9 @@
 #include "tool/Https.h"
 
 BaiduPolyphoneSpider::BaiduPolyphoneSpider(wxString strUrl):Spider(strUrl)
-            ,m_totalPages(0)
-            ,m_curPage(0)
-            ,m_totalRecords(0)
+    ,m_totalPages(0)
+    ,m_curPage(0)
+    ,m_totalRecords(0)
 {
     //ctor
 }
@@ -22,11 +22,11 @@ BaiduPolyphoneSpider::~BaiduPolyphoneSpider()
 
 int BaiduPolyphoneSpider::RemoveDirtyWords(wxString& strResponse)
 {
-     try{
-         wxRegEx reg(_T("(jQuery\\d+_\\d+\\()([^)]*)\\)"),wxRE_ADVANCED);
-         int nReplace =  reg.ReplaceAll(&strResponse,"\\2");
-         return nReplace;
-    }catch(std::exception& e){
+    try {
+        wxRegEx reg(_T("(jQuery\\d+_\\d+\\()([^)]*)\\)"),wxRE_ADVANCED);
+        int nReplace =  reg.ReplaceAll(&strResponse,"\\2");
+        return nReplace;
+    } catch(std::exception& e) {
         std::cout<<e.what()<<std::endl;
         return 0;
     }
@@ -37,7 +37,7 @@ bool BaiduPolyphoneSpider::QueryFromHtml()
     std::map<wxString,wxString> zhMap;
     // 正则匹配
     wxFile bdFile;
-    if(!bdFile.Open(getExecDir()+"baidu.html")){
+    if(!bdFile.Open(getExecDir()+"baidu.html")) {
         return false;
     }
     wxString response;
@@ -46,20 +46,20 @@ bool BaiduPolyphoneSpider::QueryFromHtml()
     wxString pattern("class=\"op_exactqa_item[^\"]*\">[^<]*<p><a\\s+href='([^']*)'[^>]*>(.?)</a>");
     wxRegEx re(pattern,wxRE_ADVANCED); // must use wxRE_ADVANCED, or \\d+ would not work correctly.
     wxString processText = response;
-    while(re.Matches(processText)){
+    while(re.Matches(processText)) {
         size_t start, len;
         re.GetMatch(&start, &len, 0);
         wxString strUrlZh = re.GetMatch(processText,1); // url
         wxString strZh = re.GetMatch(processText,2);
-        #ifdef DEBUG
-            std::cout<<"strUrlZh: "<<strUrlZh<<std::endl;
-            std::cout<<"strZh: "<<strZh<<std::endl;
-        #endif // DEBUG
+#ifdef DEBUG
+        std::cout<<"strUrlZh: "<<strUrlZh<<std::endl;
+        std::cout<<"strZh: "<<strZh<<std::endl;
+#endif // DEBUG
         zhMap[strZh] = strUrlZh;
         processText = processText.Mid(start+len);
-        #ifdef DEBUG
-            std::cout<<"processText: "<<processText.length()<<std::endl;
-        #endif
+#ifdef DEBUG
+        std::cout<<"processText: "<<processText.length()<<std::endl;
+#endif
     }
     return false;
 }
@@ -96,7 +96,7 @@ bool BaiduPolyphoneSpider::QueryFromApi()
 {
     long nPages = 10000; // a value would impossible occurs in response
     long iPage = 0;
-    do{
+    do {
         wxString response;
         wxString strUrl = GetApiUrl(iPage,64);
         std::cout<<"@@ url: "<<strUrl<<std::endl;
@@ -106,28 +106,28 @@ bool BaiduPolyphoneSpider::QueryFromApi()
         RemoveDirtyWords(response);
 
         int numErrors = reader.Parse(response, &jsonArr);
-        if(numErrors == 0){
-            if(nPages == 10000){
+        if(numErrors == 0) {
+            if(nPages == 10000) {
                 wxString num = jsonArr["data"][0]["listNum"].AsString();
                 long totalRecords;
                 num.ToLong(&totalRecords);
                 nPages = totalRecords/64+((totalRecords%64==0)?0:1);
-                #ifdef DEBUG
-                    std::cout<<"num: "<<nPages<<std::endl;
-                #endif
+#ifdef DEBUG
+                std::cout<<"num: "<<nPages<<std::endl;
+#endif
             }
             wxJSONValue data = jsonArr["data"][0]["result"];
-            for(int i=0; i<data.Size();i++){
+            for(int i=0; i<data.Size(); i++) {
                 Polyphone ph;
                 ph.strUrl = data[i]["jumplink"].AsString();
                 wxString name = data[i]["ename"].AsString();
-                if(name.length() == 1){
+                if(name.length() == 1) {
                     m_dyz[name] = ph;
                 }
             }
             iPage++;
         }
-    }while(iPage<=nPages-1);
+    } while(iPage<=nPages-1);
     return true;
 }
 
@@ -135,7 +135,7 @@ void BaiduPolyphoneSpider::DumpToFile()
 {
     OPEN_TEXT_FILE(EXE_DIR +"baidu.polyphone.txt",file,line);
     std::map<wxString,Polyphone>::const_iterator it;
-    LOOP(m_dyz,it){
+    LOOP(m_dyz,it) {
         wxString url = it->second.strUrl;
         wxString name = it->first;
         line = name+","+url;
@@ -147,8 +147,7 @@ void BaiduPolyphoneSpider::DumpToFile()
 bool BaiduPolyphoneSpider::QueryPhases()
 {
     std::map<wxString,Polyphone>::const_iterator it;
-    for(it=m_dyz.begin();it!=m_dyz.end();++it)
-    {
+    for(it=m_dyz.begin(); it!=m_dyz.end(); ++it) {
         wxString url = it->second.strUrl;
         wxString response;
         console(url);
@@ -158,9 +157,9 @@ bool BaiduPolyphoneSpider::QueryPhases()
         wxString pattern = wxT("<a href=\"([^\"]*)\">更多</a>");
         std::vector<wxString> result;
         bool found = GetRegexMatches(pattern,response,1,0,&result);
-        if(!found){//提取连接
+        if(!found) { //提取连接
             continue;
-        }else{
+        } else {
             wxString strUrl = result[0];
             console(strUrl);
             break;
@@ -178,11 +177,11 @@ bool BaiduPolyphoneSpider::HasMorePhases(wxString strHtml,wxString& strUrl)
 
 bool BaiduPolyphoneSpider::Run()
 {
-    if(!QueryFromApi()){
+    if(!QueryFromApi()) {
         return false;
     }
     DumpToFile();
-    if(!QueryPhases()){
+    if(!QueryPhases()) {
         return false;
     }
     return true;

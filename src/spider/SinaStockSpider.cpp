@@ -24,12 +24,12 @@ bool SinaStockSpider::Run()
     wxString patternTotal(_T("\\(new\\s+String\\(\"(\\d+)\"\\)\\)"));
     wxRegEx reTotal(patternTotal,wxRE_ADVANCED); // must use wxRE_ADVANCED, or \\d+ would not work correctly.
     wxString processText = resStockNum;
-    if(reTotal.Matches(processText)){
+    if(reTotal.Matches(processText)) {
         wxString strTotal = reTotal.GetMatch(processText,1);
         m_total = wxAtoi(strTotal);
     }
-    if(m_total >0){
-        for(int i=0,j=0;i<=m_total;i+=m_pageSize,j++){
+    if(m_total >0) {
+        for(int i=0,j=0; i<=m_total; i+=m_pageSize,j++) {
             wxString jsonStock;
             wxString urlStock = wxT("http://vip.stock.finance.sina.com.cn/quotes_service/api/json_v2.php/"\
                                     "Market_Center.getHQNodeData");
@@ -52,16 +52,16 @@ bool SinaStockSpider::Run()
             int numErrors = 0;
             numErrors = reader.Parse(jsonStock, &jsonArr);
             if ( numErrors > 0 )  {
-               wxArrayString err = reader.GetErrors();
-               for(size_t i=0; i<err.GetCount(); i++){
-                std::wcout<<"ERROR :  "<<err.Item(i)<<std::endl;
-               }
-               return false;
+                wxArrayString err = reader.GetErrors();
+                for(size_t i=0; i<err.GetCount(); i++) {
+                    std::cout<<"ERROR :  "<<err.Item(i)<<std::endl;
+                }
+                return false;
             }
-            std::wcout<<jsonArr[0]["symbol"].AsString()<<std::endl;
+            std::cout<<jsonArr[0]["symbol"].AsString()<<std::endl;
             break;
         }
-    }else{
+    } else {
         std::cout<<"Load Sina Stock Data Error."<<std::endl;
     }
     m_timeEnd = wxDateTime::Now();

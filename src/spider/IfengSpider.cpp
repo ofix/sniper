@@ -34,9 +34,9 @@ bool IfengSpider::Run()
 bool IfengSpider::Parse(wxString& strResponse,short iTag)
 {
     wxRegEx r(_T("<li>[\\r\\n\\s]*<a\\s+href=\"[^\"]+?\"\\s+target=\"_blank\">"\
-                    "([^(]+?)\\((\\d+)\\)</a>[\\r\\n\\s]*</li>"),wxRE_ADVANCED);
+                 "([^(]+?)\\((\\d+)\\)</a>[\\r\\n\\s]*</li>"),wxRE_ADVANCED);
     size_t oldSize = m_shares.size();
-    while(r.Matches(strResponse)){
+    while(r.Matches(strResponse)) {
         size_t start, len;
         r.GetMatch(&start, &len, 0);
         wxString code = r.GetMatch(strResponse,2);
@@ -56,7 +56,7 @@ bool IfengSpider::Parse(wxString& strResponse,short iTag)
 void IfengSpider::Dump()
 {
     wxVector<ShareBrief>::const_iterator it;
-    for(it=m_shares.begin(); it!=m_shares.end();it++){
+    for(it=m_shares.begin(); it!=m_shares.end(); it++) {
         std::wcout<<_T("股票代号: ")<<it->code<<std::endl;
         std::wcout<<_T("股票名称: ")<<it->name<<std::endl;
         std::wcout<<_T("股票市场: ")<<MARKET_NAME_ZH(it->market)<<std::endl;
@@ -83,8 +83,7 @@ size_t IfengSpider::GetShareCount() const
 
 size_t IfengSpider::GetShanghaiShareCount()const
 {
-    if(m_vecCount.size() == 3)
-    {
+    if(m_vecCount.size() == 3) {
         return m_vecCount[0];
     }
     return 0;
@@ -92,14 +91,15 @@ size_t IfengSpider::GetShanghaiShareCount()const
 
 size_t IfengSpider::GetShenzhenShareCount()const
 {
-    if(m_vecCount.size() == 3){
+    if(m_vecCount.size() == 3) {
         return m_vecCount[1];
     }
     return 0;
 }
 
-size_t IfengSpider::GetChuanyebanShareCount()const{
-    if(m_vecCount.size() == 3){
+size_t IfengSpider::GetChuanyebanShareCount()const
+{
+    if(m_vecCount.size() == 3) {
         return m_vecCount[2];
     }
     return 0;
