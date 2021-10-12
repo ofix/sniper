@@ -16,8 +16,8 @@
 #include <chrono>
 #include <sstream>
 
-#define RMB_UINT_YI   100000000
-#define RMB_UINT_WAN  10000
+#define RMB_UINT_YI   100000000.0f
+#define RMB_UINT_WAN  10000.0f
 bool saveTo(wxString path, const wxString& text);
 bool http(wxString strUrl,wxString& strResponse,wxFontEncoding enumCharSet=wxFONTENCODING_CP936);
 bool downloadHttpFile(wxString strUrl,wxString& strResponse);

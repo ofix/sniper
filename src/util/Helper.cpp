@@ -397,14 +397,14 @@ wxString FormatDataWithUint(uint64_t data)
         wxString res = str_data + _T("万");
         return res;
     } else {
-        wxString str_data = wxString::Format("%d",data);
+        wxString str_data = wxString::Format("%.2f",static_cast<double>(data)); //必须强制转换为double，否则参数类型不匹配
         return str_data;
     }
 }
 
 wxString FormatDataWithPercent(double data)
 {
-    double _data = static_cast<double>(data/100);
+    double _data = static_cast<double>(data/100.0f);
     wxString str_data = wxString::Format("%.2f",_data);
     wxString res = str_data + _T("%");
     return res;
