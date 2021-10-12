@@ -17,9 +17,9 @@ class EastMoneySpider : public StockSpider
         EastMoneySpider(wxString strUrl=wxT("http://quote.eastmoney.com/center/gridlist.html#hs_a_board"));
         virtual ~EastMoneySpider();
         virtual bool Run();
-
+        inline std::vector<ShareDetail> GetAllShares(){return this->m_shares;}
     protected:
-        wxString m_urlEastMoney;
+        std::vector<ShareDetail> m_shares;
 };
 
 #endif // EASTMONEYSPIDER_H

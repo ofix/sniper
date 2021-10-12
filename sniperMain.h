@@ -12,6 +12,7 @@
 
 //(*Headers(sniperFrame)
 #include <wx/frame.h>
+class wxListCtrl;
 class wxMenu;
 class wxMenuBar;
 class wxStatusBar;
@@ -33,6 +34,7 @@ private:
     //*)
 
     //(*Identifiers(sniperFrame)
+    static const long ID_LISTCTRL_STOCK;
     static const long ID_MENUITEM1;
     static const long idMenuAbout;
     static const long ID_SYNC_STOCK_LIST_MENUITEM;
@@ -40,10 +42,13 @@ private:
     //*)
 
     //(*Declarations(sniperFrame)
+    wxListCtrl* m_listCtrlStock;
     wxMenu* Menu3;
     wxMenuItem* MenuItemSyncChinaStockList;
     wxStatusBar* StatusBar1;
     //*)
+
+    bool initListCtrlStock();
 
     DECLARE_EVENT_TABLE()
 };

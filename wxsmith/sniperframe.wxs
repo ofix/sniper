@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
 	<object class="wxFrame" name="sniperFrame">
+		<title>股票嗅探器</title>
 		<size>910,541</size>
 		<parent_arg>0</parent_arg>
 		<id_arg>0</id_arg>
+		<object class="wxListCtrl" name="ID_LISTCTRL_STOCK" variable="m_listCtrlStock" member="yes">
+			<pos>184,192</pos>
+			<style>wxLC_REPORT|wxLC_HRULES|wxVSCROLL|wxHSCROLL|wxALWAYS_SHOW_SB</style>
+		</object>
 		<object class="wxMenuBar" variable="MenuBar1" member="no">
 			<object class="wxMenu" variable="Menu1" member="no">
 				<label>&amp;File</label>
