@@ -214,6 +214,7 @@ bool sniperFrame::initListCtrlStock()
     }
 
     std::vector<wxString> headers;
+    headers.push_back(wxT("序号"));
     headers.push_back(wxT("代码"));
     headers.push_back(wxT("名称"));
     headers.push_back(wxT("最新价"));
@@ -239,24 +240,24 @@ bool sniperFrame::initListCtrlStock()
         m_listCtrlStock->Hide();
         for(unsigned i=0; i<allShares.size(); i++) {
             ShareDetail share = allShares[i];
-            m_listCtrlStock->InsertItem(i,wxT(""));
-            m_listCtrlStock->SetItem(i,0,share.code);
-            m_listCtrlStock->SetItem(i,1,share.name);
-            m_listCtrlStock->SetItem(i,2,wxString::Format("%.2f",share.price_now));
-            m_listCtrlStock->SetItem(i,3,wxString::Format("%.2f",share.change_rate)+wxT("%"));
-            m_listCtrlStock->SetItem(i,4,wxString::Format("%.2f",share.change_amount));
-            m_listCtrlStock->SetItem(i,5,FormatDataWithUint(share.volume));
-            m_listCtrlStock->SetItem(i,6,FormatDataWithUint(share.amount));
-            m_listCtrlStock->SetItem(i,7,wxString::Format("%.2f",share.amplitude)+wxT("%"));
-            m_listCtrlStock->SetItem(i,8,wxString::Format("%.2f",share.price_max));
-            m_listCtrlStock->SetItem(i,9,wxString::Format("%.2f",share.price_min));
-            m_listCtrlStock->SetItem(i,10,wxString::Format("%.2f",share.price_open));
-            m_listCtrlStock->SetItem(i,11,wxString::Format("%.2f",share.qrr));
-            m_listCtrlStock->SetItem(i,12,wxString::Format("%.2f",share.turnover_rate)+wxT("%"));
-            m_listCtrlStock->SetItem(i,13,wxString::Format("%.2f",share.pe));
-            m_listCtrlStock->SetItem(i,14,wxString::Format("%.2f",share.pb));
-            m_listCtrlStock->SetItem(i,15,FormatDataWithUint(share.total_capital));
-            m_listCtrlStock->SetItem(i,16,FormatDataWithUint(share.trade_capital));
+            m_listCtrlStock->InsertItem(i,wxString::Format("%d",i+1));
+            m_listCtrlStock->SetItem(i,1,share.code);
+            m_listCtrlStock->SetItem(i,2,share.name);
+            m_listCtrlStock->SetItem(i,3,wxString::Format("%.2f",share.price_now));
+            m_listCtrlStock->SetItem(i,4,wxString::Format("%.2f",share.change_rate)+wxT("%"));
+            m_listCtrlStock->SetItem(i,5,wxString::Format("%.2f",share.change_amount));
+            m_listCtrlStock->SetItem(i,6,FormatDataWithUint(share.volume));
+            m_listCtrlStock->SetItem(i,7,FormatDataWithUint(share.amount));
+            m_listCtrlStock->SetItem(i,8,wxString::Format("%.2f",share.amplitude)+wxT("%"));
+            m_listCtrlStock->SetItem(i,9,wxString::Format("%.2f",share.price_max));
+            m_listCtrlStock->SetItem(i,10,wxString::Format("%.2f",share.price_min));
+            m_listCtrlStock->SetItem(i,11,wxString::Format("%.2f",share.price_open));
+            m_listCtrlStock->SetItem(i,12,wxString::Format("%.2f",share.qrr));
+            m_listCtrlStock->SetItem(i,13,wxString::Format("%.2f",share.turnover_rate)+wxT("%"));
+            m_listCtrlStock->SetItem(i,14,wxString::Format("%.2f",share.pe));
+            m_listCtrlStock->SetItem(i,15,wxString::Format("%.2f",share.pb));
+            m_listCtrlStock->SetItem(i,16,FormatDataWithUint(share.total_capital));
+            m_listCtrlStock->SetItem(i,17,FormatDataWithUint(share.trade_capital));
         }
         m_listCtrlStock->Show();
     }
