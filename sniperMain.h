@@ -18,6 +18,9 @@ class wxMenuBar;
 class wxStatusBar;
 //*)
 
+#include "wxsharemodel.h"
+#include "wxsharerender.h"
+
 class sniperFrame: public wxFrame
 {
 public:
@@ -49,6 +52,8 @@ private:
     //*)
 
     bool initListCtrlStock();
+
+    wxObjectDataPtr<wxShareModel> m_share_list;
 
     DECLARE_EVENT_TABLE()
 };

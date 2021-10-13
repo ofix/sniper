@@ -17,6 +17,7 @@ struct ShareBrief
 };
 
 struct ShareDetail{
+    int id;
     wxString code; //stock code
     wxString name; //stock name
     double price_now;//最新价
