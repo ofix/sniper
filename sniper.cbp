@@ -23,6 +23,7 @@
 					<Add directory="lib" />
 					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswud" />
 					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
+					<Add directory="./" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
@@ -73,6 +74,7 @@
 					<Add directory="lib" />
 					<Add directory="$(#wx)/wxMSW-3.1.5_gcc810_x64_Dev/lib/gcc810_x64_dll/mswu" />
 					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
+					<Add directory="./" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="$(#wx)/wxWidgets-3.1.5-headers/include" />
@@ -231,6 +233,8 @@
 		<Unit filename="resource.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="shareListDialog.cpp" />
+		<Unit filename="shareListDialog.h" />
 		<Unit filename="sniper.cbp" />
 		<Unit filename="sniper.layout" />
 		<Unit filename="sniperApp.cpp" />
@@ -262,6 +266,11 @@
 		<Unit filename="src/util/Helper.cpp" />
 		<Unit filename="test/All.cpp" />
 		<Unit filename="test/All.h" />
+		<Unit filename="wxsharemodel.cpp" />
+		<Unit filename="wxsharemodel.h" />
+		<Unit filename="wxsharerender.cpp" />
+		<Unit filename="wxsharerender.h" />
+		<Unit filename="wxsmith/shareListDialog.wxs" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
 		<Extensions>
 			<DoxyBlocks>
@@ -277,6 +286,7 @@
 				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="1" i18n="0" name="sniperFrame" language="CPP" />
+					<wxDialog wxs="wxsmith/shareListDialog.wxs" src="shareListDialog.cpp" hdr="shareListDialog.h" fwddecl="0" i18n="1" name="shareListDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>
