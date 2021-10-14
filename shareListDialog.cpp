@@ -32,7 +32,6 @@ shareListDialog::~shareListDialog()
 void shareListDialog::OnInit(wxInitDialogEvent& event)
 {
 
-    return ;
     //请求数据
     EastMoneySpider spiderEastMoney;
     bool bRet = spiderEastMoney.Run();
@@ -63,11 +62,12 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
 
 
     m_dataView = new wxDataViewCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1700, 800), wxDV_VARIABLE_LINE_HEIGHT);
+    m_dataViewModel = new wxShareModel();
+    m_dataView->AssociateModel(m_dataViewModel);
     wxShareRender* m_dataViewRender = new wxShareRender(wxDATAVIEW_CELL_INERT); //只可查看的cell
     for (unsigned i=0; i<headers.size(); i++) {
         m_dataViewColumns.push_back(new wxDataViewColumn(headers[i], m_dataViewRender, i, 100, wxAlignment(wxALIGN_LEFT | wxALIGN_TOP), wxDATAVIEW_COL_RESIZABLE));
         m_dataView->AppendColumn(m_dataViewColumns[i]);
     }
-    m_dataView->AssociateModel(m_dataViewModel);
 
 }
