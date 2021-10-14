@@ -286,7 +286,7 @@
 				<gui name="wxWidgets" src="sniperApp.cpp" main="sniperFrame" init_handlers="necessary" language="CPP" />
 				<resources>
 					<wxFrame wxs="wxsmith/sniperframe.wxs" src="sniperMain.cpp" hdr="sniperMain.h" fwddecl="1" i18n="0" name="sniperFrame" language="CPP" />
-					<wxDialog wxs="wxsmith/shareListDialog.wxs" src="shareListDialog.cpp" hdr="shareListDialog.h" fwddecl="0" i18n="1" name="shareListDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/shareListDialog.wxs" src="shareListDialog.cpp" hdr="shareListDialog.h" fwddecl="1" i18n="0" name="shareListDialog" language="CPP" />
 				</resources>
 			</wxsmith>
 		</Extensions>
