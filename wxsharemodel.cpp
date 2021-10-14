@@ -16,6 +16,124 @@ wxShareModel::~wxShareModel()
     //dtor
 }
 
+wxString wxShareModel::GetCode( const wxDataViewItem &item ) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return wxEmptyString;
+    return node->code;
+}
+wxString wxShareModel::GetName( const wxDataViewItem &item ) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return wxEmptyString;
+    return node->name;
+}
+double wxShareModel::GetPriceNow(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->price_now;
+}
+double wxShareModel::GetChangeAmount(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->change_amount;
+}
+uint64_t wxShareModel::GetVolume(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0;
+    return node->volume;
+}
+uint64_t wxShareModel::GetAmount(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0;
+    return node->amount;
+}
+double wxShareModel::GetPriceMax(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->price_max;
+}
+double wxShareModel::GetPriceMin(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->price_min;
+}
+double wxShareModel::GetPriceOpen(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->price_open;
+}
+double wxShareModel::GetPriceClose(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->price_close;
+}
+double wxShareModel::GetQrr(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->qrr;
+}
+double wxShareModel::GetPe(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->pe;
+}
+double wxShareModel::GetPb(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->pb;
+}
+double wxShareModel::GetTurnOverRate(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0.0f;
+    return node->turnover_rate;
+}
+uint64_t wxShareModel::GetTotalCapital(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0;
+    return node->total_capital;
+}
+uint64_t wxShareModel::GetTradeCapital(const wxDataViewItem &item) const
+{
+    ShareDetail *node = (ShareDetail*) item.GetID();
+    if(!node)
+        return 0;
+    return node->trade_capital;
+}
+
+void wxShareModel::AddShare(ShareDetail &data)
+{
+    m_shares.push_back(data);
+}
+
 
 static int my_sort_reverse( int *v1, int *v2 )
 {
@@ -69,12 +187,49 @@ void wxShareModel::GetValue( wxVariant &variant, const wxDataViewItem &item, uns
         variant = node->name;
         break;
     case 3:
-        variant = (double)node->price_open;
+        variant = (double)node->price_now;
         break;
     case 4:
-        variant = 80L;  // all music is very 80% popular
+        variant = (double)node->change_rate;
         break;
     case 5:
+        variant = (double)node->change_amount;
+        break;
+    case 6:
+        variant = (wxULongLong)node->volume;
+        break;
+    case 7:
+        variant = (wxULongLong)node->amount;
+        break;
+    case 8:
+        variant = (double)node->amplitude;
+        break;
+    case 9:
+        variant = (double)node->price_max;
+        break;
+    case 10:
+        variant = (double)node->price_min;
+        break;
+    case 11:
+        variant = (double)node->price_open;
+        break;
+    case 12:
+        variant = (double)node->qrr;
+        break;
+    case 13:
+        variant = (double)node->turnover_rate;
+        break;
+    case 14:
+        variant = (double)node->pe;
+        break;
+    case 15:
+        variant = (double)node->pb;
+        break;
+    case 16:
+        variant = (long)node->total_capital;
+        break;
+    case 17:
+        variant = (long)node->trade_capital;
         break;
 
     default:
@@ -101,16 +256,47 @@ bool wxShareModel::SetValue( const wxVariant &variant,const wxDataViewItem &item
         node->price_open = variant.GetDouble();
         return true;
     case 4:
-        return true;
+        node->change_rate=variant.GetDouble();
+        break;
     case 5:
-        return true;
+        node->change_amount=variant.GetDouble();
+        break;
     case 6:
-        return true;
+        node->volume=variant.GetDouble();
+        break;
     case 7:
-        return true;
+        node->amount=variant.GetDouble();
+        break;
     case 8:
-        return true;
-
+        node->amplitude=variant.GetDouble();
+        break;
+    case 9:
+        node->price_max=variant.GetDouble();
+        break;
+    case 10:
+        node->price_min=variant.GetDouble();
+        break;
+    case 11:
+        node->price_open=variant.GetDouble();
+        break;
+    case 12:
+        node->qrr=variant.GetDouble();
+        break;
+    case 13:
+        node->turnover_rate=variant.GetDouble();
+        break;
+    case 14:
+        node->pe=variant.GetDouble();
+        break;
+    case 15:
+        node->pb=variant.GetDouble();
+        break;
+    case 16:
+        node->total_capital=(uint64_t)variant.GetLong();
+        break;
+    case 17:
+        node->trade_capital=(uint64_t)variant.GetLong();
+        break;
     default:
         wxLogError( "wxShareModel::SetValue: wrong column" );
     }
@@ -120,6 +306,7 @@ bool wxShareModel::SetValue( const wxVariant &variant,const wxDataViewItem &item
 bool wxShareModel::IsEnabled( const wxDataViewItem &item,unsigned int col ) const
 {
     wxASSERT(item.IsOk());
+
     return true;
 }
 
