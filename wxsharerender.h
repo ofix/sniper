@@ -24,15 +24,6 @@ public:
 
     virtual bool SetValue( const wxVariant &value ) wxOVERRIDE;
 
-    virtual bool HasEditorCtrl() const wxOVERRIDE
-    {
-        return true;
-    }
-
-    virtual wxWindow* CreateEditorCtrl(wxWindow* parent, wxRect labelRect, const wxVariant& value) wxOVERRIDE;
-
-    virtual bool GetValueFromEditorCtrl(wxWindow* ctrl, wxVariant& value) wxOVERRIDE;
-
 protected:
 
 private:

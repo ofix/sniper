@@ -63,7 +63,7 @@ public:
         } else if(col >=3 && col<=15) {
             return wxT("double");
         } else if(col == 16 || col == 17) {
-            return wxT("uint64_t");
+            return wxT("long");
         }
     }
     // override sorting to always sort branches ascendingly

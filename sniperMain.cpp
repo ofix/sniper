@@ -17,10 +17,12 @@
 #include <wx/textfile.h>
 #include <lib/pinyin/PinYin.h>
 #include <spider/IfengSpider.h>
-#include <spider/EastMoneySpider.h>
+//#include <spider/EastMoneySpider.h>
 #include <spider/BaiduPolyphoneSpider.h>
 #include <test/All.h>
 #include <vector>
+
+#include "shareListDialog.h"
 
 //(*InternalHeaders(sniperFrame)
 #include <wx/listctrl.h>
@@ -176,91 +178,97 @@ void sniperFrame::OnAbout(wxCommandEvent& event)
 // save file name: shares.csv
 void sniperFrame::OnMenuItemSyncChinaStockList(wxCommandEvent& event)
 {
-    MenuItemSyncChinaStockList->Enable(false);
-    IfengSpider spider;
-    spider.Run();
-    wxVector<ShareBrief> data = spider.GetAllShares();
-    wxString path = getExecDir()+wxT("shares.csv");
-    wxTextFile shareFile(path);
-    if(!shareFile.Exists()) {
-        shareFile.Create();
+//    MenuItemSyncChinaStockList->Enable(false);
+//    IfengSpider spider;
+//    spider.Run();
+//    wxVector<ShareBrief> data = spider.GetAllShares();
+//    wxString path = getExecDir()+wxT("shares.csv");
+//    wxTextFile shareFile(path);
+//    if(!shareFile.Exists()) {
+//        shareFile.Create();
+//    }
+//    shareFile.Open();
+//    shareFile.Clear(); // clear old stock list data
+//    wxVector<ShareBrief>::const_iterator it;
+//    wxString line = wxT("");
+//    PinYin py;
+//    for(it = data.begin(); it!=data.end(); ++it) {
+//        line = it->code+wxT(",");
+//        line += it->name+wxT(",");
+//        line += py.FirstLetter(it->name);
+//        shareFile.AddLine(line);
+//        line = wxT("");
+//    }
+//    shareFile.Write();
+//    shareFile.Close();
+//    MenuItemSyncChinaStockList->Enable(true);
+//    wxMessageBox(wxT("同步沪深股票完成!"),wxT("数据同步"));
+    shareListDialog dlg(this);
+    if(dlg.ShowModal() == wxID_OK){
+
+
     }
-    shareFile.Open();
-    shareFile.Clear(); // clear old stock list data
-    wxVector<ShareBrief>::const_iterator it;
-    wxString line = wxT("");
-    PinYin py;
-    for(it = data.begin(); it!=data.end(); ++it) {
-        line = it->code+wxT(",");
-        line += it->name+wxT(",");
-        line += py.FirstLetter(it->name);
-        shareFile.AddLine(line);
-        line = wxT("");
-    }
-    shareFile.Write();
-    shareFile.Close();
-    MenuItemSyncChinaStockList->Enable(true);
-    wxMessageBox(wxT("同步沪深股票完成!"),wxT("数据同步"));
 }
 
 
 bool sniperFrame::initListCtrlStock()
 {
-    EastMoneySpider spiderEastMoney;
-    bool bRet = spiderEastMoney.Run();
-    std::vector<ShareDetail> allShares;
-    if(bRet) {
-        allShares= spiderEastMoney.GetAllShares();
-    }
 
-    std::vector<wxString> headers;
-    headers.push_back(wxT("序号"));
-    headers.push_back(wxT("代码"));
-    headers.push_back(wxT("名称"));
-    headers.push_back(wxT("最新价"));
-    headers.push_back(wxT("涨跌幅"));
-    headers.push_back(wxT("涨跌额"));
-    headers.push_back(wxT("成交量(手)"));
-    headers.push_back(wxT("成交额"));
-    headers.push_back(wxT("振幅"));
-    headers.push_back(wxT("最高"));
-    headers.push_back(wxT("最低"));
-    headers.push_back(wxT("今开"));
-    headers.push_back(wxT("量比"));
-    headers.push_back(wxT("换手率"));
-    headers.push_back(wxT("市盈率(动态)"));
-    headers.push_back(wxT("市净率"));
-    headers.push_back(wxT("总市值"));
-    headers.push_back(wxT("流通市值"));
-    for (unsigned i=0; i<headers.size(); i++) {
-        m_listCtrlStock->InsertColumn(i,  headers[i]);
-    }
-
-    if(bRet) {
-        m_listCtrlStock->Hide();
-        for(unsigned i=0; i<allShares.size(); i++) {
-            ShareDetail share = allShares[i];
-            m_listCtrlStock->InsertItem(i,wxString::Format("%d",i+1));
-            m_listCtrlStock->SetItem(i,1,share.code);
-            m_listCtrlStock->SetItem(i,2,share.name);
-            m_listCtrlStock->SetItem(i,3,wxString::Format("%.2f",share.price_now));
-            m_listCtrlStock->SetItem(i,4,wxString::Format("%.2f",share.change_rate)+wxT("%"));
-            m_listCtrlStock->SetItem(i,5,wxString::Format("%.2f",share.change_amount));
-            m_listCtrlStock->SetItem(i,6,FormatDataWithUint(share.volume));
-            m_listCtrlStock->SetItem(i,7,FormatDataWithUint(share.amount));
-            m_listCtrlStock->SetItem(i,8,wxString::Format("%.2f",share.amplitude)+wxT("%"));
-            m_listCtrlStock->SetItem(i,9,wxString::Format("%.2f",share.price_max));
-            m_listCtrlStock->SetItem(i,10,wxString::Format("%.2f",share.price_min));
-            m_listCtrlStock->SetItem(i,11,wxString::Format("%.2f",share.price_open));
-            m_listCtrlStock->SetItem(i,12,wxString::Format("%.2f",share.qrr));
-            m_listCtrlStock->SetItem(i,13,wxString::Format("%.2f",share.turnover_rate)+wxT("%"));
-            m_listCtrlStock->SetItem(i,14,wxString::Format("%.2f",share.pe));
-            m_listCtrlStock->SetItem(i,15,wxString::Format("%.2f",share.pb));
-            m_listCtrlStock->SetItem(i,16,FormatDataWithUint(share.total_capital));
-            m_listCtrlStock->SetItem(i,17,FormatDataWithUint(share.trade_capital));
-        }
-        m_listCtrlStock->Show();
-    }
+//    EastMoneySpider spiderEastMoney;
+//    bool bRet = spiderEastMoney.Run();
+//    std::vector<ShareDetail> allShares;
+//    if(bRet) {
+//        allShares= spiderEastMoney.GetAllShares();
+//    }
+//
+//    std::vector<wxString> headers;
+//    headers.push_back(wxT("序号"));
+//    headers.push_back(wxT("代码"));
+//    headers.push_back(wxT("名称"));
+//    headers.push_back(wxT("最新价"));
+//    headers.push_back(wxT("涨跌幅"));
+//    headers.push_back(wxT("涨跌额"));
+//    headers.push_back(wxT("成交量(手)"));
+//    headers.push_back(wxT("成交额"));
+//    headers.push_back(wxT("振幅"));
+//    headers.push_back(wxT("最高"));
+//    headers.push_back(wxT("最低"));
+//    headers.push_back(wxT("今开"));
+//    headers.push_back(wxT("量比"));
+//    headers.push_back(wxT("换手率"));
+//    headers.push_back(wxT("市盈率(动态)"));
+//    headers.push_back(wxT("市净率"));
+//    headers.push_back(wxT("总市值"));
+//    headers.push_back(wxT("流通市值"));
+//    for (unsigned i=0; i<headers.size(); i++) {
+//        m_listCtrlStock->InsertColumn(i,  headers[i]);
+//    }
+//
+//    if(bRet) {
+//        m_listCtrlStock->Hide();
+//        for(unsigned i=0; i<allShares.size(); i++) {
+//            ShareDetail share = allShares[i];
+//            m_listCtrlStock->InsertItem(i,wxString::Format("%d",i+1));
+//            m_listCtrlStock->SetItem(i,1,share.code);
+//            m_listCtrlStock->SetItem(i,2,share.name);
+//            m_listCtrlStock->SetItem(i,3,wxString::Format("%.2f",share.price_now));
+//            m_listCtrlStock->SetItem(i,4,wxString::Format("%.2f",share.change_rate)+wxT("%"));
+//            m_listCtrlStock->SetItem(i,5,wxString::Format("%.2f",share.change_amount));
+//            m_listCtrlStock->SetItem(i,6,FormatDataWithUint(share.volume));
+//            m_listCtrlStock->SetItem(i,7,FormatDataWithUint(share.amount));
+//            m_listCtrlStock->SetItem(i,8,wxString::Format("%.2f",share.amplitude)+wxT("%"));
+//            m_listCtrlStock->SetItem(i,9,wxString::Format("%.2f",share.price_max));
+//            m_listCtrlStock->SetItem(i,10,wxString::Format("%.2f",share.price_min));
+//            m_listCtrlStock->SetItem(i,11,wxString::Format("%.2f",share.price_open));
+//            m_listCtrlStock->SetItem(i,12,wxString::Format("%.2f",share.qrr));
+//            m_listCtrlStock->SetItem(i,13,wxString::Format("%.2f",share.turnover_rate)+wxT("%"));
+//            m_listCtrlStock->SetItem(i,14,wxString::Format("%.2f",share.pe));
+//            m_listCtrlStock->SetItem(i,15,wxString::Format("%.2f",share.pb));
+//            m_listCtrlStock->SetItem(i,16,FormatDataWithUint(share.total_capital));
+//            m_listCtrlStock->SetItem(i,17,FormatDataWithUint(share.trade_capital));
+//        }
+//        m_listCtrlStock->Show();
+//    }
 
 //    wxArrayInt order(3);
 //    order[0] = 2;

@@ -5,27 +5,45 @@
 #include <wx/dialog.h>
 //*)
 
+
+
+#include "wxsharemodel.h"
+#include "wxsharerender.h"
+#include <wx/dataview.h>
+#include <vector>
+#include <spider/EastMoneySpider.h>
+
+enum Identifiers {
+    IDDATAVIEW = wxID_HIGHEST + 1
+};
+
 class shareListDialog: public wxDialog
 {
-	public:
+public:
 
-		shareListDialog(wxWindow* parent,wxWindowID id=wxID_ANY);
-		virtual ~shareListDialog();
+    shareListDialog(wxWindow* parent,wxWindowID id=wxID_ANY);
+    virtual ~shareListDialog();
 
-		//(*Declarations(shareListDialog)
-		//*)
+    //(*Declarations(shareListDialog)
+    //*)
 
-	protected:
+protected:
 
-		//(*Identifiers(shareListDialog)
-		//*)
+    //(*Identifiers(shareListDialog)
+    //*)
 
-	private:
+private:
 
-		//(*Handlers(shareListDialog)
-		//*)
+    //(*Handlers(shareListDialog)
+    void OnInit(wxInitDialogEvent& event);
+    //*)
 
-		DECLARE_EVENT_TABLE()
+    wxShareRender* m_dataViewRender;
+    wxShareModel* m_dataViewModel;
+    wxDataViewCtrl* m_dataView;
+    std::vector<wxDataViewColumn*> m_dataViewColumns;
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

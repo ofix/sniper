@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <wxsmith>
-	<object class="wxDialog" name="shareListDialog" />
+	<object class="wxDialog" name="shareListDialog">
+		<title>沪深股票列表</title>
+		<size>1072,481</size>
+		<handler function="OnInit" entry="EVT_INIT_DIALOG" />
+	</object>
 </wxsmith>

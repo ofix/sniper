@@ -313,7 +313,7 @@ bool wxShareModel::IsEnabled( const wxDataViewItem &item,unsigned int col ) cons
 wxDataViewItem wxShareModel::GetParent( const wxDataViewItem &item ) const
 {
     // the invisible root node has no parent
-    return wxDataViewItem(0);
+    return  wxDataViewItem(NULL);
 }
 
 bool wxShareModel::IsContainer( const wxDataViewItem &item ) const

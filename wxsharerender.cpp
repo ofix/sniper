@@ -1,6 +1,6 @@
 #include "wxsharerender.h"
 
-wxShareRender::wxShareRender(wxDataViewCellMode mode): wxDataViewCustomRenderer("string", mode, wxALIGN_CENTER)
+wxShareRender::wxShareRender(wxDataViewCellMode mode): wxDataViewCustomRenderer("shareRender", mode, wxALIGN_CENTER)
 {
     //ctor
 }
@@ -38,12 +38,12 @@ bool wxShareRender::ActivateCell(const wxRect& WXUNUSED(cell),
         position = wxString::Format("via mouse at %d, %d", mouseEvent->m_x, mouseEvent->m_y);
     else
         position = "from keyboard";
-    wxLogMessage("MyCustomRenderer ActivateCell() %s", position);
+    wxLogMessage("ShareRender ActivateCell() %s", position);
     return false;
 }
 wxSize wxShareRender::GetSize() const
 {
-    return GetView()->FromDIP(wxSize(60, 20));
+    return GetView()->FromDIP(wxSize(120, 20));
 }
 
 bool wxShareRender::SetValue( const wxVariant &value )
@@ -52,25 +52,3 @@ bool wxShareRender::SetValue( const wxVariant &value )
     return true;
 }
 
-wxWindow* wxShareRender::CreateEditorCtrl(wxWindow* parent,
-        wxRect labelRect,
-        const wxVariant& value)
-{
-    wxTextCtrl* text = new wxTextCtrl(parent, wxID_ANY, value,
-                                      labelRect.GetPosition(),
-                                      labelRect.GetSize(),
-                                      wxTE_PROCESS_ENTER);
-    text->SetInsertionPointEnd();
-
-    return text;
-}
-bool wxShareRender::GetValueFromEditorCtrl(wxWindow* ctrl, wxVariant& value)
-{
-    wxTextCtrl* text = wxDynamicCast(ctrl, wxTextCtrl);
-    if ( !text )
-        return false;
-
-    value = text->GetValue();
-
-    return true;
-}
