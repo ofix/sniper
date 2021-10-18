@@ -12,6 +12,10 @@
 #include <wx/dataview.h>
 #include <vector>
 #include <spider/EastMoneySpider.h>
+#include "wxchineseuintrender.h"
+#include "wxdoublerender.h"
+#include "wxpercentrender.h"
+#include "wxintrender.h"
 
 enum Identifiers {
     IDDATAVIEW = wxID_HIGHEST + 1
@@ -40,7 +44,7 @@ private:
 
     wxShareRender* m_dataViewRender;
     wxShareModel* m_dataViewModel;
-    wxDataViewCtrl* m_dataView;
+    wxDataViewListCtrl* m_dataView;
     std::vector<wxDataViewColumn*> m_dataViewColumns;
 
     DECLARE_EVENT_TABLE()
