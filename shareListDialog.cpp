@@ -26,6 +26,24 @@ shareListDialog::~shareListDialog()
 {
     //(*Destroy(shareListDialog)
     //*)
+    if(m_pChineseUnitRender){
+        delete m_pChineseUnitRender;
+    }
+    if(m_pDoubleRender){
+        delete m_pDoubleRender;
+    }
+    if(m_pPercentRender){
+        delete m_pPercentRender;
+    }
+    if(m_pTextRender){
+        delete m_pTextRender;
+    }
+    if(m_pIntRender){
+        delete m_pIntRender;
+    }
+    if(m_dataView){
+        delete m_dataView;
+    }
 }
 
 
@@ -63,66 +81,35 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
 
 
     m_dataView = new wxDataViewListCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1400, 800));
-//    m_dataViewModel = new wxShareModel();
-    //添加数据
-    //绑定 DataViewModel
-//    m_dataView->AssociateModel(m_dataViewModel);
-    //m_dataViewModel->DecRef();  // avoid memory leak !!
-
-    m_dataViewRender = new wxShareRender(wxDATAVIEW_CELL_ACTIVATABLE);
-
-    wxChineseUintRender* pChineseUnitRender = new wxChineseUintRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    wxDoubleRender* pDoubleRender = new wxDoubleRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    wxPercentRender* pPercentRender = new wxPercentRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    wxDataViewTextRenderer* pTextRender = new wxDataViewTextRenderer();
-    wxIntRender* pIntRender = new wxIntRender(wxDATAVIEW_CELL_ACTIVATABLE);
+    m_pChineseUnitRender = new wxChineseUintRender(wxDATAVIEW_CELL_ACTIVATABLE);
+    m_pDoubleRender = new wxDoubleRender(wxDATAVIEW_CELL_ACTIVATABLE);
+    m_pPercentRender = new wxPercentRender(wxDATAVIEW_CELL_ACTIVATABLE);
+    m_pTextRender = new wxDataViewTextRenderer();
+    m_pIntRender = new wxIntRender(wxDATAVIEW_CELL_ACTIVATABLE);
     for (unsigned i=0; i<headers.size(); i++) {
-        /*
-        m_listCtrlStock->InsertItem(i,wxString::Format("%d",i+1));
-        m_listCtrlStock->SetItem(i,1,share.code);
-        m_listCtrlStock->SetItem(i,2,share.name);
-        m_listCtrlStock->SetItem(i,3,wxString::Format("%.2f",share.price_now));
-        m_listCtrlStock->SetItem(i,4,wxString::Format("%.2f",share.change_rate)+wxT("%"));
-        m_listCtrlStock->SetItem(i,5,wxString::Format("%.2f",share.change_amount));
-        m_listCtrlStock->SetItem(i,6,FormatDataWithUint(share.volume));
-        m_listCtrlStock->SetItem(i,7,FormatDataWithUint(share.amount));
-        m_listCtrlStock->SetItem(i,8,wxString::Format("%.2f",share.amplitude)+wxT("%"));
-        m_listCtrlStock->SetItem(i,9,wxString::Format("%.2f",share.price_max));
-        m_listCtrlStock->SetItem(i,10,wxString::Format("%.2f",share.price_min));
-        m_listCtrlStock->SetItem(i,11,wxString::Format("%.2f",share.price_open));
-        m_listCtrlStock->SetItem(i,12,wxString::Format("%.2f",share.qrr));
-        m_listCtrlStock->SetItem(i,13,wxString::Format("%.2f",share.turnover_rate)+wxT("%"));
-        m_listCtrlStock->SetItem(i,14,wxString::Format("%.2f",share.pe));
-        m_listCtrlStock->SetItem(i,15,wxString::Format("%.2f",share.pb));
-        m_listCtrlStock->SetItem(i,16,FormatDataWithUint(share.total_capital));
-        m_listCtrlStock->SetItem(i,17,FormatDataWithUint(share.trade_capital));
-
-        */
         if(i==0) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], pIntRender, i, 100,
+            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pIntRender, i, 100,
                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i == 1 || i == 2) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], pTextRender, i, 100,
+            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pTextRender, i, 100,
                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i==6||i==7||i==16||i==17) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], pChineseUnitRender, i, 100,
+            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pChineseUnitRender, i, 100,
                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i ==3||i==5||i==9||i==10||i==11||i==12||i==14||i==15) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], pDoubleRender, i, 100,
+            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pDoubleRender, i, 100,
                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i==4||i==8||i==13) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], pPercentRender, i, 100,
+            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pPercentRender, i, 100,
                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         }
 
     }
-
-
     //shares 转化成 wxVariant
     wxVector<wxVariant> data;
     for(unsigned i=0; i<allShares.size(); i++) {

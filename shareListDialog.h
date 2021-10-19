@@ -5,10 +5,6 @@
 #include <wx/dialog.h>
 //*)
 
-
-
-#include "wxsharemodel.h"
-#include "wxsharerender.h"
 #include <wx/dataview.h>
 #include <vector>
 #include <spider/EastMoneySpider.h>
@@ -42,10 +38,13 @@ private:
     void OnInit(wxInitDialogEvent& event);
     //*)
 
-    wxShareRender* m_dataViewRender;
-    wxShareModel* m_dataViewModel;
     wxDataViewListCtrl* m_dataView;
-    std::vector<wxDataViewColumn*> m_dataViewColumns;
+    // various custom renders
+    wxChineseUintRender* m_pChineseUnitRender;
+    wxDoubleRender* m_pDoubleRender;
+    wxPercentRender* m_pPercentRender;
+    wxDataViewTextRenderer* m_pTextRender;
+    wxIntRender* m_pIntRender;
 
     DECLARE_EVENT_TABLE()
 };
