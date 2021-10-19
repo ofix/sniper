@@ -266,6 +266,14 @@
 		<Unit filename="src/util/Helper.cpp" />
 		<Unit filename="test/All.cpp" />
 		<Unit filename="test/All.h" />
+		<Unit filename="wxchineseuintrender.cpp" />
+		<Unit filename="wxchineseuintrender.h" />
+		<Unit filename="wxdoublerender.cpp" />
+		<Unit filename="wxdoublerender.h" />
+		<Unit filename="wxintrender.cpp" />
+		<Unit filename="wxintrender.h" />
+		<Unit filename="wxpercentrender.cpp" />
+		<Unit filename="wxpercentrender.h" />
 		<Unit filename="wxsharemodel.cpp" />
 		<Unit filename="wxsharemodel.h" />
 		<Unit filename="wxsharerender.cpp" />

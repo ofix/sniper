@@ -1,6 +1,6 @@
 #include "wxpercentrender.h"
 
-wxPercentRender::wxPercentRender(wxDataViewCellMode mode): wxDataViewCustomRenderer("long", mode, wxALIGN_CENTER)
+wxPercentRender::wxPercentRender(wxDataViewCellMode mode): wxDataViewCustomRenderer("double", mode, wxALIGN_CENTER)
 {
     //ctor
 }
