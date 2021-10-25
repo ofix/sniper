@@ -2,7 +2,7 @@
 <wxsmith>
 	<object class="wxDialog" name="shareListDialog">
 		<title>沪深股票列表</title>
-		<size>1072,481</size>
+		<size>1080,600</size>
 		<handler function="OnInit" entry="EVT_INIT_DIALOG" />
 	</object>
 </wxsmith>

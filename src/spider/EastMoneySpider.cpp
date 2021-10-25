@@ -4,7 +4,7 @@ EastMoneySpider::EastMoneySpider(wxString strUrl):StockSpider(strUrl)
 {
     //ctor
     m_url = wxT("http://98.push2.eastmoney.com/api/qt/clist/get?"\
-                "pn=1&pz=10000&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23"\
+                "pn=1&pz=1000&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23"\
                 "&fields=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f21,f23,f24,f25,f22,f11,f62,f128,f136,f115,f152&_=");
     wxDateTime now = wxDateTime::UNow(); //获取当前Linux时间戳，单位:毫秒
     wxString strNow = wxString::Format("%lld",now.GetValue());
@@ -55,6 +55,8 @@ bool EastMoneySpider::Run()
         m_shares.clear();
         ShareDetail item;
         for(int i=0; i<diff.Size(); i++) {
+//            std::cout<<"i:"<<i<<diff[i]["f14"].AsString()<<std::endl;
+
             if(diff[i]["f2"].IsString()) { //未上市公司
                 std::wcout<<"未上市公司: "<<diff[i]["f14"].AsString()<<",  i="<<i<<std::endl;
                 continue;
@@ -87,22 +89,22 @@ bool EastMoneySpider::Run()
             item.trade_capital = diff[i]["f21"].AsUInt64(); //流通市值
             m_shares.push_back(item);
 #ifdef DEBUG_SNIPER
-            std::cout<<"code:"<<item.code<<std::endl;
-            std::cout<<"name:"<<item.name<<std::endl;
-            std::cout<<"price_now:"<<item.price_now<<std::endl;
-            std::cout<<"price_max:"<<item.price_max<<std::endl;
-            std::cout<<"price_min:"<<item.price_min<<std::endl;
-            std::cout<<"price_open:"<<item.price_open<<std::endl;
-            std::cout<<"change_rate:"<<item.change_rate<<std::endl;
-            std::cout<<"change_amount:"<<item.change_amount<<std::endl;
-            std::cout<<"volume:"<<item.volume<<std::endl;
-            std::cout<<"amount:"<<item.amount<<std::endl;
-            std::cout<<"amplitude:"<<item.amplitude<<std::endl;
-            std::cout<<"turnover_rate:"<<item.turnover_rate<<std::endl;
-            std::cout<<"pe:"<<item.pe<<std::endl;
-            std::cout<<"pb:"<<item.pb<<std::endl;
-            std::cout<<"qrr:"<<item.qrr<<std::endl;
-            std::cout<<"total_capital:"<<item.total_capital<<std::endl;
+            std::cout<<"code:"<<item.code<<",";
+            std::cout<<"name:"<<item.name<<",";
+            std::cout<<"price_now:"<<item.price_now<<",";
+            std::cout<<"price_max:"<<item.price_max<<",";
+            std::cout<<"price_min:"<<item.price_min<<",";
+            std::cout<<"price_open:"<<item.price_open<<",";
+            std::cout<<"change_rate:"<<item.change_rate<<",";
+            std::cout<<"change_amount:"<<item.change_amount<<",";
+            std::cout<<"volume:"<<item.volume<<",";
+            std::cout<<"amount:"<<item.amount<<",";
+            std::cout<<"amplitude:"<<item.amplitude<<",";
+            std::cout<<"turnover_rate:"<<item.turnover_rate<<",";
+            std::cout<<"pe:"<<item.pe<<",";
+            std::cout<<"pb:"<<item.pb<<",";
+            std::cout<<"qrr:"<<item.qrr<<",";
+            std::cout<<"total_capital:"<<item.total_capital<<",";
             std::cout<<"trade_capital:"<<item.trade_capital<<std::endl;
 #endif // DEBUG_SNIPER
         }

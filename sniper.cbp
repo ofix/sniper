@@ -274,12 +274,10 @@
 		<Unit filename="wxintrender.h" />
 		<Unit filename="wxpercentrender.cpp" />
 		<Unit filename="wxpercentrender.h" />
-		<Unit filename="wxsharemodel.cpp" />
-		<Unit filename="wxsharemodel.h" />
-		<Unit filename="wxsharerender.cpp" />
-		<Unit filename="wxsharerender.h" />
 		<Unit filename="wxsmith/shareListDialog.wxs" />
 		<Unit filename="wxsmith/sniperframe.wxs" />
+		<Unit filename="wxtextrender.cpp" />
+		<Unit filename="wxtextrender.h" />
 		<Extensions>
 			<DoxyBlocks>
 				<comment_style block="4" line="2" />
