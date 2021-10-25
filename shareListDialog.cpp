@@ -16,7 +16,7 @@ shareListDialog::shareListDialog(wxWindow* parent,wxWindowID id)
 {
     //(*Initialize(shareListDialog)
     Create(parent, id, _T("沪深股票列表"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-    SetClientSize(wxSize(1072,481));
+    SetClientSize(wxSize(1920,1080));
 
     Connect(wxID_ANY,wxEVT_INIT_DIALOG,(wxObjectEventFunction)&shareListDialog::OnInit);
     //*)
@@ -26,23 +26,8 @@ shareListDialog::~shareListDialog()
 {
     //(*Destroy(shareListDialog)
     //*)
-    if(m_pChineseUnitRender){
-        delete m_pChineseUnitRender;
-    }
-    if(m_pDoubleRender){
-        delete m_pDoubleRender;
-    }
-    if(m_pPercentRender){
-        delete m_pPercentRender;
-    }
-    if(m_pTextRender){
-        delete m_pTextRender;
-    }
-    if(m_pIntRender){
-        delete m_pIntRender;
-    }
-    if(m_dataView){
-        delete m_dataView;
+    if(m_pDataView) {
+        delete m_pDataView;
     }
 }
 
@@ -79,34 +64,35 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
     headers.push_back(wxT("流通市值"));
 
 
-
-    m_dataView = new wxDataViewListCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1400, 800));
-    m_pChineseUnitRender = new wxChineseUintRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    m_pDoubleRender = new wxDoubleRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    m_pPercentRender = new wxPercentRender(wxDATAVIEW_CELL_ACTIVATABLE);
-    m_pTextRender = new wxDataViewTextRenderer();
-    m_pIntRender = new wxIntRender(wxDATAVIEW_CELL_ACTIVATABLE);
+    m_pDataView = new wxDataViewListCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1920, 1080));
+    m_pDataView->SetBackgroundColour(wxColor(*wxBLACK));
+    m_pDataView->SetForegroundColour(wxColor(*wxBLACK));
     for (unsigned i=0; i<headers.size(); i++) {
         if(i==0) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pIntRender, i, 100,
-                                     wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
-                                     wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
+            wxIntRender* pIntRender = new wxIntRender(wxDATAVIEW_CELL_ACTIVATABLE);
+            m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pIntRender, i, 100,
+                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
+                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i == 1 || i == 2) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pTextRender, i, 100,
-                                     wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
-                                     wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
+            wxDataViewTextRenderer* pTextRender =  new wxDataViewTextRenderer();
+            m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pTextRender, i, 100,
+                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
+                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i==6||i==7||i==16||i==17) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pChineseUnitRender, i, 100,
-                                     wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
-                                     wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
+            wxChineseUintRender*  pChineseUnitRender = new wxChineseUintRender(wxDATAVIEW_CELL_ACTIVATABLE);
+            m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pChineseUnitRender, i, 100,
+                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
+                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i ==3||i==5||i==9||i==10||i==11||i==12||i==14||i==15) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pDoubleRender, i, 100,
-                                     wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
-                                     wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
+            wxDoubleRender*  pDoubleRender = new wxDoubleRender(wxDATAVIEW_CELL_ACTIVATABLE);
+            m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pDoubleRender, i, 100,
+                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
+                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i==4||i==8||i==13) {
-            m_dataView->AppendColumn(new wxDataViewColumn(headers[i], m_pPercentRender, i, 100,
-                                     wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
-                                     wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
+            wxPercentRender* pPercentRender = new wxPercentRender(wxDATAVIEW_CELL_ACTIVATABLE);
+            m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pPercentRender, i, 100,
+                                      wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
+                                      wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         }
 
     }
@@ -133,6 +119,6 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
         data.push_back( wxVariant(share.pb) );
         data.push_back( wxVariant(static_cast<long>(share.total_capital)) );
         data.push_back( wxVariant(static_cast<long>(share.trade_capital)) );
-        m_dataView->AppendItem( data );
+        m_pDataView->AppendItem( data );
     }
 }

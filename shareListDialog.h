@@ -38,13 +38,7 @@ private:
     void OnInit(wxInitDialogEvent& event);
     //*)
 
-    wxDataViewListCtrl* m_dataView;
-    // various custom renders
-    wxChineseUintRender* m_pChineseUnitRender;
-    wxDoubleRender* m_pDoubleRender;
-    wxPercentRender* m_pPercentRender;
-    wxDataViewTextRenderer* m_pTextRender;
-    wxIntRender* m_pIntRender;
+    wxDataViewListCtrl* m_pDataView;
 
     DECLARE_EVENT_TABLE()
 };
