@@ -1,6 +1,6 @@
 #include "wxpercentrender.h"
 
-wxPercentRender::wxPercentRender(wxDataViewCellMode mode): wxDataViewCustomRenderer("double", mode, wxALIGN_CENTER)
+wxPercentRender::wxPercentRender(wxDataViewCellMode mode): wxDataViewCustomRenderer(wxT("double"), mode, wxALIGN_CENTER)
 {
     //ctor
 }
@@ -25,31 +25,12 @@ bool wxPercentRender::Render( wxRect rect, wxDC *dc, int state )
     wxRect textRect = wxRect(dc->GetTextExtent(strData)).CentreIn(rect);
     dc->SetTextForeground(textClr);
     dc->DrawText(strData,textRect.GetTopLeft());
-    RenderText(strData,
-               0, // no offset
-               wxRect(dc->GetTextExtent(strData)).CentreIn(rect),
-               dc,
-               state);
     return true;
 }
 
-bool wxPercentRender::ActivateCell(const wxRect& WXUNUSED(cell),
-                                   wxDataViewModel *WXUNUSED(model),
-                                   const wxDataViewItem &WXUNUSED(item),
-                                   unsigned int WXUNUSED(col),
-                                   const wxMouseEvent *mouseEvent)
-{
-//    wxString position;
-//    if ( mouseEvent )
-//        position = wxString::Format("via mouse at %d, %d", mouseEvent->m_x, mouseEvent->m_y);
-//    else
-//        position = "from keyboard";
-//    wxLogMessage("ShareRender ActivateCell() %s", position);
-    return false;
-}
 wxSize wxPercentRender::GetSize() const
 {
-    return GetView()->FromDIP(wxSize(160, 32));
+    return GetView()->GetBestVirtualSize();
 }
 
 bool wxPercentRender::SetValue( const wxVariant &value )

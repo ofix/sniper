@@ -13,11 +13,6 @@ public:
     wxPercentRender(wxDataViewCellMode mode);
     virtual ~wxPercentRender();
     virtual bool Render( wxRect rect, wxDC *dc, int state ) wxOVERRIDE;
-    virtual bool ActivateCell(const wxRect& WXUNUSED(cell),
-                              wxDataViewModel *WXUNUSED(model),
-                              const wxDataViewItem &WXUNUSED(item),
-                              unsigned int WXUNUSED(col),
-                              const wxMouseEvent *mouseEvent) wxOVERRIDE;
     virtual wxSize GetSize() const wxOVERRIDE;
     virtual bool GetValue( wxVariant &WXUNUSED(value) ) const wxOVERRIDE
     {
