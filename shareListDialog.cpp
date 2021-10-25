@@ -16,7 +16,7 @@ shareListDialog::shareListDialog(wxWindow* parent,wxWindowID id)
 {
     //(*Initialize(shareListDialog)
     Create(parent, id, _T("沪深股票列表"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE, _T("id"));
-    SetClientSize(wxSize(1920,1080));
+    SetClientSize(wxSize(1080,600));
 
     Connect(wxID_ANY,wxEVT_INIT_DIALOG,(wxObjectEventFunction)&shareListDialog::OnInit);
     //*)
@@ -63,10 +63,9 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
     headers.push_back(wxT("总市值"));
     headers.push_back(wxT("流通市值"));
 
-
-    m_pDataView = new wxDataViewListCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1920, 1080));
+    m_pDataView = new wxDataViewListCtrl(this, IDDATAVIEW, wxDefaultPosition, wxSize(1920, 1080),wxDV_SINGLE);
+    m_pDataView->SetIndent(0);
     m_pDataView->SetBackgroundColour(wxColor(*wxBLACK));
-    m_pDataView->SetForegroundColour(wxColor(*wxBLACK));
     for (unsigned i=0; i<headers.size(); i++) {
         if(i==0) {
             wxIntRender* pIntRender = new wxIntRender(wxDATAVIEW_CELL_ACTIVATABLE);
@@ -74,7 +73,7 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
                                       wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                       wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         } else if(i == 1 || i == 2) {
-            wxDataViewTextRenderer* pTextRender =  new wxDataViewTextRenderer();
+            wxTextRender* pTextRender =  new wxTextRender(wxDATAVIEW_CELL_ACTIVATABLE);
             m_pDataView->AppendColumn(new wxDataViewColumn(headers[i], pTextRender, i, 100,
                                       wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                       wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
@@ -94,7 +93,6 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
                                       wxAlignment(wxALIGN_LEFT | wxALIGN_TOP),
                                       wxDATAVIEW_COL_SORTABLE|wxDATAVIEW_COL_RESIZABLE));
         }
-
     }
     //shares 转化成 wxVariant
     wxVector<wxVariant> data;
@@ -107,8 +105,8 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
         data.push_back( wxVariant(share.price_now) );
         data.push_back( wxVariant(share.change_rate) );
         data.push_back( wxVariant(share.change_amount) );
-        data.push_back( wxVariant(static_cast<long>(share.volume)) );
-        data.push_back( wxVariant(static_cast<long>(share.amount)) );
+        data.push_back( wxVariant(static_cast<wxULongLong>(share.volume)) );
+        data.push_back( wxVariant(static_cast<wxULongLong>(share.amount)) );
         data.push_back( wxVariant(share.amplitude) );
         data.push_back( wxVariant(share.price_max) );
         data.push_back( wxVariant(share.price_min) );
@@ -117,8 +115,8 @@ void shareListDialog::OnInit(wxInitDialogEvent& event)
         data.push_back( wxVariant(share.turnover_rate) );
         data.push_back( wxVariant(share.pe) );
         data.push_back( wxVariant(share.pb) );
-        data.push_back( wxVariant(static_cast<long>(share.total_capital)) );
-        data.push_back( wxVariant(static_cast<long>(share.trade_capital)) );
+        data.push_back( wxVariant(static_cast<wxULongLong>(share.total_capital)) );
+        data.push_back( wxVariant(static_cast<wxULongLong>(share.trade_capital)) );
         m_pDataView->AppendItem( data );
     }
 }

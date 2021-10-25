@@ -12,6 +12,7 @@
 #include "wxdoublerender.h"
 #include "wxpercentrender.h"
 #include "wxintrender.h"
+#include "wxtextrender.h"
 
 enum Identifiers {
     IDDATAVIEW = wxID_HIGHEST + 1
